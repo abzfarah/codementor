@@ -19,7 +19,7 @@ import (
 	"github.com/nomadsingles/platform/app"
 
 	"github.com/nomadsingles/platform/model"
-	"github.com/nomadsingles/platform/store"
+
 	"github.com/nomadsingles/platform/utils"
 )
 
@@ -33,7 +33,7 @@ func InitOAuth() {
 	BaseRoutes.OAuth.Handle("/authorized", ApiUserRequired(getAuthorizedApps)).Methods("GET")
 	BaseRoutes.OAuth.Handle("/delete", ApiUserRequired(deleteOAuthApp)).Methods("POST")
 	BaseRoutes.OAuth.Handle("/{id:[A-Za-z0-9]+}/deauthorize", ApiUserRequired(deauthorizeOAuthApp)).Methods("POST")
-	BaseRoutes.OAuth.Handle("/{id:[A-Za-z0-9]+}/regen_secret", ApiUserRequired(regenerateOAuthSecret)).Methods("POST")
+
 	BaseRoutes.OAuth.Handle("/{service:[A-Za-z0-9]+}/complete", AppHandlerIndependent(completeOAuth)).Methods("GET")
 	BaseRoutes.OAuth.Handle("/{service:[A-Za-z0-9]+}/login", AppHandlerIndependent(loginWithOAuth)).Methods("GET")
 	BaseRoutes.OAuth.Handle("/{service:[A-Za-z0-9]+}/signup", AppHandlerIndependent(signupWithOAuth)).Methods("GET")
@@ -54,11 +54,7 @@ func registerOAuthApp(c *Context, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if !app.SessionHasPermissionTo(c.Session, model.PERMISSION_MANAGE_OAUTH) {
-		c.Err = model.NewLocAppError("registerOAuthApp", "api.command.admin_only.app_error", nil, "")
-		c.Err.StatusCode = http.StatusForbidden
-		return
-	}
+
 
 	oauthApp := model.OAuthAppFromJson(r.Body)
 
@@ -87,33 +83,7 @@ func registerOAuthApp(c *Context, w http.ResponseWriter, r *http.Request) {
 }
 
 func getOAuthApps(c *Context, w http.ResponseWriter, r *http.Request) {
-	if !utils.Cfg.ServiceSettings.EnableOAuthServiceProvider {
-		c.Err = model.NewLocAppError("getOAuthAppsByUser", "api.oauth.allow_oauth.turn_off.app_error", nil, "")
-		c.Err.StatusCode = http.StatusNotImplemented
-		return
-	}
 
-	if !app.SessionHasPermissionTo(c.Session, model.PERMISSION_MANAGE_OAUTH) {
-		c.Err = model.NewLocAppError("getOAuthApps", "api.command.admin_only.app_error", nil, "")
-		c.Err.StatusCode = http.StatusForbidden
-		return
-	}
-
-	var ochan store.StoreChannel
-	if app.SessionHasPermissionTo(c.Session, model.PERMISSION_MANAGE_SYSTEM_WIDE_OAUTH) {
-		ochan = app.Srv.Store.OAuth().GetApps()
-	} else {
-		c.Err = nil
-		ochan = app.Srv.Store.OAuth().GetAppByUser(c.Session.UserId)
-	}
-
-	if result := <-ochan; result.Err != nil {
-		c.Err = result.Err
-		return
-	} else {
-		apps := result.Data.([]*model.OAuthApp)
-		w.Write([]byte(model.OAuthAppListToJson(apps)))
-	}
 }
 
 func getOAuthAppInfo(c *Context, w http.ResponseWriter, r *http.Request) {
@@ -814,12 +784,6 @@ func deleteOAuthApp(c *Context, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if !app.SessionHasPermissionTo(c.Session, model.PERMISSION_MANAGE_OAUTH) {
-		c.Err = model.NewLocAppError("deleteOAuthApp", "api.command.admin_only.app_error", nil, "")
-		c.Err.StatusCode = http.StatusForbidden
-		return
-	}
-
 	c.LogAudit("attempt")
 
 	props := model.MapFromJson(r.Body)
@@ -834,11 +798,7 @@ func deleteOAuthApp(c *Context, w http.ResponseWriter, r *http.Request) {
 		c.Err = result.Err
 		return
 	} else {
-		if c.Session.UserId != result.Data.(*model.OAuthApp).CreatorId && !app.SessionHasPermissionTo(c.Session, model.PERMISSION_MANAGE_SYSTEM_WIDE_OAUTH) {
-			c.LogAudit("fail - inappropriate permissions")
-			c.Err = model.NewLocAppError("deleteOAuthApp", "api.oauth.delete.permissions.app_error", nil, "user_id="+c.Session.UserId)
-			return
-		}
+
 	}
 
 	if err := (<-app.Srv.Store.OAuth().DeleteApp(id)).Err; err != nil {
@@ -886,39 +846,6 @@ func deauthorizeOAuthApp(c *Context, w http.ResponseWriter, r *http.Request) {
 	ReturnStatusOK(w)
 }
 
-func regenerateOAuthSecret(c *Context, w http.ResponseWriter, r *http.Request) {
-	if !utils.Cfg.ServiceSettings.EnableOAuthServiceProvider {
-		c.Err = model.NewLocAppError("registerOAuthApp", "api.oauth.register_oauth_app.turn_off.app_error", nil, "")
-		c.Err.StatusCode = http.StatusNotImplemented
-		return
-	}
-
-	params := mux.Vars(r)
-	id := params["id"]
-
-	var oauthApp *model.OAuthApp
-	if result := <-app.Srv.Store.OAuth().GetApp(id); result.Err != nil {
-		c.Err = model.NewLocAppError("regenerateOAuthSecret", "api.oauth.allow_oauth.database.app_error", nil, "")
-		return
-	} else {
-		oauthApp = result.Data.(*model.OAuthApp)
-
-		if oauthApp.CreatorId != c.Session.UserId && !app.SessionHasPermissionTo(c.Session, model.PERMISSION_MANAGE_SYSTEM_WIDE_OAUTH) {
-			c.Err = model.NewLocAppError("registerOAuthApp", "api.command.admin_only.app_error", nil, "")
-			c.Err.StatusCode = http.StatusForbidden
-			return
-		}
-
-		oauthApp.ClientSecret = model.NewId()
-		if update := <-app.Srv.Store.OAuth().UpdateApp(oauthApp); update.Err != nil {
-			c.Err = update.Err
-			return
-		}
-
-		w.Write([]byte(oauthApp.ToJson()))
-		return
-	}
-}
 
 func newSession(appName string, user *model.User) (*model.Session, *model.AppError) {
 	// set new token an session

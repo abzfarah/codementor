@@ -41,17 +41,7 @@ func SessionHasPermissionToChannelByPost(session model.Session, postId string, p
 }
 
 func SessionHasPermissionToUser(session model.Session, userId string) bool {
-	if userId == "" {
-		return false
-	}
 
-	if session.UserId == userId {
-		return true
-	}
-
-	if SessionHasPermissionTo(session, model.PERMISSION_EDIT_OTHER_USERS) {
-		return true
-	}
 
 	return false
 }
@@ -94,13 +84,6 @@ func HasPermissionToChannelByPost(askingUserId string, postId string, permission
 }
 
 func HasPermissionToUser(askingUserId string, userId string) bool {
-	if askingUserId == userId {
-		return true
-	}
-
-	if HasPermissionTo(askingUserId, model.PERMISSION_EDIT_OTHER_USERS) {
-		return true
-	}
 
 	return false
 }

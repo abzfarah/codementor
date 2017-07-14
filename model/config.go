@@ -306,45 +306,9 @@ type TeamSettings struct {
 	MaxNotificationsPerChannel          *int64
 }
 
-type LdapSettings struct {
-	// Basic
-	Enable             *bool
-	LdapServer         *string
-	LdapPort           *int
-	ConnectionSecurity *string
-	BaseDN             *string
-	BindUsername       *string
-	BindPassword       *string
 
-	// Filtering
-	UserFilter *string
 
-	// User Mapping
-	FirstNameAttribute *string
-	LastNameAttribute  *string
-	EmailAttribute     *string
-	UsernameAttribute  *string
-	NicknameAttribute  *string
-	IdAttribute        *string
-	PositionAttribute  *string
 
-	// Syncronization
-	SyncIntervalMinutes *int
-
-	// Advanced
-	SkipCertificateVerification *bool
-	QueryTimeout                *int
-	MaxPageSize                 *int
-
-	// Customization
-	LoginFieldName *string
-}
-
-type ComplianceSettings struct {
-	Enable      *bool
-	Directory   *string
-	EnableDaily *bool
-}
 
 type LocalizationSettings struct {
 	DefaultServerLocale *string
@@ -352,42 +316,9 @@ type LocalizationSettings struct {
 	AvailableLocales    *string
 }
 
-type SamlSettings struct {
-	// Basic
-	Enable  *bool
-	Verify  *bool
-	Encrypt *bool
-
-	IdpUrl                      *string
-	IdpDescriptorUrl            *string
-	AssertionConsumerServiceURL *string
-
-	IdpCertificateFile    *string
-	PublicCertificateFile *string
-	PrivateKeyFile        *string
-
-	// User Mapping
-	FirstNameAttribute *string
-	LastNameAttribute  *string
-	EmailAttribute     *string
-	UsernameAttribute  *string
-	NicknameAttribute  *string
-	LocaleAttribute    *string
-	PositionAttribute  *string
-
-	LoginButtonText *string
-}
 
 
-type WebrtcSettings struct {
-	Enable              *bool
-	GatewayAdminUrl     *string
-	GatewayAdminSecret  *string
-	StunURI             *string
-	TurnURI             *string
-	TurnUsername        *string
-	TurnSharedKey       *string
-}
+
 
 type Config struct {
 	ServiceSettings      ServiceSettings
