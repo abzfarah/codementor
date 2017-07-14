@@ -56,15 +56,12 @@ type User struct {
 	LastName           string    `json:"last_name"`
 	Position           string    `json:"position"`
 	Roles              string    `json:"roles"`
-	AllowMarketing     bool      `json:"allow_marketing,omitempty"`
 	Props              StringMap `json:"props,omitempty"`
 	NotifyProps        StringMap `json:"notify_props,omitempty"`
 	LastPasswordUpdate int64     `json:"last_password_update,omitempty"`
 	LastPictureUpdate  int64     `json:"last_picture_update,omitempty"`
 	FailedAttempts     int       `json:"failed_attempts,omitempty"`
 	Locale             string    `json:"locale"`
-	MfaActive          bool      `json:"mfa_active,omitempty"`
-	MfaSecret          string    `json:"mfa_secret,omitempty"`
 	LastActivityAt     int64     `db:"-" json:"last_activity_at,omitempty"`
 }
 
@@ -76,7 +73,6 @@ type UserPatch struct {
 	Position    *string    `json:"position"`
 	Email       *string    `json:"email"`
 	Props       *StringMap `json:"props,omitempty"`
-	NotifyProps *StringMap `json:"notify_props,omitempty"`
 	Locale      *string    `json:"locale"`
 }
 
@@ -159,7 +155,7 @@ func (u *User) PreSave() {
 
 	u.LastPasswordUpdate = u.CreateAt
 
-	u.MfaActive = false
+
 
 	if u.Locale == "" {
 		u.Locale = DEFAULT_LOCALE
@@ -263,9 +259,7 @@ func (u *User) Patch(patch *UserPatch) {
 		u.Props = *patch.Props
 	}
 
-	if patch.NotifyProps != nil {
-		u.NotifyProps = *patch.NotifyProps
-	}
+
 
 	if patch.Locale != nil {
 		u.Locale = *patch.Locale
@@ -301,7 +295,7 @@ func (u *User) Sanitize(options map[string]bool) {
 	u.Password = ""
 	u.AuthData = new(string)
 	*u.AuthData = ""
-	u.MfaSecret = ""
+
 
 	if len(options) != 0 && !options["email"] {
 		u.Email = ""
@@ -322,9 +316,9 @@ func (u *User) ClearNonProfileFields() {
 	u.Password = ""
 	u.AuthData = new(string)
 	*u.AuthData = ""
-	u.MfaSecret = ""
+
 	u.EmailVerified = false
-	u.AllowMarketing = false
+
 	u.Props = StringMap{}
 	u.NotifyProps = StringMap{}
 	u.LastPasswordUpdate = 0

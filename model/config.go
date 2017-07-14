@@ -226,12 +226,6 @@ type FileSettings struct {
 	ProfileWidth            int
 	ProfileHeight           int
 	InitialFont             string
-	AmazonS3AccessKeyId     string
-	AmazonS3SecretAccessKey string
-	AmazonS3Bucket          string
-	AmazonS3Region          string
-	AmazonS3Endpoint        string
-	AmazonS3SSL             *bool
 }
 
 type EmailSettings struct {
@@ -243,16 +237,9 @@ type EmailSettings struct {
 	FeedbackName                      string
 	FeedbackEmail                     string
 	FeedbackOrganization              *string
-	SMTPUsername                      string
-	SMTPPassword                      string
-	SMTPServer                        string
-	SMTPPort                          string
 	ConnectionSecurity                string
 	InviteSalt                        string
 	PasswordResetSalt                 string
-	SendPushNotifications             *bool
-	PushNotificationServer            *string
-	PushNotificationContents          *string
 	EnableEmailBatching               *bool
 	EmailBatchingBufferSize           *int
 	EmailBatchingInterval             *int
@@ -667,9 +654,7 @@ func (o *Config) Sanitize() {
 
 	o.EmailSettings.InviteSalt = FAKE_SETTING
 	o.EmailSettings.PasswordResetSalt = FAKE_SETTING
-	if len(o.EmailSettings.SMTPPassword) > 0 {
-		o.EmailSettings.SMTPPassword = FAKE_SETTING
-	}
+
 
 
 	o.SqlSettings.DataSource = FAKE_SETTING

@@ -23,8 +23,8 @@ import (
 func main() {
 	var rootCmd = &cobra.Command{
 		Use:   "platform",
-		Short: "Open source, self-hosted Slack-alternative",
-		Long:  `Mattermost offers workplace messaging across web, PC and phones with archiving, search and integration with your existing systems. Documentation available at https://docs.mattermost.com`,
+		Short: "Dating website",
+		Long:  `Nomad Singles is a Somali Dating Website`,
 		RunE:  runServerCmd,
 	}
 	rootCmd.PersistentFlags().StringP("config", "c", "config.json", "Configuration file to use.")

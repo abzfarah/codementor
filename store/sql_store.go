@@ -68,9 +68,6 @@ type SqlStore struct {
 	master         *gorp.DbMap
 	replicas       []*gorp.DbMap
 	searchReplicas []*gorp.DbMap
-	user           UserStore
-	session        SessionStore
-	oauth          OAuthStore
 	system         SystemStore
 	SchemaVersion  string
 	rrCounter      int64
@@ -119,7 +116,7 @@ func NewSqlStore() Store {
 	sqlStore := initConnection()
 
 
-	sqlStore.session = NewSqlSessionStore(sqlStore)
+
 
 	err := sqlStore.master.CreateTablesIfNotExists()
 	if err != nil {
@@ -131,7 +128,6 @@ func NewSqlStore() Store {
 
 
 
-	sqlStore.session.(*SqlSessionStore).CreateIndexesIfNotExists()
 
 
 	return sqlStore
@@ -602,19 +598,6 @@ func (ss *SqlStore) Close() {
 
 
 
-
-func (ss *SqlStore) User() UserStore {
-	return ss.user
-}
-
-func (ss *SqlStore) Session() SessionStore {
-	return ss.session
-}
-
-
-func (ss *SqlStore) OAuth() OAuthStore {
-	return ss.oauth
-}
 
 func (ss *SqlStore) System() SystemStore {
 	return ss.system

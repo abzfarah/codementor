@@ -50,16 +50,7 @@ func SessionHasPermissionToPost(session model.Session, postId string, permission
 return true
 }
 
-func HasPermissionTo(askingUserId string, permission *model.Permission) bool {
-	user, err := GetUser(askingUserId)
-	if err != nil {
-		return false
-	}
 
-	roles := user.GetRoles()
-
-	return CheckIfRolesGrantPermission(roles, permission.Id)
-}
 
 func HasPermissionToTeam(askingUserId string, teamId string, permission *model.Permission) bool {
 
@@ -77,11 +68,6 @@ func HasPermissionToChannel(askingUserId string, channelId string, permission *m
 	return true
 }
 
-func HasPermissionToChannelByPost(askingUserId string, postId string, permission *model.Permission) bool {
-
-
-	return HasPermissionTo(askingUserId, permission)
-}
 
 func HasPermissionToUser(askingUserId string, userId string) bool {
 

@@ -14,30 +14,7 @@ import (
 	"github.com/mssola/user_agent"
 )
 
-func AuthenticateUserForLogin(id, loginId, password, mfaToken, deviceId string, ldapOnly bool) (*model.User, *model.AppError) {
-	if len(password) == 0 {
-		err := model.NewLocAppError("AuthenticateUserForLogin", "api.user.login.blank_pwd.app_error", nil, "")
-		err.StatusCode = http.StatusBadRequest
-		return nil, err
-	}
 
-	var user *model.User
-	var err *model.AppError
-
-	if len(id) != 0 {
-		if user, err = GetUser(id); err != nil {
-			err.StatusCode = http.StatusBadRequest
-
-			return nil, err
-		}
-	} else {
-
-	}
-
-
-
-	return user, nil
-}
 
 func DoLogin(w http.ResponseWriter, r *http.Request, user *model.User, deviceId string) (*model.Session, *model.AppError) {
 	session := &model.Session{UserId: user.Id, Roles: user.GetRawRoles(), DeviceId: deviceId, IsOAuth: false}
@@ -47,11 +24,7 @@ func DoLogin(w http.ResponseWriter, r *http.Request, user *model.User, deviceId 
 	if len(deviceId) > 0 {
 		session.SetExpireInDays(*utils.Cfg.ServiceSettings.SessionLengthMobileInDays)
 
-		// A special case where we logout of all other sessions with the same Id
-		if err := RevokeSessionsForDeviceId(user.Id, deviceId, ""); err != nil {
-			err.StatusCode = http.StatusInternalServerError
-			return nil, err
-		}
+
 	} else {
 		session.SetExpireInDays(*utils.Cfg.ServiceSettings.SessionLengthWebInDays)
 	}
@@ -81,11 +54,8 @@ func DoLogin(w http.ResponseWriter, r *http.Request, user *model.User, deviceId 
 	session.AddProp(model.SESSION_PROP_OS, os)
 	session.AddProp(model.SESSION_PROP_BROWSER, fmt.Sprintf("%v/%v", bname, bversion))
 
-	var err *model.AppError
-	if session, err = CreateSession(session); err != nil {
-		err.StatusCode = http.StatusInternalServerError
-		return nil, err
-	}
+
+
 
 	w.Header().Set(model.HEADER_TOKEN, session.Token)
 

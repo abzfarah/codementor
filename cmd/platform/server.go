@@ -26,7 +26,7 @@ var MaxNotificationsPerChannelDefault int64 = 1000000
 
 var serverCmd = &cobra.Command{
 	Use:   "server",
-	Short: "Run the Mattermost server",
+	Short: "Run the Nomad server",
 	RunE:  runServerCmd,
 }
 
@@ -47,13 +47,13 @@ func runServer(configFileLocation string) {
 	}
 
 	utils.InitTranslations(utils.Cfg.LocalizationSettings)
-	utils.TestConnection(utils.Cfg)
+
 
 	pwd, _ := os.Getwd()
-	l4g.Info(utils.T("mattermost.current_version"), model.CurrentVersion, model.BuildNumber, model.BuildDate, model.BuildHash, model.BuildHashEnterprise)
-	l4g.Info(utils.T("mattermost.entreprise_enabled"), model.BuildEnterpriseReady)
-	l4g.Info(utils.T("mattermost.working_dir"), pwd)
-	l4g.Info(utils.T("mattermost.config_file"), utils.FindConfigFile(configFileLocation))
+	l4g.Info(utils.T("nomadsingles.current_version"), model.CurrentVersion, model.BuildNumber, model.BuildDate, model.BuildHash, model.BuildHashEnterprise)
+	l4g.Info(utils.T("nomadsingles.entreprise_enabled"), model.BuildEnterpriseReady)
+	l4g.Info(utils.T("nomadsingles.working_dir"), pwd)
+	l4g.Info(utils.T("nomadsingles.config_file"), utils.FindConfigFile(configFileLocation))
 
 	// Enable developer settings if this is a "dev" build
 	if model.BuildNumber == "dev" {

@@ -315,7 +315,7 @@ func LoadConfig(fileName string) {
 
 
 
-	SetDefaultRolesBasedOnConfig()
+
 	SetSiteURL(*Cfg.ServiceSettings.SiteURL)
 }
 
@@ -330,56 +330,21 @@ func getClientConfig(c *model.Config) map[string]string {
 	props["BuildNumber"] = model.BuildNumber
 	props["BuildDate"] = model.BuildDate
 	props["BuildHash"] = model.BuildHash
-	props["BuildHashEnterprise"] = model.BuildHashEnterprise
-	props["BuildEnterpriseReady"] = model.BuildEnterpriseReady
+
 
 	props["SiteURL"] = strings.TrimRight(*c.ServiceSettings.SiteURL, "/")
 
 	props["EnableOAuthServiceProvider"] = strconv.FormatBool(c.ServiceSettings.EnableOAuthServiceProvider)
 	props["GoogleDeveloperKey"] = c.ServiceSettings.GoogleDeveloperKey
-	props["EnableIncomingWebhooks"] = strconv.FormatBool(c.ServiceSettings.EnableIncomingWebhooks)
-	props["EnableOutgoingWebhooks"] = strconv.FormatBool(c.ServiceSettings.EnableOutgoingWebhooks)
-	props["EnableCommands"] = strconv.FormatBool(*c.ServiceSettings.EnableCommands)
-	props["EnableOnlyAdminIntegrations"] = strconv.FormatBool(*c.ServiceSettings.EnableOnlyAdminIntegrations)
-	props["EnablePostUsernameOverride"] = strconv.FormatBool(c.ServiceSettings.EnablePostUsernameOverride)
-	props["EnablePostIconOverride"] = strconv.FormatBool(c.ServiceSettings.EnablePostIconOverride)
-	props["EnableLinkPreviews"] = strconv.FormatBool(*c.ServiceSettings.EnableLinkPreviews)
 	props["EnableTesting"] = strconv.FormatBool(c.ServiceSettings.EnableTesting)
 	props["EnableDeveloper"] = strconv.FormatBool(*c.ServiceSettings.EnableDeveloper)
-	props["EnableDiagnostics"] = strconv.FormatBool(*c.LogSettings.EnableDiagnostics)
-	props["RestrictPostDelete"] = *c.ServiceSettings.RestrictPostDelete
-	props["AllowEditPost"] = *c.ServiceSettings.AllowEditPost
-	props["PostEditTimeLimit"] = fmt.Sprintf("%v", *c.ServiceSettings.PostEditTimeLimit)
 
-	props["SendEmailNotifications"] = strconv.FormatBool(c.EmailSettings.SendEmailNotifications)
-	props["SendPushNotifications"] = strconv.FormatBool(*c.EmailSettings.SendPushNotifications)
-	props["EnableSignUpWithEmail"] = strconv.FormatBool(c.EmailSettings.EnableSignUpWithEmail)
-	props["EnableSignInWithEmail"] = strconv.FormatBool(*c.EmailSettings.EnableSignInWithEmail)
-	props["EnableSignInWithUsername"] = strconv.FormatBool(*c.EmailSettings.EnableSignInWithUsername)
-	props["RequireEmailVerification"] = strconv.FormatBool(c.EmailSettings.RequireEmailVerification)
-	props["EnableEmailBatching"] = strconv.FormatBool(*c.EmailSettings.EnableEmailBatching)
-
-
-
-	props["ShowEmailAddress"] = strconv.FormatBool(c.PrivacySettings.ShowEmailAddress)
-
-
-
-	props["WebsocketPort"] = fmt.Sprintf("%v", *c.ServiceSettings.WebsocketPort)
-	props["WebsocketSecurePort"] = fmt.Sprintf("%v", *c.ServiceSettings.WebsocketSecurePort)
 
 	props["DefaultClientLocale"] = *c.LocalizationSettings.DefaultClientLocale
 	props["AvailableLocales"] = *c.LocalizationSettings.AvailableLocales
 	props["SQLDriverName"] = c.SqlSettings.DriverName
 
-	props["EnableCustomEmoji"] = strconv.FormatBool(*c.ServiceSettings.EnableCustomEmoji)
-	props["RestrictCustomEmojiCreation"] = *c.ServiceSettings.RestrictCustomEmojiCreation
 
-	props["TimeBetweenUserTypingUpdatesMilliseconds"] = strconv.FormatInt(*c.ServiceSettings.TimeBetweenUserTypingUpdatesMilliseconds, 10)
-	props["EnableUserTypingMessages"] = strconv.FormatBool(*c.ServiceSettings.EnableUserTypingMessages)
-
-	props["DiagnosticId"] = CfgDiagnosticId
-	props["DiagnosticsEnabled"] = strconv.FormatBool(*c.LogSettings.EnableDiagnostics)
 
 
 	return props
@@ -421,9 +386,6 @@ func Desanitize(cfg *model.Config) {
 	}
 	if cfg.EmailSettings.PasswordResetSalt == model.FAKE_SETTING {
 		cfg.EmailSettings.PasswordResetSalt = Cfg.EmailSettings.PasswordResetSalt
-	}
-	if cfg.EmailSettings.SMTPPassword == model.FAKE_SETTING {
-		cfg.EmailSettings.SMTPPassword = Cfg.EmailSettings.SMTPPassword
 	}
 
 
