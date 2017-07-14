@@ -45,21 +45,21 @@ const (
 	EXIT_TABLE_EXISTS                = 104
 	EXIT_TABLE_EXISTS_MYSQL          = 105
 	EXIT_COLUMN_EXISTS               = 106
-	EXIT_DOES_COLUMN_EXISTS_POSTGRES = 107
+
 	EXIT_DOES_COLUMN_EXISTS_MYSQL    = 108
 	EXIT_DOES_COLUMN_EXISTS_MISSING  = 109
-	EXIT_CREATE_COLUMN_POSTGRES      = 110
+
 	EXIT_CREATE_COLUMN_MYSQL         = 111
 	EXIT_CREATE_COLUMN_MISSING       = 112
 	EXIT_REMOVE_COLUMN               = 113
 	EXIT_RENAME_COLUMN               = 114
 	EXIT_MAX_COLUMN                  = 115
 	EXIT_ALTER_COLUMN                = 116
-	EXIT_CREATE_INDEX_POSTGRES       = 117
+
 	EXIT_CREATE_INDEX_MYSQL          = 118
 	EXIT_CREATE_INDEX_FULL_MYSQL     = 119
 	EXIT_CREATE_INDEX_MISSING        = 120
-	EXIT_REMOVE_INDEX_POSTGRES       = 121
+
 	EXIT_REMOVE_INDEX_MYSQL          = 122
 	EXIT_REMOVE_INDEX_MISSING        = 123
 )
@@ -160,9 +160,7 @@ func setupConnection(con_type string, driver string, dataSource string, maxIdle 
 		dbmap = &gorp.DbMap{Db: db, TypeConverter: mattermConverter{}, Dialect: gorp.SqliteDialect{}}
 	} else if driver == model.DATABASE_DRIVER_MYSQL {
 		dbmap = &gorp.DbMap{Db: db, TypeConverter: mattermConverter{}, Dialect: gorp.MySQLDialect{Engine: "InnoDB", Encoding: "UTF8MB4"}}
-	} else if driver == model.DATABASE_DRIVER_POSTGRES {
-		dbmap = &gorp.DbMap{Db: db, TypeConverter: mattermConverter{}, Dialect: gorp.PostgresDialect{}}
-	} else {
+	}  else {
 		l4g.Critical(utils.T("store.sql.dialect_driver.critical"))
 		time.Sleep(time.Second)
 		os.Exit(EXIT_NO_DRIVER)
@@ -223,21 +221,7 @@ func (ss *SqlStore) MarkSystemRanUnitTests() {
 }
 
 func (ss *SqlStore) DoesTableExist(tableName string) bool {
-	if utils.Cfg.SqlSettings.DriverName == model.DATABASE_DRIVER_POSTGRES {
-		count, err := ss.GetMaster().SelectInt(
-			`SELECT count(relname) FROM pg_class WHERE relname=$1`,
-			strings.ToLower(tableName),
-		)
-
-		if err != nil {
-			l4g.Critical(utils.T("store.sql.table_exists.critical"), err)
-			time.Sleep(time.Second)
-			os.Exit(EXIT_TABLE_EXISTS)
-		}
-
-		return count > 0
-
-	} else if utils.Cfg.SqlSettings.DriverName == model.DATABASE_DRIVER_MYSQL {
+ if utils.Cfg.SqlSettings.DriverName == model.DATABASE_DRIVER_MYSQL {
 
 		count, err := ss.GetMaster().SelectInt(
 			`SELECT
@@ -268,30 +252,7 @@ func (ss *SqlStore) DoesTableExist(tableName string) bool {
 }
 
 func (ss *SqlStore) DoesColumnExist(tableName string, columnName string) bool {
-	if utils.Cfg.SqlSettings.DriverName == model.DATABASE_DRIVER_POSTGRES {
-		count, err := ss.GetMaster().SelectInt(
-			`SELECT COUNT(0)
-			FROM   pg_attribute
-			WHERE  attrelid = $1::regclass
-			AND    attname = $2
-			AND    NOT attisdropped`,
-			strings.ToLower(tableName),
-			strings.ToLower(columnName),
-		)
-
-		if err != nil {
-			if err.Error() == "pq: relation \""+strings.ToLower(tableName)+"\" does not exist" {
-				return false
-			}
-
-			l4g.Critical(utils.T("store.sql.column_exists.critical"), err)
-			time.Sleep(time.Second)
-			os.Exit(EXIT_DOES_COLUMN_EXISTS_POSTGRES)
-		}
-
-		return count > 0
-
-	} else if utils.Cfg.SqlSettings.DriverName == model.DATABASE_DRIVER_MYSQL {
+ if utils.Cfg.SqlSettings.DriverName == model.DATABASE_DRIVER_MYSQL {
 
 		count, err := ss.GetMaster().SelectInt(
 			`SELECT
@@ -328,17 +289,7 @@ func (ss *SqlStore) CreateColumnIfNotExists(tableName string, columnName string,
 		return false
 	}
 
-	if utils.Cfg.SqlSettings.DriverName == model.DATABASE_DRIVER_POSTGRES {
-		_, err := ss.GetMaster().Exec("ALTER TABLE " + tableName + " ADD " + columnName + " " + postgresColType + " DEFAULT '" + defaultValue + "'")
-		if err != nil {
-			l4g.Critical(utils.T("store.sql.create_column.critical"), err)
-			time.Sleep(time.Second)
-			os.Exit(EXIT_CREATE_COLUMN_POSTGRES)
-		}
-
-		return true
-
-	} else if utils.Cfg.SqlSettings.DriverName == model.DATABASE_DRIVER_MYSQL {
+	if utils.Cfg.SqlSettings.DriverName == model.DATABASE_DRIVER_MYSQL {
 		_, err := ss.GetMaster().Exec("ALTER TABLE " + tableName + " ADD " + columnName + " " + mySqlColType + " DEFAULT '" + defaultValue + "'")
 		if err != nil {
 			l4g.Critical(utils.T("store.sql.create_column.critical"), err)
@@ -380,8 +331,6 @@ func (ss *SqlStore) RenameColumnIfExists(tableName string, oldColumnName string,
 	var err error
 	if utils.Cfg.SqlSettings.DriverName == model.DATABASE_DRIVER_MYSQL {
 		_, err = ss.GetMaster().Exec("ALTER TABLE " + tableName + " CHANGE " + oldColumnName + " " + newColumnName + " " + colType)
-	} else if utils.Cfg.SqlSettings.DriverName == model.DATABASE_DRIVER_POSTGRES {
-		_, err = ss.GetMaster().Exec("ALTER TABLE " + tableName + " RENAME COLUMN " + oldColumnName + " TO " + newColumnName)
 	}
 
 	if err != nil {
@@ -402,8 +351,6 @@ func (ss *SqlStore) GetMaxLengthOfColumnIfExists(tableName string, columnName st
 	var err error
 	if utils.Cfg.SqlSettings.DriverName == model.DATABASE_DRIVER_MYSQL {
 		result, err = ss.GetMaster().SelectStr("SELECT CHARACTER_MAXIMUM_LENGTH FROM information_schema.columns WHERE table_name = '" + tableName + "' AND COLUMN_NAME = '" + columnName + "'")
-	} else if utils.Cfg.SqlSettings.DriverName == model.DATABASE_DRIVER_POSTGRES {
-		result, err = ss.GetMaster().SelectStr("SELECT character_maximum_length FROM information_schema.columns WHERE table_name = '" + strings.ToLower(tableName) + "' AND column_name = '" + strings.ToLower(columnName) + "'")
 	}
 
 	if err != nil {
@@ -423,8 +370,6 @@ func (ss *SqlStore) AlterColumnTypeIfExists(tableName string, columnName string,
 	var err error
 	if utils.Cfg.SqlSettings.DriverName == model.DATABASE_DRIVER_MYSQL {
 		_, err = ss.GetMaster().Exec("ALTER TABLE " + tableName + " MODIFY " + columnName + " " + mySqlColType)
-	} else if utils.Cfg.SqlSettings.DriverName == model.DATABASE_DRIVER_POSTGRES {
-		_, err = ss.GetMaster().Exec("ALTER TABLE " + strings.ToLower(tableName) + " ALTER COLUMN " + strings.ToLower(columnName) + " TYPE " + postgresColType)
 	}
 
 	if err != nil {
@@ -455,28 +400,7 @@ func (ss *SqlStore) createIndexIfNotExists(indexName string, tableName string, c
 		uniqueStr = "UNIQUE "
 	}
 
-	if utils.Cfg.SqlSettings.DriverName == model.DATABASE_DRIVER_POSTGRES {
-		_, err := ss.GetMaster().SelectStr("SELECT $1::regclass", indexName)
-		// It should fail if the index does not exist
-		if err == nil {
-			return false
-		}
-
-		query := ""
-		if indexType == INDEX_TYPE_FULL_TEXT {
-			postgresColumnNames := convertMySQLFullTextColumnsToPostgres(columnName)
-			query = "CREATE INDEX " + indexName + " ON " + tableName + " USING gin(to_tsvector('english', " + postgresColumnNames + "))"
-		} else {
-			query = "CREATE " + uniqueStr + "INDEX " + indexName + " ON " + tableName + " (" + columnName + ")"
-		}
-
-		_, err = ss.GetMaster().Exec(query)
-		if err != nil {
-			l4g.Critical(utils.T("store.sql.create_index.critical"), err)
-			time.Sleep(time.Second)
-			os.Exit(EXIT_CREATE_INDEX_POSTGRES)
-		}
-	} else if utils.Cfg.SqlSettings.DriverName == model.DATABASE_DRIVER_MYSQL {
+	if utils.Cfg.SqlSettings.DriverName == model.DATABASE_DRIVER_MYSQL {
 
 		count, err := ss.GetMaster().SelectInt("SELECT COUNT(0) AS index_exists FROM information_schema.statistics WHERE TABLE_SCHEMA = DATABASE() and table_name = ? AND index_name = ?", tableName, indexName)
 		if err != nil {
@@ -511,22 +435,7 @@ func (ss *SqlStore) createIndexIfNotExists(indexName string, tableName string, c
 
 func (ss *SqlStore) RemoveIndexIfExists(indexName string, tableName string) bool {
 
-	if utils.Cfg.SqlSettings.DriverName == model.DATABASE_DRIVER_POSTGRES {
-		_, err := ss.GetMaster().SelectStr("SELECT $1::regclass", indexName)
-		// It should fail if the index does not exist
-		if err != nil {
-			return false
-		}
-
-		_, err = ss.GetMaster().Exec("DROP INDEX " + indexName)
-		if err != nil {
-			l4g.Critical(utils.T("store.sql.remove_index.critical"), err)
-			time.Sleep(time.Second)
-			os.Exit(EXIT_REMOVE_INDEX_POSTGRES)
-		}
-
-		return true
-	} else if utils.Cfg.SqlSettings.DriverName == model.DATABASE_DRIVER_MYSQL {
+if utils.Cfg.SqlSettings.DriverName == model.DATABASE_DRIVER_MYSQL {
 
 		count, err := ss.GetMaster().SelectInt("SELECT COUNT(0) AS index_exists FROM information_schema.statistics WHERE TABLE_SCHEMA = DATABASE() and table_name = ? AND index_name = ?", tableName, indexName)
 		if err != nil {
@@ -679,18 +588,7 @@ func (me mattermConverter) FromDb(target interface{}) (gorp.CustomScanner, bool)
 	return gorp.CustomScanner{}, false
 }
 
-func convertMySQLFullTextColumnsToPostgres(columnNames string) string {
-	columns := strings.Split(columnNames, ", ")
-	concatenatedColumnNames := ""
-	for i, c := range columns {
-		concatenatedColumnNames += c
-		if i < len(columns)-1 {
-			concatenatedColumnNames += " || ' ' || "
-		}
-	}
 
-	return concatenatedColumnNames
-}
 
 func encrypt(key []byte, text string) (string, error) {
 
