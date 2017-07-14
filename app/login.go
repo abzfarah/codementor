@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/mattermost/platform/einterfaces"
+
 	"github.com/mattermost/platform/model"
 	"github.com/mattermost/platform/utils"
 	"github.com/mssola/user_agent"
@@ -27,31 +27,14 @@ func AuthenticateUserForLogin(id, loginId, password, mfaToken, deviceId string, 
 	if len(id) != 0 {
 		if user, err = GetUser(id); err != nil {
 			err.StatusCode = http.StatusBadRequest
-			if einterfaces.GetMetricsInterface() != nil {
-				einterfaces.GetMetricsInterface().IncrementLoginFail()
-			}
+
 			return nil, err
 		}
 	} else {
-		if user, err = GetUserForLogin(loginId, ldapOnly); err != nil {
-			if einterfaces.GetMetricsInterface() != nil {
-				einterfaces.GetMetricsInterface().IncrementLoginFail()
-			}
-			return nil, err
-		}
+
 	}
 
-	// and then authenticate them
-	if user, err = authenticateUser(user, password, mfaToken); err != nil {
-		if einterfaces.GetMetricsInterface() != nil {
-			einterfaces.GetMetricsInterface().IncrementLoginFail()
-		}
-		return nil, err
-	}
 
-	if einterfaces.GetMetricsInterface() != nil {
-		einterfaces.GetMetricsInterface().IncrementLogin()
-	}
 
 	return user, nil
 }

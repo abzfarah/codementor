@@ -56,8 +56,7 @@ type Store interface {
 }
 
 type TeamStore interface {
-	Save(team *model.Team) StoreChannel
-	Update(team *model.Team) StoreChannel
+
 	UpdateDisplayName(name string, teamId string) StoreChannel
 	Get(id string) StoreChannel
 	GetByName(name string) StoreChannel
@@ -72,8 +71,7 @@ type TeamStore interface {
 	GetByInviteId(inviteId string) StoreChannel
 	PermanentDelete(teamId string) StoreChannel
 	AnalyticsTeamCount() StoreChannel
-	SaveMember(member *model.TeamMember) StoreChannel
-	UpdateMember(member *model.TeamMember) StoreChannel
+
 	GetMember(teamId string, userId string) StoreChannel
 	GetMembers(teamId string, offset int, limit int) StoreChannel
 	GetMembersByIds(teamId string, userIds []string) StoreChannel
@@ -88,10 +86,7 @@ type TeamStore interface {
 }
 
 type ChannelStore interface {
-	Save(channel *model.Channel) StoreChannel
-	CreateDirectChannel(userId string, otherUserId string) StoreChannel
-	SaveDirectChannel(channel *model.Channel, member1 *model.ChannelMember, member2 *model.ChannelMember) StoreChannel
-	Update(channel *model.Channel) StoreChannel
+
 	Get(id string, allowFromCache bool) StoreChannel
 	InvalidateChannel(id string)
 	InvalidateChannelByName(teamId, name string)
@@ -111,8 +106,7 @@ type ChannelStore interface {
 	GetTeamChannels(teamId string) StoreChannel
 	GetAll(teamId string) StoreChannel
 	GetForPost(postId string) StoreChannel
-	SaveMember(member *model.ChannelMember) StoreChannel
-	UpdateMember(member *model.ChannelMember) StoreChannel
+
 	GetMembers(channelId string, offset, limit int) StoreChannel
 	GetMember(channelId string, userId string) StoreChannel
 	GetAllChannelMembersForUser(userId string, allowFromCache bool) StoreChannel
@@ -141,8 +135,7 @@ type ChannelStore interface {
 }
 
 type PostStore interface {
-	Save(post *model.Post) StoreChannel
-	Update(newPost *model.Post, oldPost *model.Post) StoreChannel
+
 	Get(id string) StoreChannel
 	GetSingle(id string) StoreChannel
 	Delete(postId string, time int64) StoreChannel
@@ -155,13 +148,13 @@ type PostStore interface {
 	GetPostsAfter(channelId string, postId string, numPosts int, offset int) StoreChannel
 	GetPostsSince(channelId string, time int64, allowFromCache bool) StoreChannel
 	GetEtag(channelId string, allowFromCache bool) StoreChannel
-	Search(teamId string, userId string, params *model.SearchParams) StoreChannel
+
 	AnalyticsUserCountsWithPostsByDay(teamId string) StoreChannel
 	AnalyticsPostCountsByDay(teamId string) StoreChannel
 	AnalyticsPostCount(teamId string, mustHaveFile bool, mustHaveHashtag bool) StoreChannel
 	InvalidateLastPostTimeCache(channelId string)
 	GetPostsCreatedAt(channelId string, time int64) StoreChannel
-	Overwrite(post *model.Post) StoreChannel
+
 }
 
 type UserStore interface {
@@ -177,11 +170,7 @@ type UserStore interface {
 	GetAll() StoreChannel
 	InvalidateProfilesInChannelCacheByUser(userId string)
 	InvalidateProfilesInChannelCache(channelId string)
-	GetProfilesInChannel(channelId string, offset int, limit int) StoreChannel
-	GetAllProfilesInChannel(channelId string, allowFromCache bool) StoreChannel
-	GetProfilesNotInChannel(teamId string, channelId string, offset int, limit int) StoreChannel
-	GetProfilesWithoutTeam(offset int, limit int) StoreChannel
-	GetProfilesByUsernames(usernames []string, teamId string) StoreChannel
+
 	GetAllProfiles(offset int, limit int) StoreChannel
 	GetProfiles(teamId string, offset int, limit int) StoreChannel
 	GetProfileByIds(userId []string, allowFromCache bool) StoreChannel
@@ -229,17 +218,16 @@ type SessionStore interface {
 }
 
 type AuditStore interface {
-	Save(audit *model.Audit) StoreChannel
+
 	Get(user_id string, offset int, limit int) StoreChannel
 	PermanentDeleteByUser(userId string) StoreChannel
 }
 
 type ComplianceStore interface {
-	Save(compliance *model.Compliance) StoreChannel
-	Update(compliance *model.Compliance) StoreChannel
+
 	Get(id string) StoreChannel
 	GetAll(offset, limit int) StoreChannel
-	ComplianceExport(compliance *model.Compliance) StoreChannel
+
 }
 
 type OAuthStore interface {
@@ -272,23 +260,22 @@ type SystemStore interface {
 }
 
 type WebhookStore interface {
-	SaveIncoming(webhook *model.IncomingWebhook) StoreChannel
+
 	GetIncoming(id string, allowFromCache bool) StoreChannel
 	GetIncomingList(offset, limit int) StoreChannel
 	GetIncomingByTeam(teamId string, offset, limit int) StoreChannel
-	UpdateIncoming(webhook *model.IncomingWebhook) StoreChannel
+
 	GetIncomingByChannel(channelId string) StoreChannel
 	DeleteIncoming(webhookId string, time int64) StoreChannel
 	PermanentDeleteIncomingByUser(userId string) StoreChannel
 
-	SaveOutgoing(webhook *model.OutgoingWebhook) StoreChannel
 	GetOutgoing(id string) StoreChannel
 	GetOutgoingList(offset, limit int) StoreChannel
 	GetOutgoingByChannel(channelId string, offset, limit int) StoreChannel
 	GetOutgoingByTeam(teamId string, offset, limit int) StoreChannel
 	DeleteOutgoing(webhookId string, time int64) StoreChannel
 	PermanentDeleteOutgoingByUser(userId string) StoreChannel
-	UpdateOutgoing(hook *model.OutgoingWebhook) StoreChannel
+
 
 	AnalyticsIncomingCount(teamId string) StoreChannel
 	AnalyticsOutgoingCount(teamId string) StoreChannel
@@ -296,17 +283,17 @@ type WebhookStore interface {
 }
 
 type CommandStore interface {
-	Save(webhook *model.Command) StoreChannel
+
 	Get(id string) StoreChannel
 	GetByTeam(teamId string) StoreChannel
 	Delete(commandId string, time int64) StoreChannel
 	PermanentDeleteByUser(userId string) StoreChannel
-	Update(hook *model.Command) StoreChannel
+
 	AnalyticsCommandCount(teamId string) StoreChannel
 }
 
 type PreferenceStore interface {
-	Save(preferences *model.Preferences) StoreChannel
+
 	Get(userId string, category string, name string) StoreChannel
 	GetCategory(userId string, category string) StoreChannel
 	GetAll(userId string) StoreChannel
@@ -323,14 +310,14 @@ type LicenseStore interface {
 }
 
 type PasswordRecoveryStore interface {
-	SaveOrUpdate(recovery *model.PasswordRecovery) StoreChannel
+
 	Delete(userId string) StoreChannel
 	Get(userId string) StoreChannel
 	GetByCode(code string) StoreChannel
 }
 
 type EmojiStore interface {
-	Save(emoji *model.Emoji) StoreChannel
+
 	Get(id string, allowFromCache bool) StoreChannel
 	GetByName(name string) StoreChannel
 	GetAll() StoreChannel
@@ -338,7 +325,7 @@ type EmojiStore interface {
 }
 
 type StatusStore interface {
-	SaveOrUpdate(status *model.Status) StoreChannel
+
 	Get(userId string) StoreChannel
 	GetByIds(userIds []string) StoreChannel
 	GetOnlineAway() StoreChannel
@@ -350,7 +337,7 @@ type StatusStore interface {
 }
 
 type FileInfoStore interface {
-	Save(info *model.FileInfo) StoreChannel
+
 	Get(id string) StoreChannel
 	GetByPath(path string) StoreChannel
 	GetForPost(postId string, readFromMaster bool, allowFromCache bool) StoreChannel
@@ -360,8 +347,7 @@ type FileInfoStore interface {
 }
 
 type ReactionStore interface {
-	Save(reaction *model.Reaction) StoreChannel
-	Delete(reaction *model.Reaction) StoreChannel
+
 	InvalidateCacheForPost(postId string)
 	InvalidateCache()
 	GetForPost(postId string, allowFromCache bool) StoreChannel

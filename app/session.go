@@ -6,11 +6,12 @@ package app
 import (
 	"net/http"
 
-	"github.com/mattermost/platform/einterfaces"
+
 	"github.com/mattermost/platform/model"
 	"github.com/mattermost/platform/utils"
 
 	l4g "github.com/alecthomas/log4go"
+
 )
 
 var sessionCache *utils.Cache = utils.NewLru(model.SESSION_CACHE_SIZE)
@@ -28,18 +29,12 @@ func CreateSession(session *model.Session) (*model.Session, *model.AppError) {
 }
 
 func GetSession(token string) (*model.Session, *model.AppError) {
-	metrics := einterfaces.GetMetricsInterface()
+
 
 	var session *model.Session
 	if ts, ok := sessionCache.Get(token); ok {
 		session = ts.(*model.Session)
-		if metrics != nil {
-			metrics.IncrementMemCacheHitCounterSession()
-		}
-	} else {
-		if metrics != nil {
-			metrics.IncrementMemCacheMissCounterSession()
-		}
+
 	}
 
 	if session == nil {
@@ -87,8 +82,8 @@ func RevokeAllSessions(userId string) *model.AppError {
 				}
 			}
 
-			RevokeWebrtcToken(session.Id)
-		}
+
+	}
 	}
 
 	ClearSessionCacheForUser(userId)
@@ -100,9 +95,7 @@ func ClearSessionCacheForUser(userId string) {
 
 	ClearSessionCacheForUserSkipClusterSend(userId)
 
-	if einterfaces.GetClusterInterface() != nil {
-		einterfaces.GetClusterInterface().ClearSessionCacheForUser(userId)
-	}
+
 }
 
 func ClearSessionCacheForUserSkipClusterSend(userId string) {
@@ -117,7 +110,6 @@ func ClearSessionCacheForUserSkipClusterSend(userId string) {
 		}
 	}
 
-	InvalidateWebConnSessionCacheForUser(userId)
 
 }
 
@@ -168,8 +160,8 @@ func RevokeSession(session *model.Session) *model.AppError {
 		}
 	}
 
-	RevokeWebrtcToken(session.Id)
-	ClearSessionCacheForUser(session.UserId)
+
+
 
 	return nil
 }

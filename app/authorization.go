@@ -19,12 +19,6 @@ func SessionHasPermissionToTeam(session model.Session, teamId string, permission
 		return false
 	}
 
-	teamMember := session.GetTeamByTeamId(teamId)
-	if teamMember != nil {
-		if CheckIfRolesGrantPermission(teamMember.GetRoles(), permission.Id) {
-			return true
-		}
-	}
 
 	return SessionHasPermissionTo(session, permission)
 }
@@ -47,28 +41,13 @@ func SessionHasPermissionToChannel(session model.Session, channelId string, perm
 		}
 	}
 
-	channel, err := GetChannel(channelId)
-	if err == nil {
-		return SessionHasPermissionToTeam(session, channel.TeamId, permission)
-	}
 
 	return SessionHasPermissionTo(session, permission)
 }
 
 func SessionHasPermissionToChannelByPost(session model.Session, postId string, permission *model.Permission) bool {
-	var channelMember *model.ChannelMember
-	if result := <-Srv.Store.Channel().GetMemberForPost(postId, session.UserId); result.Err == nil {
-		channelMember = result.Data.(*model.ChannelMember)
 
-		if CheckIfRolesGrantPermission(channelMember.GetRoles(), permission.Id) {
-			return true
-		}
-	}
 
-	if result := <-Srv.Store.Channel().GetForPost(postId); result.Err == nil {
-		channel := result.Data.(*model.Channel)
-		return SessionHasPermissionToTeam(session, channel.TeamId, permission)
-	}
 
 	return SessionHasPermissionTo(session, permission)
 }
@@ -90,16 +69,7 @@ func SessionHasPermissionToUser(session model.Session, userId string) bool {
 }
 
 func SessionHasPermissionToPost(session model.Session, postId string, permission *model.Permission) bool {
-	post, err := GetSinglePost(postId)
-	if err != nil {
-		return false
-	}
-
-	if post.UserId == session.UserId {
-		return true
-	}
-
-	return SessionHasPermissionToChannel(session, post.ChannelId, permission)
+return true
 }
 
 func HasPermissionTo(askingUserId string, permission *model.Permission) bool {
@@ -114,22 +84,9 @@ func HasPermissionTo(askingUserId string, permission *model.Permission) bool {
 }
 
 func HasPermissionToTeam(askingUserId string, teamId string, permission *model.Permission) bool {
-	if teamId == "" || askingUserId == "" {
-		return false
-	}
 
-	teamMember, err := GetTeamMember(teamId, askingUserId)
-	if err != nil {
-		return false
-	}
 
-	roles := teamMember.GetRoles()
-
-	if CheckIfRolesGrantPermission(roles, permission.Id) {
-		return true
-	}
-
-	return HasPermissionTo(askingUserId, permission)
+	return true
 }
 
 func HasPermissionToChannel(askingUserId string, channelId string, permission *model.Permission) bool {
@@ -137,37 +94,13 @@ func HasPermissionToChannel(askingUserId string, channelId string, permission *m
 		return false
 	}
 
-	channelMember, err := GetChannelMember(channelId, askingUserId)
-	if err == nil {
-		roles := channelMember.GetRoles()
-		if CheckIfRolesGrantPermission(roles, permission.Id) {
-			return true
-		}
-	}
 
-	var channel *model.Channel
-	channel, err = GetChannel(channelId)
-	if err == nil {
-		return HasPermissionToTeam(askingUserId, channel.TeamId, permission)
-	}
 
-	return HasPermissionTo(askingUserId, permission)
+	return true
 }
 
 func HasPermissionToChannelByPost(askingUserId string, postId string, permission *model.Permission) bool {
-	var channelMember *model.ChannelMember
-	if result := <-Srv.Store.Channel().GetMemberForPost(postId, askingUserId); result.Err == nil {
-		channelMember = result.Data.(*model.ChannelMember)
 
-		if CheckIfRolesGrantPermission(channelMember.GetRoles(), permission.Id) {
-			return true
-		}
-	}
-
-	if result := <-Srv.Store.Channel().GetForPost(postId); result.Err == nil {
-		channel := result.Data.(*model.Channel)
-		return HasPermissionToTeam(askingUserId, channel.TeamId, permission)
-	}
 
 	return HasPermissionTo(askingUserId, permission)
 }

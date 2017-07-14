@@ -142,7 +142,7 @@ func NewSqlStore() Store {
 		os.Exit(EXIT_CREATE_TABLE)
 	}
 
-	UpgradeDatabase(sqlStore)
+
 
 
 	sqlStore.session.(*SqlSessionStore).CreateIndexesIfNotExists()

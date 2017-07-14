@@ -1036,10 +1036,7 @@ func (o *Config) SetDefaults() {
 		*o.SamlSettings.AssertionConsumerServiceURL = ""
 	}
 
-	if o.SamlSettings.LoginButtonText == nil || *o.SamlSettings.LoginButtonText == "" {
-		o.SamlSettings.LoginButtonText = new(string)
-		*o.SamlSettings.LoginButtonText = USER_AUTH_SERVICE_SAML_TEXT
-	}
+
 
 	if o.SamlSettings.FirstNameAttribute == nil {
 		o.SamlSettings.FirstNameAttribute = new(string)

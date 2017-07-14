@@ -69,16 +69,7 @@ func (me SqlSessionStore) Save(session *model.Session) StoreChannel {
 		if rtcs := <-tcs; rtcs.Err != nil {
 			result.Err = model.NewLocAppError("SqlSessionStore.Save", "store.sql_session.save.app_error", nil, "id="+session.Id+", "+rtcs.Err.Error())
 			return
-		} else {
-			tempMembers := rtcs.Data.([]*model.TeamMember)
-			session.TeamMembers = make([]*model.TeamMember, 0, len(tempMembers))
-			for _, tm := range tempMembers {
-				if tm.DeleteAt == 0 {
-					session.TeamMembers = append(session.TeamMembers, tm)
-				}
-			}
 		}
-
 		storeChannel <- result
 		close(storeChannel)
 	}()
@@ -102,19 +93,7 @@ func (me SqlSessionStore) Get(sessionIdOrToken string) StoreChannel {
 		} else {
 			result.Data = sessions[0]
 
-			tcs := me.Team().GetTeamsForUser(sessions[0].UserId)
-			if rtcs := <-tcs; rtcs.Err != nil {
-				result.Err = model.NewLocAppError("SqlSessionStore.Get", "store.sql_session.get.app_error", nil, "sessionIdOrToken="+sessionIdOrToken+", "+rtcs.Err.Error())
-				return
-			} else {
-				tempMembers := rtcs.Data.([]*model.TeamMember)
-				sessions[0].TeamMembers = make([]*model.TeamMember, 0, len(tempMembers))
-				for _, tm := range tempMembers {
-					if tm.DeleteAt == 0 {
-						sessions[0].TeamMembers = append(sessions[0].TeamMembers, tm)
-					}
-				}
-			}
+
 		}
 
 		storeChannel <- result
@@ -137,7 +116,6 @@ func (me SqlSessionStore) GetSessions(userId string) StoreChannel {
 		result := StoreResult{}
 		var sessions []*model.Session
 
-		tcs := me.Team().GetTeamsForUser(userId)
 
 		if _, err := me.GetReplica().Select(&sessions, "SELECT * FROM Sessions WHERE UserId = :UserId ORDER BY LastActivityAt DESC", map[string]interface{}{"UserId": userId}); err != nil {
 			result.Err = model.NewLocAppError("SqlSessionStore.GetSessions", "store.sql_session.get_sessions.app_error", nil, err.Error())
@@ -146,20 +124,7 @@ func (me SqlSessionStore) GetSessions(userId string) StoreChannel {
 			result.Data = sessions
 		}
 
-		if rtcs := <-tcs; rtcs.Err != nil {
-			result.Err = model.NewLocAppError("SqlSessionStore.GetSessions", "store.sql_session.get_sessions.app_error", nil, rtcs.Err.Error())
-			return
-		} else {
-			for _, session := range sessions {
-				tempMembers := rtcs.Data.([]*model.TeamMember)
-				session.TeamMembers = make([]*model.TeamMember, 0, len(tempMembers))
-				for _, tm := range tempMembers {
-					if tm.DeleteAt == 0 {
-						session.TeamMembers = append(session.TeamMembers, tm)
-					}
-				}
-			}
-		}
+
 
 		storeChannel <- result
 		close(storeChannel)

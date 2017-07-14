@@ -17,7 +17,7 @@ import (
 	l4g "github.com/alecthomas/log4go"
 	"github.com/gorilla/mux"
 	"github.com/mattermost/platform/app"
-	"github.com/mattermost/platform/einterfaces"
+
 	"github.com/mattermost/platform/model"
 	"github.com/mattermost/platform/store"
 	"github.com/mattermost/platform/utils"
@@ -202,19 +202,8 @@ func allowOAuth(c *Context, w http.ResponseWriter, r *http.Request) {
 	authData := &model.AuthData{UserId: c.Session.UserId, ClientId: clientId, CreateAt: model.GetMillis(), RedirectUri: redirectUri, State: state, Scope: scope}
 	authData.Code = model.HashSha256(fmt.Sprintf("%v:%v:%v:%v", clientId, redirectUri, authData.CreateAt, c.Session.UserId))
 
-	// this saves the OAuth2 app as authorized
-	authorizedApp := model.Preference{
-		UserId:   c.Session.UserId,
-		Category: model.PREFERENCE_CATEGORY_AUTHORIZED_OAUTH_APP,
-		Name:     clientId,
-		Value:    scope,
-	}
 
-	if result := <-app.Srv.Store.Preference().Save(&model.Preferences{authorizedApp}); result.Err != nil {
-		responseData["redirect"] = redirectUri + "?error=server_error&state=" + state
-		w.Write([]byte(model.MapToJson(responseData)))
-		return
-	}
+
 
 	if result := <-app.Srv.Store.OAuth().SaveAuthData(authData); result.Err != nil {
 		responseData["redirect"] = redirectUri + "?error=server_error&state=" + state
@@ -295,10 +284,8 @@ func completeOAuth(c *Context, w http.ResponseWriter, r *http.Request) {
 			}
 			break
 		case model.OAUTH_ACTION_LOGIN:
-			user := LoginByOAuth(c, w, r, service, body)
-			if len(teamId) > 0 {
-				c.Err = app.AddUserToTeamByTeamId(teamId, user)
-			}
+
+
 			if c.Err == nil {
 				if val, ok := props["redirect_to"]; ok {
 					http.Redirect(w, r, c.GetSiteURLHeader()+val, http.StatusTemporaryRedirect)
@@ -366,10 +353,6 @@ func authorizeOAuth(c *Context, w http.ResponseWriter, r *http.Request) {
 	}
 
 	isAuthorized := false
-	if result := <-app.Srv.Store.Preference().Get(c.Session.UserId, model.PREFERENCE_CATEGORY_AUTHORIZED_OAUTH_APP, clientId); result.Err == nil {
-		// when we support scopes we should check if the scopes match
-		isAuthorized = true
-	}
 
 	// Automatically allow if the app is trusted
 	if oauthApp.IsTrusted || isAuthorized {
@@ -651,8 +634,6 @@ func getTeamIdFromQuery(query url.Values) (string, *model.AppError) {
 		if result := <-app.Srv.Store.Team().GetByInviteId(inviteId); result.Err != nil {
 			// soft fail, so we still create user but don't auto-join team
 			l4g.Error("%v", result.Err)
-		} else {
-			return result.Data.(*model.Team).Id, nil
 		}
 	}
 
@@ -798,19 +779,7 @@ func AuthorizeOAuthUser(service, code, state, redirectUri string) (io.ReadCloser
 func CompleteSwitchWithOAuth(c *Context, w http.ResponseWriter, r *http.Request, service string, userData io.ReadCloser, email string) {
 	authData := ""
 	ssoEmail := ""
-	provider := einterfaces.GetOauthProvider(service)
-	if provider == nil {
-		c.Err = model.NewLocAppError("CompleteClaimWithOAuth", "api.user.complete_switch_with_oauth.unavailable.app_error",
-			map[string]interface{}{"Service": strings.Title(service)}, "")
-		return
-	} else {
-		ssoUser := provider.GetUserFromJson(userData)
-		ssoEmail = ssoUser.Email
 
-		if ssoUser.AuthData != nil {
-			authData = *ssoUser.AuthData
-		}
-	}
 
 	if len(authData) == 0 {
 		c.Err = model.NewLocAppError("CompleteClaimWithOAuth", "api.user.complete_switch_with_oauth.parse.app_error",
@@ -842,11 +811,7 @@ func CompleteSwitchWithOAuth(c *Context, w http.ResponseWriter, r *http.Request,
 		return
 	}
 
-	go func() {
-		if err := app.SendSignInChangeEmail(user.Email, strings.Title(service)+" SSO", user.Locale, utils.GetSiteURL()); err != nil {
-			l4g.Error(err.Error())
-		}
-	}()
+
 }
 
 func deleteOAuthApp(c *Context, w http.ResponseWriter, r *http.Request) {
@@ -922,11 +887,7 @@ func deauthorizeOAuthApp(c *Context, w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	// Deauthorize the app
-	if err := (<-app.Srv.Store.Preference().Delete(c.Session.UserId, model.PREFERENCE_CATEGORY_AUTHORIZED_OAUTH_APP, id)).Err; err != nil {
-		c.Err = err
-		return
-	}
+
 
 	c.LogAudit("success")
 	ReturnStatusOK(w)

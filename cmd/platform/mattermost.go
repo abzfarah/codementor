@@ -11,8 +11,7 @@ import (
 	"github.com/mattermost/platform/app"
 	"github.com/spf13/cobra"
 
-	// Plugins
-	_ "github.com/mattermost/platform/model/gitlab"
+
 
 	// Enterprise Deps
 	_ "github.com/dgryski/dgoogauth"
@@ -33,7 +32,7 @@ func main() {
 
 	resetCmd.Flags().Bool("confirm", false, "Confirm you really want to delete everything and a DB backup has been performed.")
 
-	rootCmd.AddCommand(serverCmd, versionCmd, userCmd, teamCmd, licenseCmd, importCmd, resetCmd, channelCmd, rolesCmd, testCmd, ldapCmd)
+	rootCmd.AddCommand(serverCmd, versionCmd, userCmd,  resetCmd, channelCmd, rolesCmd)
 
 	if err := rootCmd.Execute(); err != nil {
 		os.Exit(1)

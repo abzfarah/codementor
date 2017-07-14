@@ -382,23 +382,7 @@ func (u *User) GetDisplayName() string {
 	}
 }
 
-func (u *User) GetDisplayNameForPreference(nameFormat string) string {
-	displayName := u.Username
 
-	if nameFormat == PREFERENCE_VALUE_DISPLAY_NAME_NICKNAME {
-		if u.Nickname != "" {
-			displayName = u.Nickname
-		} else if fullName := u.GetFullName(); fullName != "" {
-			displayName = fullName
-		}
-	} else if nameFormat == PREFERENCE_VALUE_DISPLAY_NAME_FULL {
-		if fullName := u.GetFullName(); fullName != "" {
-			displayName = fullName
-		}
-	}
-
-	return displayName
-}
 
 func (u *User) GetRoles() []string {
 	return strings.Fields(u.Roles)
@@ -459,19 +443,7 @@ func (u *User) IsSSOUser() bool {
 	return false
 }
 
-func (u *User) IsOAuthUser() bool {
-	if u.AuthService == USER_AUTH_SERVICE_GITLAB {
-		return true
-	}
-	return false
-}
 
-func (u *User) IsLDAPUser() bool {
-	if u.AuthService == USER_AUTH_SERVICE_LDAP {
-		return true
-	}
-	return false
-}
 
 // UserFromJson will decode the input and return a User
 func UserFromJson(data io.Reader) *User {

@@ -8,14 +8,14 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-	"time"
+
 
 	l4g "github.com/alecthomas/log4go"
 	"github.com/gorilla/mux"
 	goi18n "github.com/nicksnyder/go-i18n/i18n"
 
 	"github.com/mattermost/platform/app"
-	"github.com/mattermost/platform/einterfaces"
+
 	"github.com/mattermost/platform/model"
 	"github.com/mattermost/platform/utils"
 )
@@ -99,12 +99,10 @@ type handler struct {
 }
 
 func (h handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	now := time.Now()
+
 	l4g.Debug("%v", r.URL.Path)
 
-	if metrics := einterfaces.GetMetricsInterface(); metrics != nil && h.isApi {
-		metrics.IncrementHttpRequest()
-	}
+
 
 	c := &Context{}
 	c.T, c.Locale = utils.GetTranslationsAndLocale(w, r)
@@ -150,9 +148,7 @@ func (h handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set(model.HEADER_REQUEST_ID, c.RequestId)
 	w.Header().Set(model.HEADER_VERSION_ID, fmt.Sprintf("%v.%v.%v.%v", model.CurrentVersion, model.BuildNumber, utils.ClientCfgHash, utils.IsLicensed))
-	if einterfaces.GetClusterInterface() != nil {
-		w.Header().Set(model.HEADER_CLUSTER_ID, einterfaces.GetClusterInterface().GetClusterId())
-	}
+
 
 	// Instruct the browser not to display us in an iframe unless is the same origin for anti-clickjacking
 	if !h.isApi {
@@ -206,9 +202,7 @@ func (h handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		c.SystemAdminRequired()
 	}
 
-	if c.Err == nil && h.isUserActivity && token != "" && len(c.Session.UserId) > 0 {
-		app.SetStatusOnline(c.Session.UserId, c.Session.Id, false)
-	}
+
 
 	if c.Err == nil && (h.requireUser || h.requireSystemAdmin) {
 		//check if teamId exist
@@ -235,32 +229,17 @@ func (h handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(c.Err.StatusCode)
 			w.Write([]byte(c.Err.ToJson()))
 
-			if einterfaces.GetMetricsInterface() != nil {
-				einterfaces.GetMetricsInterface().IncrementHttpError()
-			}
-		} else {
-			if c.Err.StatusCode == http.StatusUnauthorized {
-				http.Redirect(w, r, c.GetTeamURL()+"/?redirect="+url.QueryEscape(r.URL.Path), http.StatusTemporaryRedirect)
-			} else {
-				RenderWebError(c.Err, w, r)
-			}
+
 		}
 
 	}
 
-	if h.isApi && einterfaces.GetMetricsInterface() != nil {
-		if r.URL.Path != model.API_URL_SUFFIX_V3+"/users/websocket" {
-			elapsed := float64(time.Since(now)) / float64(time.Second)
-			einterfaces.GetMetricsInterface().ObserveHttpRequestDuration(elapsed)
-		}
+
 	}
-}
+
 
 func (c *Context) LogAudit(extraInfo string) {
-	audit := &model.Audit{UserId: c.Session.UserId, IpAddress: c.IpAddress, Action: c.Path, ExtraInfo: extraInfo, SessionId: c.Session.Id}
-	if r := <-app.Srv.Store.Audit().Save(audit); r.Err != nil {
-		c.LogError(r.Err)
-	}
+
 }
 
 func (c *Context) LogAuditWithUserId(userId, extraInfo string) {
@@ -269,10 +248,7 @@ func (c *Context) LogAuditWithUserId(userId, extraInfo string) {
 		extraInfo = strings.TrimSpace(extraInfo + " session_user=" + c.Session.UserId)
 	}
 
-	audit := &model.Audit{UserId: userId, IpAddress: c.IpAddress, Action: c.Path, ExtraInfo: extraInfo, SessionId: c.Session.Id}
-	if r := <-app.Srv.Store.Audit().Save(audit); r.Err != nil {
-		c.LogError(r.Err)
-	}
+
 }
 
 func (c *Context) LogError(err *model.AppError) {
@@ -314,21 +290,6 @@ func (c *Context) MfaRequired() {
 		c.Err = model.NewLocAppError("", "api.context.session_expired.app_error", nil, "MfaRequired")
 		c.Err.StatusCode = http.StatusUnauthorized
 		return
-	} else {
-		user := result.Data.(*model.User)
-
-		// Only required for email and ldap accounts
-		if user.AuthService != "" &&
-			user.AuthService != model.USER_AUTH_SERVICE_EMAIL &&
-			user.AuthService != model.USER_AUTH_SERVICE_LDAP {
-			return
-		}
-
-		if !user.MfaActive {
-			c.Err = model.NewLocAppError("", "api.context.mfa_required.app_error", nil, "MfaRequired")
-			c.Err.StatusCode = http.StatusUnauthorized
-			return
-		}
 	}
 }
 
@@ -384,38 +345,20 @@ func (c *Context) setTeamURL(url string, valid bool) {
 	c.teamURLValid = valid
 }
 
-func (c *Context) SetTeamURLFromSession() {
-	if result := <-app.Srv.Store.Team().Get(c.TeamId); result.Err == nil {
-		c.setTeamURL(c.GetSiteURLHeader()+"/"+result.Data.(*model.Team).Name, true)
-	}
-}
+
 
 func (c *Context) SetSiteURLHeader(url string) {
 	c.siteURLHeader = strings.TrimRight(url, "/")
 }
 
-// TODO see where these are used
-func (c *Context) GetTeamURLFromTeam(team *model.Team) string {
-	return c.GetSiteURLHeader() + "/" + team.Name
-}
 
-func (c *Context) GetTeamURL() string {
-	if !c.teamURLValid {
-		c.SetTeamURLFromSession()
-		if !c.teamURLValid {
-			l4g.Debug(utils.T("api.context.invalid_team_url.debug"))
-		}
-	}
-	return c.teamURL
-}
+
 
 func (c *Context) GetSiteURLHeader() string {
 	return c.siteURLHeader
 }
 
-func (c *Context) GetCurrentTeamMember() *model.TeamMember {
-	return c.Session.GetTeamByTeamId(c.TeamId)
-}
+
 
 func IsApiCall(r *http.Request) bool {
 	return strings.Index(r.URL.Path, "/api/") == 0
@@ -463,16 +406,5 @@ func Handle404(w http.ResponseWriter, r *http.Request) {
 }
 
 func (c *Context) CheckTeamId() {
-	if c.TeamId != "" && c.Session.GetTeamByTeamId(c.TeamId) == nil {
-		if app.SessionHasPermissionTo(c.Session, model.PERMISSION_MANAGE_SYSTEM) {
-			if result := <-app.Srv.Store.Team().Get(c.TeamId); result.Err != nil {
-				c.Err = result.Err
-				c.Err.StatusCode = http.StatusBadRequest
-				return
-			}
-		} else {
-			c.SetPermissionError(model.PERMISSION_MANAGE_SYSTEM)
-			return
-		}
-	}
+
 }

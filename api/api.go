@@ -8,7 +8,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/mattermost/platform/app"
-	"github.com/mattermost/platform/einterfaces"
+
 	"github.com/mattermost/platform/model"
 
 
@@ -76,21 +76,7 @@ func InitApi() {
 }
 
 func HandleEtag(etag string, routeName string, w http.ResponseWriter, r *http.Request) bool {
-	metrics := einterfaces.GetMetricsInterface()
-	if et := r.Header.Get(model.HEADER_ETAG_CLIENT); len(etag) > 0 {
-		if et == etag {
-			w.Header().Set(model.HEADER_ETAG_SERVER, etag)
-			w.WriteHeader(http.StatusNotModified)
-			if metrics != nil {
-				metrics.IncrementEtagHitCounter(routeName)
-			}
-			return true
-		}
-	}
 
-	if metrics != nil {
-		metrics.IncrementEtagMissCounter(routeName)
-	}
 
 	return false
 }

@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/mattermost/platform/app"
-	"github.com/mattermost/platform/model"
+
 	"github.com/mattermost/platform/utils"
 	"github.com/spf13/cobra"
 )
@@ -42,7 +42,5 @@ func initDBCommandContext(configFileLocation string) {
 
 	app.NewServer()
 	app.InitStores()
-	if model.BuildEnterpriseReady == "true" {
-		app.LoadLicense()
-	}
+
 }

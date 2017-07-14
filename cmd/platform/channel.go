@@ -5,8 +5,7 @@ package main
 import (
 	"errors"
 
-	"github.com/mattermost/platform/app"
-	"github.com/mattermost/platform/model"
+
 	"github.com/mattermost/platform/utils"
 	"github.com/spf13/cobra"
 )
@@ -106,33 +105,6 @@ func createChannelCmdF(cmd *cobra.Command, args []string) error {
 	if errteam != nil || teamArg == "" {
 		return errors.New("Team is required")
 	}
-	header, _ := cmd.Flags().GetString("header")
-	purpose, _ := cmd.Flags().GetString("purpose")
-	useprivate, _ := cmd.Flags().GetBool("private")
-
-	channelType := model.CHANNEL_OPEN
-	if useprivate {
-		channelType = model.CHANNEL_PRIVATE
-	}
-
-	team := getTeamFromTeamArg(teamArg)
-	if team == nil {
-		return errors.New("Unable to find team: " + teamArg)
-	}
-
-	channel := &model.Channel{
-		TeamId:      team.Id,
-		Name:        name,
-		DisplayName: displayname,
-		Header:      header,
-		Purpose:     purpose,
-		Type:        channelType,
-		CreatorId:   "",
-	}
-
-	if _, err := app.CreateChannel(channel, false); err != nil {
-		return err
-	}
 
 	return nil
 }
@@ -148,28 +120,13 @@ func removeChannelUsersCmdF(cmd *cobra.Command, args []string) error {
 		return errors.New("Not enough arguments.")
 	}
 
-	channel := getChannelFromChannelArg(args[0])
-	if channel == nil {
-		return errors.New("Unable to find channel '" + args[0] + "'")
-	}
 
-	users := getUsersFromUserArgs(args[1:])
-	for i, user := range users {
-		removeUserFromChannel(channel, user, args[i+1])
-	}
+
 
 	return nil
 }
 
-func removeUserFromChannel(channel *model.Channel, user *model.User, userArg string) {
-	if user == nil {
-		CommandPrintErrorln("Can't find user '" + userArg + "'")
-		return
-	}
-	if err := app.RemoveUserFromChannel(user.Id, "", channel); err != nil {
-		CommandPrintErrorln("Unable to remove '" + userArg + "' from " + channel.Name + ". Error: " + err.Error())
-	}
-}
+
 
 func addChannelUsersCmdF(cmd *cobra.Command, args []string) error {
 	initDBCommandContextCobra(cmd)
@@ -182,28 +139,15 @@ func addChannelUsersCmdF(cmd *cobra.Command, args []string) error {
 		return errors.New("Not enough arguments.")
 	}
 
-	channel := getChannelFromChannelArg(args[0])
-	if channel == nil {
-		return errors.New("Unable to find channel '" + args[0] + "'")
-	}
 
-	users := getUsersFromUserArgs(args[1:])
-	for i, user := range users {
-		addUserToChannel(channel, user, args[i+1])
-	}
+
+
+
 
 	return nil
 }
 
-func addUserToChannel(channel *model.Channel, user *model.User, userArg string) {
-	if user == nil {
-		CommandPrintErrorln("Can't find user '" + userArg + "'")
-		return
-	}
-	if _, err := app.AddUserToChannel(user, channel); err != nil {
-		CommandPrintErrorln("Unable to add '" + userArg + "' from " + channel.Name + ". Error: " + err.Error())
-	}
-}
+
 
 func deleteChannelsCmdF(cmd *cobra.Command, args []string) error {
 	initDBCommandContextCobra(cmd)
@@ -212,16 +156,7 @@ func deleteChannelsCmdF(cmd *cobra.Command, args []string) error {
 		return errors.New("Enter at least one channel to delete.")
 	}
 
-	channels := getChannelsFromChannelArgs(args)
-	for i, channel := range channels {
-		if channel == nil {
-			CommandPrintErrorln("Unable to find channel '" + args[i] + "'")
-			continue
-		}
-		if result := <-app.Srv.Store.Channel().Delete(channel.Id, model.GetMillis()); result.Err != nil {
-			CommandPrintErrorln("Unable to delete channel '" + channel.Name + "' error: " + result.Err.Error())
-		}
-	}
+
 
 	return nil
 }
@@ -237,26 +172,7 @@ func listChannelsCmdF(cmd *cobra.Command, args []string) error {
 		return errors.New("Enter at least one team.")
 	}
 
-	teams := getTeamsFromTeamArgs(args)
-	for i, team := range teams {
-		if team == nil {
-			CommandPrintErrorln("Unable to find team '" + args[i] + "'")
-			continue
-		}
-		if result := <-app.Srv.Store.Channel().GetAll(team.Id); result.Err != nil {
-			CommandPrintErrorln("Unable to list channels for '" + args[i] + "'")
-		} else {
-			channels := result.Data.([]*model.Channel)
 
-			for _, channel := range channels {
-				if channel.DeleteAt > 0 {
-					CommandPrettyPrintln(channel.Name + " (archived)")
-				} else {
-					CommandPrettyPrintln(channel.Name)
-				}
-			}
-		}
-	}
 
 	return nil
 }
@@ -272,16 +188,7 @@ func restoreChannelsCmdF(cmd *cobra.Command, args []string) error {
 		return errors.New("Enter at least one channel.")
 	}
 
-	channels := getChannelsFromChannelArgs(args)
-	for i, channel := range channels {
-		if channel == nil {
-			CommandPrintErrorln("Unable to find channel '" + args[i] + "'")
-			continue
-		}
-		if result := <-app.Srv.Store.Channel().SetDeleteAt(channel.Id, 0, model.GetMillis()); result.Err != nil {
-			CommandPrintErrorln("Unable to restore channel '" + args[i] + "'")
-		}
-	}
+
 
 	return nil
 }

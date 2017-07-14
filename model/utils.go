@@ -295,18 +295,7 @@ var reservedName = []string{
 	"oauth",
 }
 
-func IsValidChannelIdentifier(s string) bool {
 
-	if !IsValidAlphaNum(s, true) {
-		return false
-	}
-
-	if len(s) < CHANNEL_NAME_MIN_LENGTH {
-		return false
-	}
-
-	return true
-}
 
 var validAlphaNumUnderscore = regexp.MustCompile(`^[a-z0-9]+([a-z\-\_0-9]+|(__)?)[a-z0-9]+$`)
 var validAlphaNum = regexp.MustCompile(`^[a-z0-9]+([a-z\-0-9]+|(__)?)[a-z0-9]+$`)
@@ -375,24 +364,8 @@ func ParseHashtags(text string) (string, string) {
 	return strings.TrimSpace(hashtagString), strings.TrimSpace(plainString)
 }
 
-func IsFileExtImage(ext string) bool {
-	ext = strings.ToLower(ext)
-	for _, imgExt := range IMAGE_EXTENSIONS {
-		if ext == imgExt {
-			return true
-		}
-	}
-	return false
-}
 
-func GetImageMimeType(ext string) string {
-	ext = strings.ToLower(ext)
-	if len(IMAGE_MIME_TYPES[ext]) == 0 {
-		return "image"
-	} else {
-		return IMAGE_MIME_TYPES[ext]
-	}
-}
+
 
 func ClearMentionTags(post string) string {
 	post = strings.Replace(post, "<mention>", "", -1)

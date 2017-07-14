@@ -7,7 +7,7 @@ import (
 	"fmt"
 
 	"github.com/mattermost/platform/app"
-	"github.com/mattermost/platform/einterfaces"
+
 	"github.com/mattermost/platform/model"
 	"github.com/mattermost/platform/utils"
 	"github.com/spf13/cobra"
@@ -170,10 +170,7 @@ func changeUserActiveStatus(user *model.User, userArg string, activate bool) {
 		CommandPrintErrorln("Can't find user '" + userArg + "'")
 		return
 	}
-	if user.IsLDAPUser() {
-		CommandPrintErrorln(utils.T("api.user.update_active.no_deactivate_ldap.app_error"))
-		return
-	}
+
 	if _, err := app.UpdateActive(user, activate); err != nil {
 		CommandPrintErrorln("Unable to change activation status of user: " + userArg)
 	}
@@ -247,23 +244,10 @@ func userInviteCmdF(cmd *cobra.Command, args []string) error {
 		return errors.New("Invalid email")
 	}
 
-	teams := getTeamsFromTeamArgs(args[1:])
-	for i, team := range teams {
-		inviteUser(email, team, args[i+1])
-	}
 
 	return nil
 }
 
-func inviteUser(email string, team *model.Team, teamArg string) {
-	invites := []string{email}
-	if team == nil {
-		CommandPrintErrorln("Can't find team '" + teamArg + "'")
-		return
-	}
-	app.SendInviteEmails(team, "Administrator", invites, *utils.Cfg.ServiceSettings.SiteURL)
-	CommandPrettyPrintln("Invites may or may not have been sent.")
-}
 
 func resetUserPasswordCmdF(cmd *cobra.Command, args []string) error {
 	initDBCommandContextCobra(cmd)
@@ -297,9 +281,7 @@ func resetUserMfaCmdF(cmd *cobra.Command, args []string) error {
 			return errors.New("Unable to find user '" + args[i] + "'")
 		}
 
-		if err := app.DeactivateMfa(user.Id); err != nil {
-			return err
-		}
+
 	}
 
 	return nil
@@ -400,13 +382,6 @@ func migrateAuthCmdF(cmd *cobra.Command, args []string) error {
 		return errors.New("Invalid match_field argument")
 	}
 
-	if migrate := einterfaces.GetAccountMigrationInterface(); migrate != nil {
-		if err := migrate.MigrateToLdap(fromAuth, matchField); err != nil {
-			return errors.New("Error while migrating users: " + err.Error())
-		} else {
-			CommandPrettyPrintln("Sucessfully migrated accounts.")
-		}
-	}
 
 	return nil
 }

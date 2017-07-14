@@ -18,7 +18,7 @@ import (
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
 
-	"github.com/mattermost/platform/einterfaces"
+
 	"github.com/mattermost/platform/model"
 )
 
@@ -318,15 +318,7 @@ func LoadConfig(fileName string) {
 	clientCfgJson, _ := json.Marshal(ClientCfg)
 	ClientCfgHash = fmt.Sprintf("%x", md5.Sum(clientCfgJson))
 
-	// Actions that need to run every time the config is loaded
-	if ldapI := einterfaces.GetLdapInterface(); ldapI != nil {
-		// This restarts the job if nessisary (works for config reloads)
-		ldapI.StartLdapSyncJob()
-	}
 
-	if samlI := einterfaces.GetSamlInterface(); samlI != nil {
-		samlI.ConfigureSP()
-	}
 
 	SetDefaultRolesBasedOnConfig()
 	SetSiteURL(*Cfg.ServiceSettings.SiteURL)
@@ -485,12 +477,7 @@ func getClientConfig(c *model.Config) map[string]string {
 }
 
 func ValidateLdapFilter(cfg *model.Config) *model.AppError {
-	ldapInterface := einterfaces.GetLdapInterface()
-	if *cfg.LdapSettings.Enable && ldapInterface != nil && *cfg.LdapSettings.UserFilter != "" {
-		if err := ldapInterface.ValidateFilter(*cfg.LdapSettings.UserFilter); err != nil {
-			return err
-		}
-	}
+
 	return nil
 }
 

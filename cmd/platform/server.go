@@ -7,14 +7,13 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
-	"time"
 
 	l4g "github.com/alecthomas/log4go"
 	"github.com/mattermost/platform/api"
 
 	"github.com/mattermost/platform/app"
 
-	"github.com/mattermost/platform/manualtesting"
+
 	"github.com/mattermost/platform/model"
 	"github.com/mattermost/platform/utils"
 	"github.com/mattermost/platform/web"
@@ -75,10 +74,6 @@ func runServer(configFileLocation string) {
 
 	app.StartServer()
 
-	// If we allow testing then listen for manual testing URL hits
-	if utils.Cfg.ServiceSettings.EnableTesting {
-		manualtesting.InitManualTesting()
-	}
 
 
 	// wait for kill signal before attempting to gracefully shutdown
@@ -91,15 +86,7 @@ func runServer(configFileLocation string) {
 	app.StopServer()
 }
 
-func runSecurityJob() {
-	doSecurity()
-	model.CreateRecurringTask("Security", doSecurity, time.Hour*4)
-}
 
-func runDiagnosticsJob() {
-	doDiagnostics()
-	model.CreateRecurringTask("Diagnostics", doDiagnostics, time.Hour*24)
-}
 
 func resetStatuses() {
 	if result := <-app.Srv.Store.Status().ResetAll(); result.Err != nil {
@@ -122,12 +109,3 @@ func setDiagnosticId() {
 	}
 }
 
-func doSecurity() {
-	app.DoSecurityUpdateCheck()
-}
-
-func doDiagnostics() {
-	if *utils.Cfg.LogSettings.EnableDiagnostics {
-		app.SendDailyDiagnostics()
-	}
-}
