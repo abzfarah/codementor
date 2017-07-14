@@ -278,7 +278,7 @@ func LoadConfig(fileName string) {
 
 	CfgFileName = viper.ConfigFileUsed()
 
-	needSave := len(config.SqlSettings.AtRestEncryptKey) == 0 || len(*config.FileSettings.PublicLinkSalt) == 0 ||
+	needSave := len(config.SqlSettings.AtRestEncryptKey) == 0  ||
 		len(config.EmailSettings.InviteSalt) == 0 || len(config.EmailSettings.PasswordResetSalt) == 0
 
 	config.SetDefaults()
@@ -305,12 +305,7 @@ func LoadConfig(fileName string) {
 
 	configureLog(&config.LogSettings)
 
-	if config.FileSettings.DriverName == model.IMAGE_DRIVER_LOCAL {
-		dir := config.FileSettings.Directory
-		if len(dir) > 0 && dir[len(dir)-1:] != "/" {
-			config.FileSettings.Directory += "/"
-		}
-	}
+
 
 	Cfg = &config
 	CfgHash = fmt.Sprintf("%x", md5.Sum([]byte(Cfg.ToJson())))
@@ -339,19 +334,6 @@ func getClientConfig(c *model.Config) map[string]string {
 	props["BuildEnterpriseReady"] = model.BuildEnterpriseReady
 
 	props["SiteURL"] = strings.TrimRight(*c.ServiceSettings.SiteURL, "/")
-	props["SiteName"] = c.TeamSettings.SiteName
-	props["EnableTeamCreation"] = strconv.FormatBool(c.TeamSettings.EnableTeamCreation)
-	props["EnableUserCreation"] = strconv.FormatBool(c.TeamSettings.EnableUserCreation)
-	props["EnableOpenServer"] = strconv.FormatBool(*c.TeamSettings.EnableOpenServer)
-	props["RestrictDirectMessage"] = *c.TeamSettings.RestrictDirectMessage
-	props["RestrictTeamInvite"] = *c.TeamSettings.RestrictTeamInvite
-	props["RestrictPublicChannelCreation"] = *c.TeamSettings.RestrictPublicChannelCreation
-	props["RestrictPrivateChannelCreation"] = *c.TeamSettings.RestrictPrivateChannelCreation
-	props["RestrictPublicChannelManagement"] = *c.TeamSettings.RestrictPublicChannelManagement
-	props["RestrictPrivateChannelManagement"] = *c.TeamSettings.RestrictPrivateChannelManagement
-	props["RestrictPublicChannelDeletion"] = *c.TeamSettings.RestrictPublicChannelDeletion
-	props["RestrictPrivateChannelDeletion"] = *c.TeamSettings.RestrictPrivateChannelDeletion
-	props["RestrictPrivateChannelManageMembers"] = *c.TeamSettings.RestrictPrivateChannelManageMembers
 
 	props["EnableOAuthServiceProvider"] = strconv.FormatBool(c.ServiceSettings.EnableOAuthServiceProvider)
 	props["GoogleDeveloperKey"] = c.ServiceSettings.GoogleDeveloperKey
@@ -377,20 +359,11 @@ func getClientConfig(c *model.Config) map[string]string {
 	props["RequireEmailVerification"] = strconv.FormatBool(c.EmailSettings.RequireEmailVerification)
 	props["EnableEmailBatching"] = strconv.FormatBool(*c.EmailSettings.EnableEmailBatching)
 
-	props["EnableSignUpWithGitLab"] = strconv.FormatBool(c.GitLabSettings.Enable)
+
 
 	props["ShowEmailAddress"] = strconv.FormatBool(c.PrivacySettings.ShowEmailAddress)
 
-	props["TermsOfServiceLink"] = *c.SupportSettings.TermsOfServiceLink
-	props["PrivacyPolicyLink"] = *c.SupportSettings.PrivacyPolicyLink
-	props["AboutLink"] = *c.SupportSettings.AboutLink
-	props["HelpLink"] = *c.SupportSettings.HelpLink
-	props["ReportAProblemLink"] = *c.SupportSettings.ReportAProblemLink
-	props["SupportEmail"] = *c.SupportSettings.SupportEmail
 
-	props["EnablePublicLink"] = strconv.FormatBool(c.FileSettings.EnablePublicLink)
-	props["ProfileHeight"] = fmt.Sprintf("%v", c.FileSettings.ProfileHeight)
-	props["ProfileWidth"] = fmt.Sprintf("%v", c.FileSettings.ProfileWidth)
 
 	props["WebsocketPort"] = fmt.Sprintf("%v", *c.ServiceSettings.WebsocketPort)
 	props["WebsocketSecurePort"] = fmt.Sprintf("%v", *c.ServiceSettings.WebsocketSecurePort)
@@ -401,77 +374,13 @@ func getClientConfig(c *model.Config) map[string]string {
 
 	props["EnableCustomEmoji"] = strconv.FormatBool(*c.ServiceSettings.EnableCustomEmoji)
 	props["RestrictCustomEmojiCreation"] = *c.ServiceSettings.RestrictCustomEmojiCreation
-	props["MaxFileSize"] = strconv.FormatInt(*c.FileSettings.MaxFileSize, 10)
 
-	props["AppDownloadLink"] = *c.NativeAppSettings.AppDownloadLink
-	props["AndroidAppDownloadLink"] = *c.NativeAppSettings.AndroidAppDownloadLink
-	props["IosAppDownloadLink"] = *c.NativeAppSettings.IosAppDownloadLink
-
-	props["EnableWebrtc"] = strconv.FormatBool(*c.WebrtcSettings.Enable)
-
-	props["MaxNotificationsPerChannel"] = strconv.FormatInt(*c.TeamSettings.MaxNotificationsPerChannel, 10)
 	props["TimeBetweenUserTypingUpdatesMilliseconds"] = strconv.FormatInt(*c.ServiceSettings.TimeBetweenUserTypingUpdatesMilliseconds, 10)
 	props["EnableUserTypingMessages"] = strconv.FormatBool(*c.ServiceSettings.EnableUserTypingMessages)
 
 	props["DiagnosticId"] = CfgDiagnosticId
 	props["DiagnosticsEnabled"] = strconv.FormatBool(*c.LogSettings.EnableDiagnostics)
 
-	if IsLicensed {
-		if *License.Features.CustomBrand {
-			props["EnableCustomBrand"] = strconv.FormatBool(*c.TeamSettings.EnableCustomBrand)
-			props["CustomBrandText"] = *c.TeamSettings.CustomBrandText
-			props["CustomDescriptionText"] = *c.TeamSettings.CustomDescriptionText
-		}
-
-		if *License.Features.LDAP {
-			props["EnableLdap"] = strconv.FormatBool(*c.LdapSettings.Enable)
-			props["LdapLoginFieldName"] = *c.LdapSettings.LoginFieldName
-			props["NicknameAttributeSet"] = strconv.FormatBool(*c.LdapSettings.NicknameAttribute != "")
-			props["FirstNameAttributeSet"] = strconv.FormatBool(*c.LdapSettings.FirstNameAttribute != "")
-			props["LastNameAttributeSet"] = strconv.FormatBool(*c.LdapSettings.LastNameAttribute != "")
-		}
-
-		if *License.Features.MFA {
-			props["EnableMultifactorAuthentication"] = strconv.FormatBool(*c.ServiceSettings.EnableMultifactorAuthentication)
-			props["EnforceMultifactorAuthentication"] = strconv.FormatBool(*c.ServiceSettings.EnforceMultifactorAuthentication)
-		}
-
-		if *License.Features.Compliance {
-			props["EnableCompliance"] = strconv.FormatBool(*c.ComplianceSettings.Enable)
-		}
-
-		if *License.Features.SAML {
-			props["EnableSaml"] = strconv.FormatBool(*c.SamlSettings.Enable)
-			props["SamlLoginButtonText"] = *c.SamlSettings.LoginButtonText
-			props["FirstNameAttributeSet"] = strconv.FormatBool(*c.SamlSettings.FirstNameAttribute != "")
-			props["LastNameAttributeSet"] = strconv.FormatBool(*c.SamlSettings.LastNameAttribute != "")
-			props["NicknameAttributeSet"] = strconv.FormatBool(*c.SamlSettings.NicknameAttribute != "")
-		}
-
-		if *License.Features.Cluster {
-			props["EnableCluster"] = strconv.FormatBool(*c.ClusterSettings.Enable)
-		}
-
-		if *License.Features.Cluster {
-			props["EnableMetrics"] = strconv.FormatBool(*c.MetricsSettings.Enable)
-		}
-
-		if *License.Features.GoogleOAuth {
-			props["EnableSignUpWithGoogle"] = strconv.FormatBool(c.GoogleSettings.Enable)
-		}
-
-		if *License.Features.Office365OAuth {
-			props["EnableSignUpWithOffice365"] = strconv.FormatBool(c.Office365Settings.Enable)
-		}
-
-		if *License.Features.PasswordRequirements {
-			props["PasswordMinimumLength"] = fmt.Sprintf("%v", *c.PasswordSettings.MinimumLength)
-			props["PasswordRequireLowercase"] = strconv.FormatBool(*c.PasswordSettings.Lowercase)
-			props["PasswordRequireUppercase"] = strconv.FormatBool(*c.PasswordSettings.Uppercase)
-			props["PasswordRequireNumber"] = strconv.FormatBool(*c.PasswordSettings.Number)
-			props["PasswordRequireSymbol"] = strconv.FormatBool(*c.PasswordSettings.Symbol)
-		}
-	}
 
 	return props
 }
@@ -505,16 +414,7 @@ func ValidateLocales(cfg *model.Config) *model.AppError {
 }
 
 func Desanitize(cfg *model.Config) {
-	if cfg.LdapSettings.BindPassword != nil && *cfg.LdapSettings.BindPassword == model.FAKE_SETTING {
-		*cfg.LdapSettings.BindPassword = *Cfg.LdapSettings.BindPassword
-	}
 
-	if *cfg.FileSettings.PublicLinkSalt == model.FAKE_SETTING {
-		*cfg.FileSettings.PublicLinkSalt = *Cfg.FileSettings.PublicLinkSalt
-	}
-	if cfg.FileSettings.AmazonS3SecretAccessKey == model.FAKE_SETTING {
-		cfg.FileSettings.AmazonS3SecretAccessKey = Cfg.FileSettings.AmazonS3SecretAccessKey
-	}
 
 	if cfg.EmailSettings.InviteSalt == model.FAKE_SETTING {
 		cfg.EmailSettings.InviteSalt = Cfg.EmailSettings.InviteSalt
@@ -526,9 +426,7 @@ func Desanitize(cfg *model.Config) {
 		cfg.EmailSettings.SMTPPassword = Cfg.EmailSettings.SMTPPassword
 	}
 
-	if cfg.GitLabSettings.Secret == model.FAKE_SETTING {
-		cfg.GitLabSettings.Secret = Cfg.GitLabSettings.Secret
-	}
+
 
 	if cfg.SqlSettings.DataSource == model.FAKE_SETTING {
 		cfg.SqlSettings.DataSource = Cfg.SqlSettings.DataSource

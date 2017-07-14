@@ -93,8 +93,7 @@ func (t *HTMLTemplate) addDefaultProps() {
 		t.Props["Organization"] = ""
 	}
 
-	t.Html["EmailInfo"] = template.HTML(localT("api.templates.email_info",
-		map[string]interface{}{"SupportEmail": Cfg.SupportSettings.SupportEmail, "SiteName": Cfg.TeamSettings.SiteName}))
+
 }
 
 func (t *HTMLTemplate) Render() string {

@@ -4,18 +4,15 @@
 package app
 
 import (
-	"bytes"
+
 
 	"fmt"
-	"hash/fnv"
-	"image"
-	"image/color"
-	"image/draw"
+
 	_ "image/gif"
 	_ "image/jpeg"
-	"image/png"
+
 	"io"
-	"io/ioutil"
+
 
 	"net/http"
 	"strconv"
@@ -23,7 +20,7 @@ import (
 
 	l4g "github.com/alecthomas/log4go"
 
-	"github.com/golang/freetype"
+
 
 	"github.com/nomadsingles/platform/model"
 
@@ -79,11 +76,6 @@ func CreateUserFromSignup(user *model.User) (*model.User, *model.AppError) {
 		return nil, err
 	}
 
-	if !IsFirstUserAccount() && !*utils.Cfg.TeamSettings.EnableOpenServer {
-		err := model.NewLocAppError("CreateUserFromSignup", "api.user.create_user.no_open_server", nil, "email="+user.Email)
-		err.StatusCode = http.StatusForbidden
-		return nil, err
-	}
 
 	user.EmailVerified = false
 
@@ -98,11 +90,7 @@ func CreateUserFromSignup(user *model.User) (*model.User, *model.AppError) {
 }
 
 func IsUserSignUpAllowed() *model.AppError {
-	if !utils.Cfg.EmailSettings.EnableSignUpWithEmail || !utils.Cfg.TeamSettings.EnableUserCreation {
-		err := model.NewLocAppError("IsUserSignUpAllowed", "api.user.create_user.signup_email_disabled.app_error", nil, "")
-		err.StatusCode = http.StatusNotImplemented
-		return err
-	}
+
 	return nil
 }
 
@@ -123,9 +111,6 @@ func IsFirstUserAccount() bool {
 }
 
 func CreateUser(user *model.User) (*model.User, *model.AppError) {
-	if !user.IsSSOUser() && !CheckUserDomain(user, utils.Cfg.TeamSettings.RestrictCreationToDomains) {
-		return nil, model.NewLocAppError("CreateUser", "api.user.create_user.accepted_domain.app_error", nil, "")
-	}
 
 	user.Roles = model.ROLE_SYSTEM_USER.Id
 
@@ -179,9 +164,7 @@ func createUser(user *model.User) (*model.User, *model.AppError) {
 }
 
 func CreateOAuthUser(service string, userData io.Reader, teamId string) (*model.User, *model.AppError) {
-	if !utils.Cfg.TeamSettings.EnableUserCreation {
-		return nil, model.NewAppError("CreateOAuthUser", "api.user.create_user.disabled.app_error", nil, "", http.StatusNotImplemented)
-	}
+
 
 	var user *model.User
 
@@ -425,81 +408,6 @@ func GetUsersByIds(userIds []string, asAdmin bool) ([]*model.User, *model.AppErr
 	}
 }
 
-
-func CreateProfileImage(username string, userId string) ([]byte, *model.AppError) {
-	colors := []color.NRGBA{
-		{197, 8, 126, 255},
-		{227, 207, 18, 255},
-		{28, 181, 105, 255},
-		{35, 188, 224, 255},
-		{116, 49, 196, 255},
-		{197, 8, 126, 255},
-		{197, 19, 19, 255},
-		{250, 134, 6, 255},
-		{227, 207, 18, 255},
-		{123, 201, 71, 255},
-		{28, 181, 105, 255},
-		{35, 188, 224, 255},
-		{116, 49, 196, 255},
-		{197, 8, 126, 255},
-		{197, 19, 19, 255},
-		{250, 134, 6, 255},
-		{227, 207, 18, 255},
-		{123, 201, 71, 255},
-		{28, 181, 105, 255},
-		{35, 188, 224, 255},
-		{116, 49, 196, 255},
-		{197, 8, 126, 255},
-		{197, 19, 19, 255},
-		{250, 134, 6, 255},
-		{227, 207, 18, 255},
-		{123, 201, 71, 255},
-	}
-
-	h := fnv.New32a()
-	h.Write([]byte(userId))
-	seed := h.Sum32()
-
-	initial := string(strings.ToUpper(username)[0])
-
-	fontBytes, err := ioutil.ReadFile(utils.FindDir("fonts") + utils.Cfg.FileSettings.InitialFont)
-	if err != nil {
-		return nil, model.NewLocAppError("CreateProfileImage", "api.user.create_profile_image.default_font.app_error", nil, err.Error())
-	}
-	font, err := freetype.ParseFont(fontBytes)
-	if err != nil {
-		return nil, model.NewLocAppError("CreateProfileImage", "api.user.create_profile_image.default_font.app_error", nil, err.Error())
-	}
-
-	width := int(utils.Cfg.FileSettings.ProfileWidth)
-	height := int(utils.Cfg.FileSettings.ProfileHeight)
-	color := colors[int64(seed)%int64(len(colors))]
-	dstImg := image.NewRGBA(image.Rect(0, 0, width, height))
-	srcImg := image.White
-	draw.Draw(dstImg, dstImg.Bounds(), &image.Uniform{color}, image.ZP, draw.Src)
-	size := float64((width + height) / 4)
-
-	c := freetype.NewContext()
-	c.SetFont(font)
-	c.SetFontSize(size)
-	c.SetClip(dstImg.Bounds())
-	c.SetDst(dstImg)
-	c.SetSrc(srcImg)
-
-	pt := freetype.Pt(width/6, height*2/3)
-	_, err = c.DrawString(initial, pt)
-	if err != nil {
-		return nil, model.NewLocAppError("CreateProfileImage", "api.user.create_profile_image.initial.app_error", nil, err.Error())
-	}
-
-	buf := new(bytes.Buffer)
-
-	if imgErr := png.Encode(buf, dstImg); imgErr != nil {
-		return nil, model.NewLocAppError("CreateProfileImage", "api.user.create_profile_image.encode.app_error", nil, imgErr.Error())
-	} else {
-		return buf.Bytes(), nil
-	}
-}
 
 
 func UpdatePasswordAsUser(userId, currentPassword, newPassword string) *model.AppError {

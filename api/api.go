@@ -20,40 +20,10 @@ type Routes struct {
 	ApiRoot *mux.Router // 'api/v3'
 
 	Users    *mux.Router // 'api/v3/users'
-	NeedUser *mux.Router // 'api/v3/users/{user_id:[A-Za-z0-9]+}'
-
-	Teams    *mux.Router // 'api/v3/teams'
-	NeedTeam *mux.Router // 'api/v3/teams/{team_id:[A-Za-z0-9]+}'
-
-	Channels        *mux.Router // 'api/v3/teams/{team_id:[A-Za-z0-9]+}/channels'
-	NeedChannel     *mux.Router // 'api/v3/teams/{team_id:[A-Za-z0-9]+}/channels/{channel_id:[A-Za-z0-9]+}'
-	NeedChannelName *mux.Router // 'api/v3/teams/{team_id:[A-Za-z0-9]+}/channels/name/{channel_name:[A-Za-z0-9_-]+}'
-
-	Posts    *mux.Router // 'api/v3/teams/{team_id:[A-Za-z0-9]+}/channels/{channel_id:[A-Za-z0-9]+}/posts'
-	NeedPost *mux.Router // 'api/v3/teams/{team_id:[A-Za-z0-9]+}/channels/{channel_id:[A-Za-z0-9]+}/posts/{post_id:[A-Za-z0-9]+}'
-
-	Commands *mux.Router // 'api/v3/teams/{team_id:[A-Za-z0-9]+}/commands'
-	Hooks    *mux.Router // 'api/v3/teams/{team_id:[A-Za-z0-9]+}/hooks'
-
-	TeamFiles *mux.Router // 'api/v3/teams/{team_id:[A-Za-z0-9]+}/files'
-	Files     *mux.Router // 'api/v3/files'
-	NeedFile  *mux.Router // 'api/v3/files/{file_id:[A-Za-z0-9]+}'
 
 	OAuth *mux.Router // 'api/v3/oauth'
 
-	Admin *mux.Router // 'api/v3/admin'
 
-	General *mux.Router // 'api/v3/general'
-
-	Preferences *mux.Router // 'api/v3/preferences'
-
-	License *mux.Router // 'api/v3/license'
-
-	Public *mux.Router // 'api/v3/public'
-
-	Emoji *mux.Router // 'api/v3/emoji'
-
-	Webrtc *mux.Router // 'api/v3/webrtc'
 }
 
 var BaseRoutes *Routes

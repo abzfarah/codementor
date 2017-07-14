@@ -641,11 +641,7 @@ func signupWithOAuth(c *Context, w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	service := params["service"]
 
-	if !utils.Cfg.TeamSettings.EnableUserCreation {
-		c.Err = model.NewLocAppError("signupWithOAuth", "api.oauth.singup_with_oauth.disabled.app_error", nil, "")
-		c.Err.StatusCode = http.StatusNotImplemented
-		return
-	}
+
 
 	teamId, err := getTeamIdFromQuery(r.URL.Query())
 	if err != nil {

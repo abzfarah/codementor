@@ -482,44 +482,7 @@ func getProfileImage(c *Context, w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func uploadProfileImage(c *Context, w http.ResponseWriter, r *http.Request) {
-	if len(utils.Cfg.FileSettings.DriverName) == 0 {
-		c.Err = model.NewLocAppError("uploadProfileImage", "api.user.upload_profile_user.storage.app_error", nil, "")
-		c.Err.StatusCode = http.StatusNotImplemented
-		return
-	}
 
-	if r.ContentLength > *utils.Cfg.FileSettings.MaxFileSize {
-		c.Err = model.NewLocAppError("uploadProfileImage", "api.user.upload_profile_user.too_large.app_error", nil, "")
-		c.Err.StatusCode = http.StatusRequestEntityTooLarge
-		return
-	}
-
-	if err := r.ParseMultipartForm(*utils.Cfg.FileSettings.MaxFileSize); err != nil {
-		c.Err = model.NewLocAppError("uploadProfileImage", "api.user.upload_profile_user.parse.app_error", nil, "")
-		return
-	}
-
-	m := r.MultipartForm
-
-	imageArray, ok := m.File["image"]
-	if !ok {
-		c.Err = model.NewLocAppError("uploadProfileImage", "api.user.upload_profile_user.no_file.app_error", nil, "")
-		c.Err.StatusCode = http.StatusBadRequest
-		return
-	}
-
-	if len(imageArray) <= 0 {
-		c.Err = model.NewLocAppError("uploadProfileImage", "api.user.upload_profile_user.array.app_error", nil, "")
-		c.Err.StatusCode = http.StatusBadRequest
-		return
-	}
-
-	c.LogAudit("")
-
-	// write something as the response since jQuery expects a json response
-	w.Write([]byte("true"))
-}
 
 func updateUser(c *Context, w http.ResponseWriter, r *http.Request) {
 	user := model.UserFromJson(r.Body)

@@ -30,7 +30,7 @@ func main() {
 	rootCmd.PersistentFlags().StringP("config", "c", "config.json", "Configuration file to use.")
 
 
-	rootCmd.AddCommand(serverCmd, userCmd,  channelCmd)
+	rootCmd.AddCommand(serverCmd)
 
 	if err := rootCmd.Execute(); err != nil {
 		os.Exit(1)
