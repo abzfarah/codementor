@@ -1421,7 +1421,7 @@
   "help.formatting.headings2Example": "Large Heading\n-------------",
   "help.formatting.headingsExample": "## Large Heading\n### Smaller Heading\n#### Even Smaller Heading",
   "help.formatting.images": "## In-line Images\n\nCreate in-line images using an `!` followed by the alt text in square brackets and the link in normal brackets. Add hover text by placing it in quotes after the link.",
-  "help.formatting.imagesExample": "![alt text](link \"hover text\")\n\nand\n\n[![Build Status](https://travis-ci.org/mattermost/platform.svg?branch=master)](https://travis-ci.org/mattermost/platform) [![Github](https://assets-cdn.github.com/favicon.ico)](https://github.com/mattermost/platform)",
+  "help.formatting.imagesExample": "![alt text](link \"hover text\")\n\nand\n\n[![Build Status](https://travis-ci.org/mattermost/platform.svg?branch=master)](https://travis-ci.org/mattermost/platform) [![Github](https://assets-cdn.github.com/favicon.ico)](https://github.com/nomadsingles/platform)",
   "help.formatting.inline": "## In-line Code\n\nCreate in-line monospaced font by surrounding it with backticks.",
   "help.formatting.intro": "Markdown makes it easy to format messages. Type a message as you normally would, and use these rules to render it with special formatting.",
   "help.formatting.lines": "## Lines\n\nCreate a line by using three `*`, `_`, or `-`.",

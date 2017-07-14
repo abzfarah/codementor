@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 
-	"github.com/mattermost/platform/app"
+	"github.com/nomadsingles/platform/app"
 
-	"github.com/mattermost/platform/utils"
+	"github.com/nomadsingles/platform/utils"
 	"github.com/spf13/cobra"
 )
 

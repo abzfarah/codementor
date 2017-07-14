@@ -14,10 +14,10 @@ import (
 	"github.com/gorilla/mux"
 	goi18n "github.com/nicksnyder/go-i18n/i18n"
 
-	"github.com/mattermost/platform/app"
+	"github.com/nomadsingles/platform/app"
 
-	"github.com/mattermost/platform/model"
-	"github.com/mattermost/platform/utils"
+	"github.com/nomadsingles/platform/model"
+	"github.com/nomadsingles/platform/utils"
 )
 
 type Context struct {

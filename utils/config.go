@@ -19,7 +19,7 @@ import (
 	"github.com/spf13/viper"
 
 
-	"github.com/mattermost/platform/model"
+	"github.com/nomadsingles/platform/model"
 )
 
 const (

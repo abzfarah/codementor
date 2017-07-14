@@ -4,7 +4,7 @@
 package app
 
 import (
-	"github.com/mattermost/platform/model"
+	"github.com/nomadsingles/platform/model"
 )
 
 func RevokeAccessToken(token string) *model.AppError {

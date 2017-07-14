@@ -10,10 +10,10 @@ import (
 	"github.com/NYTimes/gziphandler"
 
 	l4g "github.com/alecthomas/log4go"
-	"github.com/mattermost/platform/api"
-	"github.com/mattermost/platform/app"
-	"github.com/mattermost/platform/model"
-	"github.com/mattermost/platform/utils"
+	"github.com/nomadsingles/platform/api"
+	"github.com/nomadsingles/platform/app"
+	"github.com/nomadsingles/platform/model"
+	"github.com/nomadsingles/platform/utils"
 	"github.com/mssola/user_agent"
 )
 

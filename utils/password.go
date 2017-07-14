@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/mattermost/platform/model"
+	"github.com/nomadsingles/platform/model"
 )
 
 func IsPasswordValid(password string) *model.AppError {

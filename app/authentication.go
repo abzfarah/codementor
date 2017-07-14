@@ -8,8 +8,8 @@ import (
 
 
 
-	"github.com/mattermost/platform/model"
-	"github.com/mattermost/platform/utils"
+	"github.com/nomadsingles/platform/model"
+	"github.com/nomadsingles/platform/utils"
 )
 
 func CheckPasswordAndAllCriteria(user *model.User, password string, mfaToken string) *model.AppError {

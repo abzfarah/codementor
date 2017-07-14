@@ -1421,7 +1421,7 @@
   "help.formatting.headings2Example": "大標題\n-------------",
   "help.formatting.headingsExample": "## 大標題\n### 小點的標題\n#### 更小的標題",
   "help.formatting.images": "## 嵌入圖片\n\n建立嵌入圖片：在 `!` 後接著方括號再接著括號，方括號內放替代文字，括號內放圖片連結。在連結後加入用雙引號括起來的文字則可增加動態顯示文字。",
-  "help.formatting.imagesExample": "![替代文字](連結 \"動態顯示文字\")\n\n跟\n\n[![Build Status](https://travis-ci.org/mattermost/platform.svg?branch=master)](https://travis-ci.org/mattermost/platform) [![Github](https://assets-cdn.github.com/favicon.ico)](https://github.com/mattermost/platform)",
+  "help.formatting.imagesExample": "![替代文字](連結 \"動態顯示文字\")\n\n跟\n\n[![Build Status](https://travis-ci.org/mattermost/platform.svg?branch=master)](https://travis-ci.org/mattermost/platform) [![Github](https://assets-cdn.github.com/favicon.ico)](https://github.com/nomadsingles/platform)",
   "help.formatting.inline": "## 嵌入程式碼\n\n用反引號括起文字用來將等寬文字嵌入普通文字中。",
   "help.formatting.intro": "Markdown 讓設定訊息格式變得非常輕鬆。您只須如同平時一樣的輸入訊息，然後用以下的規則賦予其特定格式。",
   "help.formatting.lines": "## 線\n\n用 3 個 `*`、`_` 或 `-` 來建立一條線。",

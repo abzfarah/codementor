@@ -26,8 +26,8 @@ describe('Markdown.Imgs', function() {
 
     it('Image with link', function(done) {
         assert.equal(
-            Markdown.format('[![Mattermost](../../images/icon-76x76.png)](https://github.com/mattermost/platform)').trim(),
-            '<p><a class="theme markdown__link" href="https://github.com/mattermost/platform" rel="noreferrer" target="_blank"><img src="../../images/icon-76x76.png" alt="Mattermost" onload="window.markdownImageLoaded(this)" onerror="window.markdownImageLoaded(this)" class="markdown-inline-img"></a></p>'
+            Markdown.format('[![Mattermost](../../images/icon-76x76.png)](https://github.com/nomadsingles/platform)').trim(),
+            '<p><a class="theme markdown__link" href="https://github.com/nomadsingles/platform" rel="noreferrer" target="_blank"><img src="../../images/icon-76x76.png" alt="Mattermost" onload="window.markdownImageLoaded(this)" onerror="window.markdownImageLoaded(this)" class="markdown-inline-img"></a></p>'
         );
 
         done();

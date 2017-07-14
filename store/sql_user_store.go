@@ -11,8 +11,8 @@ import (
 	"strings"
 
 
-	"github.com/mattermost/platform/model"
-	"github.com/mattermost/platform/utils"
+	"github.com/nomadsingles/platform/model"
+	"github.com/nomadsingles/platform/utils"
 )
 
 const (

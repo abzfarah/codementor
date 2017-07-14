@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	l4g "github.com/alecthomas/log4go"
-	"github.com/mattermost/platform/model"
+	"github.com/nomadsingles/platform/model"
 )
 
 func SessionHasPermissionTo(session model.Session, permission *model.Permission) bool {

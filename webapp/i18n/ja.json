@@ -1421,7 +1421,7 @@
   "help.formatting.headings2Example": "大きな見出し\n-------------",
   "help.formatting.headingsExample": "## 大きな見出し\n### 小さな見出し\n#### さらに小さな見出し",
   "help.formatting.images": "## インライン画像\n\n`!`に続いて角括弧で囲んだ代替テキストと括弧で囲んだリンクを使用することでインライン画像を作成できます。リンクの後に引用符で囲んだテキストを書くことでホバーテキストを追加できます。",
-  "help.formatting.imagesExample": "![代替テキスト](リンク \"ホバーテキスト\")\n\nと\n\n[![ビルド状況](https://travis-ci.org/mattermost/platform.svg?branch=master)](https://travis-ci.org/mattermost/platform) [![Github](https://assets-cdn.github.com/favicon.ico)](https://github.com/mattermost/platform)",
+  "help.formatting.imagesExample": "![代替テキスト](リンク \"ホバーテキスト\")\n\nと\n\n[![ビルド状況](https://travis-ci.org/mattermost/platform.svg?branch=master)](https://travis-ci.org/mattermost/platform) [![Github](https://assets-cdn.github.com/favicon.ico)](https://github.com/nomadsingles/platform)",
   "help.formatting.inline": "## インラインコード\n\nテキストをバッククォートで囲むとインライン等幅フォントを作成できます。",
   "help.formatting.intro": "Markdownを使うとメッセージの書式を簡単に設定することができます。通常通りメッセージを入力し、特別なフォーマットで表示するためにはこれらのルールを使用してください。",
   "help.formatting.lines": "## ライン\n\n`*`か`_`か`-`を３つ使用することでラインを引くことができます。",

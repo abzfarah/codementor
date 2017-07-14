@@ -1421,7 +1421,7 @@
   "help.formatting.headings2Example": "大标题\n-------------",
   "help.formatting.headingsExample": "## 大标题\n### 小标题\n#### 更加小标题",
   "help.formatting.images": "## 内嵌图片\n\n在 `!` 后面加方括号里带替代文字以及括号里带链接以创建内嵌图片。在链接后用带双引号的文字以添加悬浮文字。",
-  "help.formatting.imagesExample": "![替代文字](链接 \"悬浮文字\")\n\n以及\n\n[![Build Status](https://travis-ci.org/mattermost/platform.svg?branch=master)](https://travis-ci.org/mattermost/platform) [![Github](https://assets-cdn.github.com/favicon.ico)](https://github.com/mattermost/platform)",
+  "help.formatting.imagesExample": "![替代文字](链接 \"悬浮文字\")\n\n以及\n\n[![Build Status](https://travis-ci.org/mattermost/platform.svg?branch=master)](https://travis-ci.org/mattermost/platform) [![Github](https://assets-cdn.github.com/favicon.ico)](https://github.com/nomadsingles/platform)",
   "help.formatting.inline": "## 嵌入代码\n\n用反引号包围文字创建等宽文字。",
   "help.formatting.intro": "Markdown能轻松改变消息格式。您如常输入消息，然后用以下规则给予指定的格式。",
   "help.formatting.lines": "## 分界线\n\n用三个 `*`, `_` 或 `-` 创建一条分界线。",

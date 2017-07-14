@@ -5,7 +5,7 @@ package main
 import (
 	"errors"
 
-	"github.com/mattermost/platform/app"
+	"github.com/nomadsingles/platform/app"
 	"github.com/spf13/cobra"
 )
 

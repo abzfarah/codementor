@@ -19,7 +19,7 @@ import (
 
 	l4g "github.com/alecthomas/log4go"
 
-	"github.com/mattermost/platform/model"
+	"github.com/nomadsingles/platform/model"
 )
 
 var IsLicensed bool = false

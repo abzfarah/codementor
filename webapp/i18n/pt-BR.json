@@ -1421,7 +1421,7 @@
   "help.formatting.headings2Example": "Cabeçalho Largo\n-------------",
   "help.formatting.headingsExample": "## Cabeçalho Largo\n### Cabeçalho Menor\n#### Cabeçalho Ainda Menor",
   "help.formatting.images": "## Imagens na Linha\n\nCrie imagens na linha usando `!` seguido do texto para imagem entre colchetes e o link entre parenteses. Adicione texto suspenso, colocando-o entre aspas após o link.",
-  "help.formatting.imagesExample": "![alt texto](link \"texto suspenso\")\n\ne\n\n[![Status Compilação](https://travis-ci.org/mattermost/platform.svg?branch=master)](https://travis-ci.org/mattermost/platform) [![Github](https://assets-cdn.github.com/favicon.ico)](https://github.com/mattermost/platform)",
+  "help.formatting.imagesExample": "![alt texto](link \"texto suspenso\")\n\ne\n\n[![Status Compilação](https://travis-ci.org/mattermost/platform.svg?branch=master)](https://travis-ci.org/mattermost/platform) [![Github](https://assets-cdn.github.com/favicon.ico)](https://github.com/nomadsingles/platform)",
   "help.formatting.inline": "## Código na Linha\n\nCrie fonte monoespaçada na linha cercando o com acentos graves.",
   "help.formatting.intro": "Markdown torna fácil formatar mensagens. Digite uma mensagem como faria normalmente, e use essas regras para deixa-lá com formatação especial.",
   "help.formatting.lines": "## Linhas\n\nCrie uma linha usando três `*`, `_`, ou `-`.",

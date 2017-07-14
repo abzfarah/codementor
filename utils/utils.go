@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/mattermost/platform/model"
+	"github.com/nomadsingles/platform/model"
 )
 
 func StringArrayIntersection(arr1, arr2 []string) []string {

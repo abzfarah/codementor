@@ -1421,7 +1421,7 @@
   "help.formatting.headings2Example": "Große Überschrift\n--------------",
   "help.formatting.headingsExample": "## Große Überschrift\n### Kleinere Überschrift\n#### Noch kleinere Überschrift",
   "help.formatting.images": "## Eingebettete Bilder\n\nErstellen Sie eingebettete Bilder durch `!`gefolgt vom alternativen Text in eckigen Klammern und einem Link in normalen Klammern. Fügen Sie einen Hover Text hinzu, indem Sie diesen in Anführungszeichen nach dem Link schreiben.",
-  "help.formatting.imagesExample": "![Alternativer Text](Link \"Hover Text\")\n\nund\n\n[![Build Status](https://travis-ci.org/mattermost/platform.svg?branch=master)](https://travis-ci.org/mattermost/platform) [![Github](https://assets-cdn.github.com/favicon.ico)](https://github.com/mattermost/platform)",
+  "help.formatting.imagesExample": "![Alternativer Text](Link \"Hover Text\")\n\nund\n\n[![Build Status](https://travis-ci.org/mattermost/platform.svg?branch=master)](https://travis-ci.org/mattermost/platform) [![Github](https://assets-cdn.github.com/favicon.ico)](https://github.com/nomadsingles/platform)",
   "help.formatting.inline": "## Eingebetteter Code\n\nErstellen Sie eingebetteten Monospaced Font durch die Verwendung von Backticks vor und nach dem Code.",
   "help.formatting.intro": "Markdown macht es einfach Nachrichten zu formatieren. Schreiben Sie Nachrichten wie Sie es normalerweise Tun würden und verwenden diese Regeln um ihn zu formatieren.",
   "help.formatting.lines": "## Linien\n\nErstellen Sie eine Linie durch drei `*`, `_`oder `-`.",

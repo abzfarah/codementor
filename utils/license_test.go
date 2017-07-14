@@ -4,7 +4,7 @@
 package utils
 
 import (
-	"github.com/mattermost/platform/model"
+	"github.com/nomadsingles/platform/model"
 	"testing"
 )
 

@@ -1,4 +1,4 @@
-package: github.com/mattermost/platform
+package: github.com/nomadsingles/platform
 import:
 - package: github.com/NYTimes/gziphandler
 - package: github.com/alecthomas/log4go

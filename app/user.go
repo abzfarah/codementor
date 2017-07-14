@@ -25,9 +25,9 @@ import (
 
 	"github.com/golang/freetype"
 
-	"github.com/mattermost/platform/model"
+	"github.com/nomadsingles/platform/model"
 
-	"github.com/mattermost/platform/utils"
+	"github.com/nomadsingles/platform/utils"
 )
 
 func CreateUserWithHash(user *model.User, hash string, data string) (*model.User, *model.AppError) {

@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	l4g "github.com/alecthomas/log4go"
-	"github.com/mattermost/platform/model"
+	"github.com/nomadsingles/platform/model"
 	"github.com/nicksnyder/go-i18n/i18n"
 )
 

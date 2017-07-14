@@ -6,7 +6,7 @@ import (
 	"errors"
 
 
-	"github.com/mattermost/platform/utils"
+	"github.com/nomadsingles/platform/utils"
 	"github.com/spf13/cobra"
 )
 

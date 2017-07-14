@@ -1421,7 +1421,7 @@
   "help.formatting.headings2Example": "Encabezado Grande\n-------------",
   "help.formatting.headingsExample": "## Encabezado Grande\n### Encabezado más pequeño\n#### Encabezado aún más pequeño",
   "help.formatting.images": "## Imágenes entre líneas\n\nCrear imágenes en línea con el uso de un `!` seguido por el texto alternativo en corchetes y el vínculo entre paréntesis. Agrega un pase de texto colocandondolo entre comillas después del enlace.",
-  "help.formatting.imagesExample": "![texto alternativo](enlace \"coloca el pase de texto\")\n\ny\n\n[![Estatus de Construcción](https://travis-ci.org/mattermost/platform.svg?branch=master)](https://travis-ci.org/mattermost/platform) [![Github](https://assets-cdn.github.com/favicon.ico)](https://github.com/mattermost/platform)",
+  "help.formatting.imagesExample": "![texto alternativo](enlace \"coloca el pase de texto\")\n\ny\n\n[![Estatus de Construcción](https://travis-ci.org/mattermost/platform.svg?branch=master)](https://travis-ci.org/mattermost/platform) [![Github](https://assets-cdn.github.com/favicon.ico)](https://github.com/nomadsingles/platform)",
   "help.formatting.inline": "## Código entre líneas\n\nCrea código fuente entre líneas al rodear el texto con comillas simples inclinadas.",
   "help.formatting.intro": "Markdown hace que sea fácil para darle formato a los mensajes. Escribe un mensaje como lo harías normalmente, y el uso de estas reglas para hacerla con formato especial.",
   "help.formatting.lines": "## Líneas\n\nCrea una línea mediante el uso de tres `*`, `_`, o `-`.",

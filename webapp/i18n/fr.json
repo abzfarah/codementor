@@ -1421,7 +1421,7 @@
   "help.formatting.headings2Example": "Grand en tête\n-------------",
   "help.formatting.headingsExample": "## Grand en tête\n### Plus petit en tête\n#### Encore plus petit en tête",
   "help.formatting.images": "## Images intégrées au message\n\nCréez des images intégrées au message en utilisant `!`suivi par le texte alternatif placé entre crochets et le lien placé entre parenthèses. Pour ajouter un texte apparaissant au survol de la souris, placez-le entre guillemets après le lien.",
-  "help.formatting.imagesExample": "![texte alternatif](lien \"texte apparaissant au survol de la souris\")\n\net\n\n[![Statut de compilation](https://travis-ci.org/mattermost/platform.svg?branch=master)](https://travis-ci.org/mattermost/platform) [![Github](https://assets-cdn.github.com/favicon.ico)](https://github.com/mattermost/platform)",
+  "help.formatting.imagesExample": "![texte alternatif](lien \"texte apparaissant au survol de la souris\")\n\net\n\n[![Statut de compilation](https://travis-ci.org/mattermost/platform.svg?branch=master)](https://travis-ci.org/mattermost/platform) [![Github](https://assets-cdn.github.com/favicon.ico)](https://github.com/nomadsingles/platform)",
   "help.formatting.inline": "## Code intégré au message\n\nCréez un message formaté en police monospace en l'entourant d'apostrophes inversées.",
   "help.formatting.intro": "Le Markdown rend plus simple la mise en forme des messages. Écrivez normalement votre message et utilisez ces règles pour créer une mise en forme spéciale.",
   "help.formatting.lines": "## Lignes\n\nCréez une ligne à l'aide de `*`, `_`, ou `-`.",

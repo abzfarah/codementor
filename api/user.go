@@ -15,11 +15,11 @@ import (
 
 	l4g "github.com/alecthomas/log4go"
 	"github.com/gorilla/mux"
-	"github.com/mattermost/platform/app"
+	"github.com/nomadsingles/platform/app"
 
-	"github.com/mattermost/platform/model"
-	"github.com/mattermost/platform/store"
-	"github.com/mattermost/platform/utils"
+	"github.com/nomadsingles/platform/model"
+	"github.com/nomadsingles/platform/store"
+	"github.com/nomadsingles/platform/utils"
 )
 
 func InitUser() {

@@ -5,8 +5,8 @@ package store
 
 import (
 	l4g "github.com/alecthomas/log4go"
-	"github.com/mattermost/platform/model"
-	"github.com/mattermost/platform/utils"
+	"github.com/nomadsingles/platform/model"
+	"github.com/nomadsingles/platform/utils"
 )
 
 type SqlSessionStore struct {

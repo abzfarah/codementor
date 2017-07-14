@@ -3,8 +3,8 @@
 package main
 
 import (
-	"github.com/mattermost/platform/app"
-	"github.com/mattermost/platform/model"
+	"github.com/nomadsingles/platform/app"
+	"github.com/nomadsingles/platform/model"
 )
 
 func getUsersFromUserArgs(userArgs []string) []*model.User {

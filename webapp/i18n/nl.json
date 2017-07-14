@@ -1421,7 +1421,7 @@
   "help.formatting.headings2Example": "Grote koptekst\n-------------",
   "help.formatting.headingsExample": "## Grote koptekst\n### Kleinere koptekst\n#### Nog kleinere koptekst",
   "help.formatting.images": "## In-line Afbeeldingen\n\nMaak in-line afbeeldingen door gebruik te maken van een `!`gevolgd door de tekst in rechte haken, en de link in normale haken. ",
-  "help.formatting.imagesExample": "![alt text](link \"hover text\")\n\nen\n\n[![Build Status](https://travis-ci.org/mattermost/platform.svg?branch=master)](https://travis-ci.org/mattermost/platform) [![Github](https://assets-cdn.github.com/favicon.ico)](https://github.com/mattermost/platform)",
+  "help.formatting.imagesExample": "![alt text](link \"hover text\")\n\nen\n\n[![Build Status](https://travis-ci.org/mattermost/platform.svg?branch=master)](https://travis-ci.org/mattermost/platform) [![Github](https://assets-cdn.github.com/favicon.ico)](https://github.com/nomadsingles/platform)",
   "help.formatting.inline": "## In-line Code\n\nMaak in-line monospaced font door het te omgeven door backticks.",
   "help.formatting.intro": "Markdown maakt het makkelijk berichten vorm te geven. Type een bericht zoals je normaal zou doen, en gebruik deze regels om het in speciaal formaat weer te geven.",
   "help.formatting.lines": "## Lijnen\n\nMaak een lijn door gebruik te maken van drie `*`, `_`, of `-`.",

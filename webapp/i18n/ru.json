@@ -1421,7 +1421,7 @@
   "help.formatting.headings2Example": "Большие заголовки\n-------------",
   "help.formatting.headingsExample": "## Заголовок 1\n### Заголовок 2\n#### Заголовок 3",
   "help.formatting.images": "## Встроенные изображения\n\nЧтобы вставить изображение в сообщение, начните писать с `!`, далее альтернативное описание в квадратных скобках и ссылку в круглых. Напишите текст в скобках после ссылки, чтобы добавить текст поверх картинки.",
-  "help.formatting.imagesExample": "![альтернативный текст](ссылка \"плавающий текст\")\n\nи\n\n[![Статус сборки](https://travis-ci.org/mattermost/platform.svg?branch=master)](https://travis-ci.org/mattermost/platform) [![Github](https://assets-cdn.github.com/favicon.ico)](https://github.com/mattermost/platform)",
+  "help.formatting.imagesExample": "![альтернативный текст](ссылка \"плавающий текст\")\n\nи\n\n[![Статус сборки](https://travis-ci.org/mattermost/platform.svg?branch=master)](https://travis-ci.org/mattermost/platform) [![Github](https://assets-cdn.github.com/favicon.ico)](https://github.com/nomadsingles/platform)",
   "help.formatting.inline": "## Inline-код\n\nДля вставки кода внутри предложений нужно заключать этот код в апострофы (на букве Ё).",
   "help.formatting.intro": "Markdown позволяет легко форматировать сообщения. Наберите своё сообщения, как вы всегда это делаете, а потом примените правила, чтобы его отформатировать.",
   "help.formatting.lines": "## Линии\n\nВы можете создать линию при помощи трёх символов `*`, `_`, или `-`.",

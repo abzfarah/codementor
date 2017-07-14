@@ -1,5 +1,5 @@
 # Testing Text Processing  
-The text processing tests located in the [doc/developer/tests folder](https://github.com/mattermost/platform/tree/master/doc/developer/tests) are designed for use with the `/loadtest url` command. This command posts the raw contents of a specified .md file in the doc/developer/test folder into Mattermost.
+The text processing tests located in the [doc/developer/tests folder](https://github.com/nomadsingles/platform/tree/master/doc/developer/tests) are designed for use with the `/loadtest url` command. This command posts the raw contents of a specified .md file in the doc/developer/test folder into Mattermost.
 
 ## Turning on /loadtest  
 Access the **System Console** from the Main Menu. Under *Service Settings* make sure that *Enable Testing* is set to `true`, then click **Save**. You may also change this setting from `config.json` by setting `”EnableTesting”: true`. Changing this setting requires a server restart to take effect.

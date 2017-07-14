@@ -7,11 +7,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/mattermost/platform/api"
-	"github.com/mattermost/platform/app"
-	"github.com/mattermost/platform/model"
-	"github.com/mattermost/platform/store"
-	"github.com/mattermost/platform/utils"
+	"github.com/nomadsingles/platform/api"
+	"github.com/nomadsingles/platform/app"
+	"github.com/nomadsingles/platform/model"
+	"github.com/nomadsingles/platform/store"
+	"github.com/nomadsingles/platform/utils"
 )
 
 var ApiClient *model.Client

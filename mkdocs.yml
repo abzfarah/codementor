@@ -1,6 +1,6 @@
 site_name: Mattermost Documentation
 site_url: http://docs.mattermost.org
-repo_url: https://github.com/mattermost/platform
+repo_url: https://github.com/nomadsingles/platform
 repo_name: GitHub
 site_favicon: favicon.ico
 copyright: "Copyright (c) 2015 Mattermost, Inc. All Rights Reserved."
