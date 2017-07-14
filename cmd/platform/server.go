@@ -42,7 +42,7 @@ func runServerCmd(cmd *cobra.Command, args []string) error {
 
 func runServer(configFileLocation string) {
 	if errstr := doLoadConfig(configFileLocation); errstr != "" {
-		l4g.Exit("Unable to load mattermost configuration file: ", errstr)
+		l4g.Exit("Unable to load nomadsingles configuration file: ", errstr)
 		return
 	}
 
@@ -50,7 +50,7 @@ func runServer(configFileLocation string) {
 
 
 	pwd, _ := os.Getwd()
-	l4g.Info(utils.T("nomadsingles.current_version"), model.CurrentVersion, model.BuildNumber, model.BuildDate, model.BuildHash, model.BuildHashEnterprise)
+	l4g.Info(utils.T("nomadsingles.current_version"), model.CurrentVersion, model.BuildNumber, model.BuildDate, model.BuildHash)
 	l4g.Info(utils.T("nomadsingles.entreprise_enabled"), model.BuildEnterpriseReady)
 	l4g.Info(utils.T("nomadsingles.working_dir"), pwd)
 	l4g.Info(utils.T("nomadsingles.config_file"), utils.FindConfigFile(configFileLocation))
@@ -85,25 +85,3 @@ func runServer(configFileLocation string) {
 
 	app.StopServer()
 }
-
-
-
-func resetStatuses() {
-
-}
-
-func setDiagnosticId() {
-	if result := <-app.Srv.Store.System().Get(); result.Err == nil {
-		props := result.Data.(model.StringMap)
-
-		id := props[model.SYSTEM_DIAGNOSTIC_ID]
-		if len(id) == 0 {
-			id = model.NewId()
-			systemId := &model.System{Name: model.SYSTEM_DIAGNOSTIC_ID, Value: id}
-			<-app.Srv.Store.System().Save(systemId)
-		}
-
-		utils.CfgDiagnosticId = id
-	}
-}
-
