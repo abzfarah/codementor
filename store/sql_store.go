@@ -68,24 +68,10 @@ type SqlStore struct {
 	master         *gorp.DbMap
 	replicas       []*gorp.DbMap
 	searchReplicas []*gorp.DbMap
-	team           TeamStore
-	channel        ChannelStore
-	post           PostStore
 	user           UserStore
-	audit          AuditStore
-	compliance     ComplianceStore
 	session        SessionStore
 	oauth          OAuthStore
 	system         SystemStore
-	webhook        WebhookStore
-	command        CommandStore
-	preference     PreferenceStore
-	license        LicenseStore
-	recovery       PasswordRecoveryStore
-	emoji          EmojiStore
-	status         StatusStore
-	fileInfo       FileInfoStore
-	reaction       ReactionStore
 	SchemaVersion  string
 	rrCounter      int64
 	srCounter      int64
@@ -614,17 +600,8 @@ func (ss *SqlStore) Close() {
 	}
 }
 
-func (ss *SqlStore) Team() TeamStore {
-	return ss.team
-}
 
-func (ss *SqlStore) Channel() ChannelStore {
-	return ss.channel
-}
 
-func (ss *SqlStore) Post() PostStore {
-	return ss.post
-}
 
 func (ss *SqlStore) User() UserStore {
 	return ss.user
@@ -634,13 +611,6 @@ func (ss *SqlStore) Session() SessionStore {
 	return ss.session
 }
 
-func (ss *SqlStore) Audit() AuditStore {
-	return ss.audit
-}
-
-func (ss *SqlStore) Compliance() ComplianceStore {
-	return ss.compliance
-}
 
 func (ss *SqlStore) OAuth() OAuthStore {
 	return ss.oauth
@@ -650,41 +620,6 @@ func (ss *SqlStore) System() SystemStore {
 	return ss.system
 }
 
-func (ss *SqlStore) Webhook() WebhookStore {
-	return ss.webhook
-}
-
-func (ss *SqlStore) Command() CommandStore {
-	return ss.command
-}
-
-func (ss *SqlStore) Preference() PreferenceStore {
-	return ss.preference
-}
-
-func (ss *SqlStore) License() LicenseStore {
-	return ss.license
-}
-
-func (ss *SqlStore) PasswordRecovery() PasswordRecoveryStore {
-	return ss.recovery
-}
-
-func (ss *SqlStore) Emoji() EmojiStore {
-	return ss.emoji
-}
-
-func (ss *SqlStore) Status() StatusStore {
-	return ss.status
-}
-
-func (ss *SqlStore) FileInfo() FileInfoStore {
-	return ss.fileInfo
-}
-
-func (ss *SqlStore) Reaction() ReactionStore {
-	return ss.reaction
-}
 
 func (ss *SqlStore) DropAllTables() {
 	ss.master.TruncateTables()

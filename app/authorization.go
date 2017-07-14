@@ -4,7 +4,7 @@
 package app
 
 import (
-	"strings"
+
 
 	l4g "github.com/alecthomas/log4go"
 	"github.com/nomadsingles/platform/model"
@@ -28,18 +28,6 @@ func SessionHasPermissionToChannel(session model.Session, channelId string, perm
 		return false
 	}
 
-	cmc := Srv.Store.Channel().GetAllChannelMembersForUser(session.UserId, true)
-
-	var channelRoles []string
-	if cmcresult := <-cmc; cmcresult.Err == nil {
-		ids := cmcresult.Data.(map[string]string)
-		if roles, ok := ids[channelId]; ok {
-			channelRoles = strings.Fields(roles)
-			if CheckIfRolesGrantPermission(channelRoles, permission.Id) {
-				return true
-			}
-		}
-	}
 
 
 	return SessionHasPermissionTo(session, permission)

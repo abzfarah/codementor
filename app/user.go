@@ -564,9 +564,6 @@ func UpdateActive(user *model.User, active bool) (*model.User, *model.AppError) 
 			}
 		}
 
-		if extra := <-Srv.Store.Channel().ExtraUpdateByUser(user.Id, model.GetMillis()); extra.Err != nil {
-			return nil, extra.Err
-		}
 
 		ruser := result.Data.([2]*model.User)[0]
 		options := utils.Cfg.GetSanitizeOptions()
@@ -708,9 +705,7 @@ func SendPasswordReset(email string, siteURL string) (bool, *model.AppError) {
 
 
 func DeletePasswordRecoveryForUser(userId string) *model.AppError {
-	if result := <-Srv.Store.PasswordRecovery().Delete(userId); result.Err != nil {
-		return result.Err
-	}
+
 
 	return nil
 }
@@ -745,62 +740,6 @@ func UpdateUserRoles(userId string, newRoles string) (*model.User, *model.AppErr
 }
 
 func PermanentDeleteUser(user *model.User) *model.AppError {
-	l4g.Warn(utils.T("api.user.permanent_delete_user.attempting.warn"), user.Email, user.Id)
-	if user.IsInRole(model.ROLE_SYSTEM_ADMIN.Id) {
-		l4g.Warn(utils.T("api.user.permanent_delete_user.system_admin.warn"), user.Email)
-	}
-
-	if _, err := UpdateActive(user, false); err != nil {
-		return err
-	}
-
-	if result := <-Srv.Store.Session().PermanentDeleteSessionsByUser(user.Id); result.Err != nil {
-		return result.Err
-	}
-
-	if result := <-Srv.Store.OAuth().PermanentDeleteAuthDataByUser(user.Id); result.Err != nil {
-		return result.Err
-	}
-
-	if result := <-Srv.Store.Webhook().PermanentDeleteIncomingByUser(user.Id); result.Err != nil {
-		return result.Err
-	}
-
-	if result := <-Srv.Store.Webhook().PermanentDeleteOutgoingByUser(user.Id); result.Err != nil {
-		return result.Err
-	}
-
-	if result := <-Srv.Store.Command().PermanentDeleteByUser(user.Id); result.Err != nil {
-		return result.Err
-	}
-
-	if result := <-Srv.Store.Preference().PermanentDeleteByUser(user.Id); result.Err != nil {
-		return result.Err
-	}
-
-	if result := <-Srv.Store.Channel().PermanentDeleteMembersByUser(user.Id); result.Err != nil {
-		return result.Err
-	}
-
-	if result := <-Srv.Store.Post().PermanentDeleteByUser(user.Id); result.Err != nil {
-		return result.Err
-	}
-
-	if result := <-Srv.Store.User().PermanentDelete(user.Id); result.Err != nil {
-		return result.Err
-	}
-
-	if result := <-Srv.Store.Audit().PermanentDeleteByUser(user.Id); result.Err != nil {
-		return result.Err
-	}
-
-	if result := <-Srv.Store.Team().RemoveAllMembersByUser(user.Id); result.Err != nil {
-		return result.Err
-	}
-
-	if result := <-Srv.Store.PasswordRecovery().Delete(user.Id); result.Err != nil {
-		return result.Err
-	}
 
 	l4g.Warn(utils.T("api.user.permanent_delete_user.deleted.warn"), user.Email, user.Id)
 
@@ -808,14 +747,6 @@ func PermanentDeleteUser(user *model.User) *model.AppError {
 }
 
 func PermanentDeleteAllUsers() *model.AppError {
-	if result := <-Srv.Store.User().GetAll(); result.Err != nil {
-		return result.Err
-	} else {
-		users := result.Data.([]*model.User)
-		for _, user := range users {
-			PermanentDeleteUser(user)
-		}
-	}
 
 	return nil
 }

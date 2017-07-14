@@ -89,9 +89,7 @@ func runServer(configFileLocation string) {
 
 
 func resetStatuses() {
-	if result := <-app.Srv.Store.Status().ResetAll(); result.Err != nil {
-		l4g.Error(utils.T("mattermost.reset_status.error"), result.Err.Error())
-	}
+
 }
 
 func setDiagnosticId() {

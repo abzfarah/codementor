@@ -631,10 +631,7 @@ func getTeamIdFromQuery(query url.Values) (string, *model.AppError) {
 
 		return props["id"], nil
 	} else if len(inviteId) > 0 {
-		if result := <-app.Srv.Store.Team().GetByInviteId(inviteId); result.Err != nil {
-			// soft fail, so we still create user but don't auto-join team
-			l4g.Error("%v", result.Err)
-		}
+
 	}
 
 	return "", nil

@@ -57,19 +57,6 @@ func (me SqlSessionStore) Save(session *model.Session) StoreChannel {
 			l4g.Error(utils.T("store.sql_session.save.cleanup.error"), cur.Err)
 		}
 
-		tcs := me.Team().GetTeamsForUser(session.UserId)
-
-		if err := me.GetMaster().Insert(session); err != nil {
-			result.Err = model.NewLocAppError("SqlSessionStore.Save", "store.sql_session.save.app_error", nil, "id="+session.Id+", "+err.Error())
-			return
-		} else {
-			result.Data = session
-		}
-
-		if rtcs := <-tcs; rtcs.Err != nil {
-			result.Err = model.NewLocAppError("SqlSessionStore.Save", "store.sql_session.save.app_error", nil, "id="+session.Id+", "+rtcs.Err.Error())
-			return
-		}
 		storeChannel <- result
 		close(storeChannel)
 	}()
