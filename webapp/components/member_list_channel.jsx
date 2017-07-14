@@ -1,5 +1,5 @@
 // Copyright (c) 2017 Mattermost, Inc. All Rights Reserved.
-// See License.txt for license information.
+
 
 import ChannelMembersDropdown from 'components/channel_members_dropdown.jsx';
 import SearchableUserList from 'components/searchable_user_list/searchable_user_list_container.jsx';

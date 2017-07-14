@@ -1,5 +1,5 @@
-// Copyright (c) 2016 Mattermost, Inc. All Rights Reserved.
-// See License.txt for license information.
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
+
 
 const MAX_WEBSOCKET_FAILS = 7;
 const MIN_WEBSOCKET_RETRY_TIME = 3000; // 3 sec

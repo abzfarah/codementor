@@ -1,5 +1,5 @@
 // Copyright (c) 2015 Spinpunch, Inc. All Rights Reserved.
-// See License.txt for license information.
+
 
 import SettingItemMax from '../setting_item_max.jsx';
 

@@ -1,5 +1,5 @@
 // Copyright (c) 2015 Mattermost, Inc. All Rights Reserved.
-// See License.txt for license information.
+
 
 import PostHeader from './post_header.jsx';
 import PostBody from './post_body.jsx';

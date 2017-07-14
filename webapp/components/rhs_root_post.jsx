@@ -1,5 +1,5 @@
 // Copyright (c) 2015 Mattermost, Inc. All Rights Reserved.
-// See License.txt for license information.
+
 
 import UserProfile from './user_profile.jsx';
 import PostBodyAdditionalContent from 'components/post_view/components/post_body_additional_content.jsx';

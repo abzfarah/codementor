@@ -1,5 +1,5 @@
-// Copyright (c) 2016 Mattermost, Inc. All Rights Reserved.
-// See License.txt for license information.
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
+
 
 import BackstageList from 'components/backstage/components/backstage_list.jsx';
 import InstalledOutgoingWebhook from './installed_outgoing_webhook.jsx';

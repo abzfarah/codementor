@@ -1,5 +1,5 @@
 // Copyright (c) 2015 Mattermost, Inc. All Rights Reserved.
-// See License.txt for license information.
+
 
 import FileStore from 'stores/file_store.jsx';
 import ReactDOM from 'react-dom';

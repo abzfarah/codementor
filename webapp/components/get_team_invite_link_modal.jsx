@@ -1,5 +1,5 @@
 // Copyright (c) 2015 Mattermost, Inc. All Rights Reserved.
-// See License.txt for license information.
+
 
 import GetLinkModal from './get_link_modal.jsx';
 import ModalStore from 'stores/modal_store.jsx';

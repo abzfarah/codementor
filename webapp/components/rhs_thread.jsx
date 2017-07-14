@@ -1,5 +1,5 @@
 // Copyright (c) 2015 Mattermost, Inc. All Rights Reserved.
-// See License.txt for license information.
+
 
 import CreateComment from './create_comment.jsx';
 import RhsHeaderPost from './rhs_header_post.jsx';

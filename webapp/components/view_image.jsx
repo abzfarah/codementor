@@ -1,5 +1,5 @@
 // Copyright (c) 2015 Mattermost, Inc. All Rights Reserved.
-// See License.txt for license information.
+
 
 import AudioVideoPreview from './audio_video_preview.jsx';
 import CodePreview from './code_preview.jsx';

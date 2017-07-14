@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Mattermost, Inc. All Rights Reserved.
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 // See License.txt for license information
 
 import PostViewController from './post_view_controller.jsx';

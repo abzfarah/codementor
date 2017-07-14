@@ -1,5 +1,5 @@
 // Copyright (c) 2015 Mattermost, Inc. All Rights Reserved.
-// See License.txt for license information.
+
 
 import {Modal} from 'react-bootstrap';
 
@@ -158,7 +158,7 @@ export default class AboutBuildModal extends React.Component {
                         <div className='form-group about-modal__copyright'>
                             <FormattedMessage
                                 id='about.copyright'
-                                defaultMessage='Copyright 2016 Mattermost, Inc. All rights reserved'
+                                defaultMessage='Copyright 2018 Nomad Media, Inc. All Rights Reserved.
                             />
                         </div>
                     </div>

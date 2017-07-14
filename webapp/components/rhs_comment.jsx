@@ -1,5 +1,5 @@
 // Copyright (c) 2015 Mattermost, Inc. All Rights Reserved.
-// See License.txt for license information.
+
 
 import UserProfile from './user_profile.jsx';
 import FileAttachmentListContainer from './file_attachment_list_container.jsx';

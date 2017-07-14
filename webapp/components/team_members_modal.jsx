@@ -1,5 +1,5 @@
 // Copyright (c) 2015 Mattermost, Inc. All Rights Reserved.
-// See License.txt for license information.
+
 
 import MemberListTeam from './member_list_team.jsx';
 import TeamStore from 'stores/team_store.jsx';

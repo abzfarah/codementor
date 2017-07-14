@@ -1,5 +1,5 @@
 // Copyright (c) 2015 Mattermost, Inc. All Rights Reserved.
-// See License.txt for license information.
+
 
 import ChannelStore from 'stores/channel_store.jsx';
 import WebClient from 'client/web_client.jsx';

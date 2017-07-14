@@ -1,5 +1,5 @@
 // Copyright (c) 2015 Mattermost, Inc. All Rights Reserved.
-// See License.txt for license information.
+
 
 import {checkIfTeamExists, createTeam} from 'actions/team_actions.jsx';
 import {trackEvent} from 'actions/diagnostics_actions.jsx';

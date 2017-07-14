@@ -1,5 +1,5 @@
-// Copyright (c) 2016 Mattermost, Inc. All Rights Reserved.
-// See License.txt for license information.
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
+
 
 import Client from '../client/web_client.jsx';
 import AppDispatcher from '../dispatcher/app_dispatcher.jsx';

@@ -1,5 +1,5 @@
 // Copyright (c) 2015 Mattermost, Inc. All Rights Reserved.
-// See License.txt for license information.
+
 
 import LoginMfa from './components/login_mfa.jsx';
 import ErrorBar from 'components/error_bar.jsx';

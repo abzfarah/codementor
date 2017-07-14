@@ -1,5 +1,5 @@
 // Copyright (c) 2015 Mattermost, Inc. All Rights Reserved.
-// See License.txt for license information.
+
 
 import $ from 'jquery';
 import PostMessageContainer from 'components/post_view/components/post_message_container.jsx';

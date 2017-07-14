@@ -1,5 +1,5 @@
 // Copyright (c) 2015 Mattermost, Inc. All Rights Reserved.
-// See License.txt for license information.
+
 
 import ViewImageModal from './view_image.jsx';
 import FileAttachment from './file_attachment.jsx';

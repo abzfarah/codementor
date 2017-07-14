@@ -1,5 +1,5 @@
 // Copyright (c) 2017 Mattermost, Inc. All Rights Reserved.
-// See License.txt for license information.
+
 
 import LocalizationStore from 'stores/localization_store.jsx';
 

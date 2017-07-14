@@ -1,5 +1,5 @@
 // Copyright (c) 2015 Mattermost, Inc. All Rights Reserved.
-// See License.txt for license information.
+
 
 import Constants from 'utils/constants.jsx';
 import FileStore from 'stores/file_store.jsx';

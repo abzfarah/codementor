@@ -1,5 +1,5 @@
 // Copyright (c) 2015 Mattermost, Inc. All Rights Reserved.
-// See License.txt for license information.
+
 
 const de = require('!!file-loader?name=i18n/[name].[hash].[ext]!./de.json');
 const es = require('!!file-loader?name=i18n/[name].[hash].[ext]!./es.json');

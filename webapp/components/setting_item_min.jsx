@@ -1,5 +1,5 @@
 // Copyright (c) 2015 Mattermost, Inc. All Rights Reserved.
-// See License.txt for license information.
+
 
 import {FormattedMessage} from 'react-intl';
 import * as Utils from 'utils/utils.jsx';

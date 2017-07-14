@@ -1,5 +1,5 @@
 // Copyright (c) 2017 Mattermost, Inc. All Rights Reserved.
-// See License.txt for license information.
+
 
 import ChannelStore from 'stores/channel_store.jsx';
 import TeamStore from 'stores/team_store.jsx';

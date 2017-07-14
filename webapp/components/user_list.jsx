@@ -1,5 +1,5 @@
 // Copyright (c) 2015 Mattermost, Inc. All Rights Reserved.
-// See License.txt for license information.
+
 
 import UserListRow from './user_list_row.jsx';
 import LoadingScreen from 'components/loading_screen.jsx';

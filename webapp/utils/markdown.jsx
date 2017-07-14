@@ -1,5 +1,5 @@
 // Copyright (c) 2015 Mattermost, Inc. All Rights Reserved.
-// See License.txt for license information.
+
 
 import * as TextFormatting from './text_formatting.jsx';
 import * as SyntaxHighlighting from './syntax_highlighting.jsx';
