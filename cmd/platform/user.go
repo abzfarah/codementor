@@ -4,7 +4,7 @@ package main
 
 import (
 	"errors"
-	"fmt"
+
 
 	"github.com/nomadsingles/platform/app"
 
@@ -159,21 +159,11 @@ func userActivateCmdF(cmd *cobra.Command, args []string) error {
 }
 
 func changeUsersActiveStatus(userArgs []string, active bool) {
-	users := getUsersFromUserArgs(userArgs)
-	for i, user := range users {
-		changeUserActiveStatus(user, userArgs[i], active)
-	}
+
 }
 
 func changeUserActiveStatus(user *model.User, userArg string, activate bool) {
-	if user == nil {
-		CommandPrintErrorln("Can't find user '" + userArg + "'")
-		return
-	}
 
-	if _, err := app.UpdateActive(user, activate); err != nil {
-		CommandPrintErrorln("Unable to change activation status of user: " + userArg)
-	}
 }
 
 func userDeactivateCmdF(cmd *cobra.Command, args []string) error {
@@ -226,7 +216,6 @@ func userCreateCmdF(cmd *cobra.Command, args []string) error {
 		app.UpdateUserRoles(ruser.Id, "system_user system_admin")
 	}
 
-	CommandPrettyPrintln("Created User")
 
 	return nil
 }
@@ -250,137 +239,29 @@ func userInviteCmdF(cmd *cobra.Command, args []string) error {
 
 
 func resetUserPasswordCmdF(cmd *cobra.Command, args []string) error {
-	initDBCommandContextCobra(cmd)
-	if len(args) != 2 {
-		return errors.New("Incorect number of arguments.")
-	}
-
-	user := getUserFromUserArg(args[0])
-	if user == nil {
-		return errors.New("Unable to find user '" + args[0] + "'")
-	}
-	password := args[1]
-
-	if result := <-app.Srv.Store.User().UpdatePassword(user.Id, model.HashPassword(password)); result.Err != nil {
-		return result.Err
-	}
 
 	return nil
 }
 
 func resetUserMfaCmdF(cmd *cobra.Command, args []string) error {
-	initDBCommandContextCobra(cmd)
-	if len(args) < 1 {
-		return errors.New("Enter at least one user.")
-	}
 
-	users := getUsersFromUserArgs(args)
-
-	for i, user := range users {
-		if user == nil {
-			return errors.New("Unable to find user '" + args[i] + "'")
-		}
-
-
-	}
 
 	return nil
 }
 
 func deleteUserCmdF(cmd *cobra.Command, args []string) error {
-	initDBCommandContextCobra(cmd)
-	if len(args) < 1 {
-		return errors.New("Enter at least one user.")
-	}
-
-	confirmFlag, _ := cmd.Flags().GetBool("confirm")
-	if !confirmFlag {
-		var confirm string
-		CommandPrettyPrintln("Have you performed a database backup? (YES/NO): ")
-		fmt.Scanln(&confirm)
-
-		if confirm != "YES" {
-			return errors.New("ABORTED: You did not answer YES exactly, in all capitals.")
-		}
-		CommandPrettyPrintln("Are you sure you want to delete the teams specified?  All data will be permanently deleted? (YES/NO): ")
-		fmt.Scanln(&confirm)
-		if confirm != "YES" {
-			return errors.New("ABORTED: You did not answer YES exactly, in all capitals.")
-		}
-	}
-
-	users := getUsersFromUserArgs(args)
-
-	for i, user := range users {
-		if user == nil {
-			return errors.New("Unable to find user '" + args[i] + "'")
-		}
-
-		if err := app.PermanentDeleteUser(user); err != nil {
-			return err
-		}
-	}
 
 	return nil
 }
 
 func deleteAllUsersCommandF(cmd *cobra.Command, args []string) error {
 	initDBCommandContextCobra(cmd)
-	if len(args) > 0 {
-		return errors.New("Don't enter any agruments.")
-	}
-
-	confirmFlag, _ := cmd.Flags().GetBool("confirm")
-	if !confirmFlag {
-		var confirm string
-		CommandPrettyPrintln("Have you performed a database backup? (YES/NO): ")
-		fmt.Scanln(&confirm)
-
-		if confirm != "YES" {
-			return errors.New("ABORTED: You did not answer YES exactly, in all capitals.")
-		}
-		CommandPrettyPrintln("Are you sure you want to delete the teams specified?  All data will be permanently deleted? (YES/NO): ")
-		fmt.Scanln(&confirm)
-		if confirm != "YES" {
-			return errors.New("ABORTED: You did not answer YES exactly, in all capitals.")
-		}
-	}
-
-	if err := app.PermanentDeleteAllUsers(); err != nil {
-		return err
-	} else {
-		CommandPrettyPrintln("Sucsessfull. All users deleted.")
-	}
 
 	return nil
 }
 
 func migrateAuthCmdF(cmd *cobra.Command, args []string) error {
-	initDBCommandContextCobra(cmd)
-	if len(args) != 3 {
-		return errors.New("Enter the correct number of arguments.")
-	}
 
-	fromAuth := args[0]
-	toAuth := args[1]
-	matchField := args[2]
-
-	if len(fromAuth) == 0 || (fromAuth != "email" && fromAuth != "gitlab" && fromAuth != "saml") {
-		return errors.New("Invalid from_auth argument")
-	}
-
-	if len(toAuth) == 0 || toAuth != "ldap" {
-		return errors.New("Invalid to_auth argument")
-	}
-
-	// Email auth in Mattermost system is represented by ""
-	if fromAuth == "email" {
-		fromAuth = ""
-	}
-
-	if len(matchField) == 0 || (matchField != "email" && matchField != "username") {
-		return errors.New("Invalid match_field argument")
-	}
 
 
 	return nil
@@ -392,17 +273,7 @@ func verifyUserCmdF(cmd *cobra.Command, args []string) error {
 		return errors.New("Enter at least one user.")
 	}
 
-	users := getUsersFromUserArgs(args)
 
-	for i, user := range users {
-		if user == nil {
-			CommandPrintErrorln("Unable to find user '" + args[i] + "'")
-			continue
-		}
-		if cresult := <-app.Srv.Store.User().VerifyEmail(user.Id); cresult.Err != nil {
-			CommandPrintErrorln("Unable to verify '" + args[i] + "' email. Error: " + cresult.Err.Error())
-		}
-	}
 
 	return nil
 }

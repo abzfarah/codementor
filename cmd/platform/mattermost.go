@@ -4,11 +4,10 @@
 package main
 
 import (
-	"errors"
-	"fmt"
+
 	"os"
 
-	"github.com/nomadsingles/platform/app"
+
 	"github.com/spf13/cobra"
 
 
@@ -30,43 +29,11 @@ func main() {
 	}
 	rootCmd.PersistentFlags().StringP("config", "c", "config.json", "Configuration file to use.")
 
-	resetCmd.Flags().Bool("confirm", false, "Confirm you really want to delete everything and a DB backup has been performed.")
 
-	rootCmd.AddCommand(serverCmd, versionCmd, userCmd,  resetCmd, channelCmd, rolesCmd)
+	rootCmd.AddCommand(serverCmd, userCmd,  channelCmd)
 
 	if err := rootCmd.Execute(); err != nil {
 		os.Exit(1)
 	}
 }
 
-var resetCmd = &cobra.Command{
-	Use:   "reset",
-	Short: "Reset the database to initial state",
-	Long:  "Completely erases the database causing the loss of all data. This will reset Mattermost to its initial state.",
-	RunE:  resetCmdF,
-}
-
-func resetCmdF(cmd *cobra.Command, args []string) error {
-	initDBCommandContextCobra(cmd)
-
-	confirmFlag, _ := cmd.Flags().GetBool("confirm")
-	if !confirmFlag {
-		var confirm string
-		CommandPrettyPrintln("Have you performed a database backup? (YES/NO): ")
-		fmt.Scanln(&confirm)
-
-		if confirm != "YES" {
-			return errors.New("ABORTED: You did not answer YES exactly, in all capitals.")
-		}
-		CommandPrettyPrintln("Are you sure you want to delete everything? All data will be permanently deleted? (YES/NO): ")
-		fmt.Scanln(&confirm)
-		if confirm != "YES" {
-			return errors.New("ABORTED: You did not answer YES exactly, in all capitals.")
-		}
-	}
-
-	app.Srv.Store.DropAllTables()
-	CommandPrettyPrintln("Database sucessfully reset")
-
-	return nil
-}
