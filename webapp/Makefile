@@ -27,7 +27,7 @@ build: .npminstall
 run: .npminstall
 	@echo Running mattermost Webapp for development
 
-	npm run run &
+	npm run run-fullmap &
 
 run-fullmap: .npminstall
 	@echo FULL SOURCE MAP Running mattermost Webapp for development FULL SOURCE MAP

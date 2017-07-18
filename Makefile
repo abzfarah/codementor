@@ -534,9 +534,3 @@ todo:
 	@! ag --ignore Makefile --ignore-dir vendor --ignore-dir runtime --ignore-dir webapp/non_npm_dependencies/ XXX
 	@! ag --ignore Makefile --ignore-dir vendor --ignore-dir runtime --ignore-dir webapp/non_npm_dependencies/ FIXME
 	@! ag --ignore Makefile --ignore-dir vendor --ignore-dir runtime --ignore-dir webapp/non_npm_dependencies/ "FIX ME"
-ifeq ($(BUILD_ENTERPRISE_READY),true)f
-	@! ag --ignore Makefile --ignore-dir vendor --ignore-dir runtime --ignore-dir webapp/non_npm_dependencies/ TODO enterprise/
-	@! ag --ignore Makefile --ignore-dir vendor --ignore-dir runtime --ignore-dir webapp/non_npm_dependencies/ XXX enterprise/
-	@! ag --ignore Makefile --ignore-dir vendor --ignore-dir runtime --ignore-dir webapp/non_npm_dependencies/ FIXME enterprise/
-	@! ag --ignore Makefile --ignore-dir vendor --ignore-dir runtime --ignore-dir webapp/non_npm_dependencies/ "FIX ME" enterprise/
-endif

@@ -59,8 +59,7 @@ var config = {
                 test: /(node_modules|non_npm_dependencies)(\\|\/).+\.(js|jsx)$/,
                 loader: 'imports-loader',
                 query: {
-                    $: 'jquery',
-                    jQuery: 'jquery'
+
                 }
             },
             {
