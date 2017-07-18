@@ -38,10 +38,7 @@ func InitWeb() {
 func staticHandler(handler http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Cache-Control", "max-age=31556926, public")
-		if strings.HasSuffix(r.URL.Path, "/") {
-			http.NotFound(w, r)
-			return
-		}
+
 		handler.ServeHTTP(w, r)
 	})
 }
@@ -79,5 +76,5 @@ func root(c *api.Context, w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Cache-Control", "no-cache, max-age=31556926, public")
-	http.ServeFile(w, r, utils.FindDir(model.CLIENT_DIR)+"root.html")
+	http.ServeFile(w, r, utils.FindDir(model.CLIENT_DIR)+"index.html")
 }
