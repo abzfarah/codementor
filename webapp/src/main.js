@@ -1,22 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import createStore from './store/createStore'
-import './styles/main.scss'
+import { makeMainRoutes } from './routes'
 
-// Store Initialization
-// ------------------------------------
-const store = createStore(window.__INITIAL_STATE__)
+import './styles/index.scss'
+const routes = makeMainRoutes()
 
 // Render Setup
 // ------------------------------------
 const MOUNT_NODE = document.getElementById('root')
 
 let render = () => {
-  const App = require('./components/App').default
-  const routes = require('./routes/index').default(store)
-
   ReactDOM.render(
-    <App store={store} routes={routes} />,
+    routes,
     MOUNT_NODE
   )
 }
