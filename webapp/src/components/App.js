@@ -1,27 +1,78 @@
-import React from 'react'
-import { browserHistory, Router } from 'react-router'
-import { Provider } from 'react-redux'
-import PropTypes from 'prop-types'
+// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
 
-class App extends React.Component {
-  static propTypes = {
-    store: PropTypes.object.isRequired,
-    routes: PropTypes.object.isRequired,
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
+import { getCurrentLocale } from '../utils/Locale';
+import SkipLinks from './SkipLinks';
+
+import CSSClassnames from '../utils/CSSClassnames';
+
+const CLASS_ROOT = CSSClassnames.APP;
+
+let supportedLocales = ['en-US', 'pt-BR'];
+
+function localesSupported() {
+  return global.Intl && supportedLocales.every(function (locale) {
+    return Intl.NumberFormat.supportedLocalesOf(locale)[0] === locale &&
+            Intl.DateTimeFormat.supportedLocalesOf(locale)[0] === locale;
+  });
+}
+
+if (! localesSupported()) {
+  require('intl');
+  require('intl/locale-data/jsonp/en-US.js');
+  require('intl/locale-data/jsonp/pt-BR.js');
+  Intl.NumberFormat = IntlPolyfill.NumberFormat;
+  Intl.DateTimeFormat = IntlPolyfill.DateTimeFormat;
+}
+
+export default class App extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      lang: 'en-US'
+    };
   }
 
-  shouldComponentUpdate () {
-    return false
+  componentDidMount() {
+    var lang = this.props.lang || getCurrentLocale();
+
+    if (!document.documentElement.getAttribute('lang')) {
+      document.documentElement.setAttribute('lang', lang);
+    }
+    this.setState({lang: lang});
   }
 
-  render () {
+  render() {
+    const { centered, children, className, inline, ...props } = this.props;
+    const { lang } = this.state;
+
+    const classes = classnames(
+      'grommet',
+      CLASS_ROOT, {
+        [`${CLASS_ROOT}--centered`]: centered,
+        [`${CLASS_ROOT}--inline`]: inline
+      },
+      className
+    );
+
     return (
-      <Provider store={this.props.store}>
-        <div style={{ height: '100%' }}>
-          <Router history={browserHistory} children={this.props.routes} />
-        </div>
-      </Provider>
-    )
+      <div lang={lang} className={classes} {...props}>
+        {children}
+        <SkipLinks />
+        <div className={`${CLASS_ROOT}__announcer`} aria-live='polite' />
+      </div>
+    );
   }
 }
 
-export default App
+App.propTypes = {
+  centered: PropTypes.bool,
+  inline: PropTypes.bool
+};
+
+App.defaultProps = {
+  centered: true
+};
