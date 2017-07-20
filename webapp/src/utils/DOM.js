@@ -1,4 +1,4 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 
 const COLOR_RGB_REGEXP = /rgb\((\d+), (\d+), (\d+)\)/;
 const COLOR_RGBA_REGEXP = /rgba\((\d+), (\d+), (\d+), ([\d\.]+)\)/;

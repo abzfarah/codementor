@@ -1,4 +1,4 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 
 // CIRCLE, ARC, SPIRAL
 
@@ -14,25 +14,25 @@ $meter-circle-dash: round($meter-size-default * 3.2);
   }
 }
 
-.#{$grommet-namespace}meter--circle,
-.#{$grommet-namespace}meter--arc,
-.#{$grommet-namespace}meter--spiral {
+.meter--circle,
+.meter--arc,
+.meter--spiral {
 
   @include media-query(palm) {
     margin: 0px auto;
   }
 
-  .#{$grommet-namespace}meter.series-pre {
+  .meter.series-pre {
     path {
       stroke-dashoffset: quadruple($meter-size-default);
     }
   }
 
-  .#{$grommet-namespace}meter__slice {
+  .meter__slice {
     stroke-linecap: butt;
   }
 
-  .#{$grommet-namespace}meter__slice-indicator {
+  .meter__slice-indicator {
     stroke-linecap: square;
     stroke-width: $meter-indicator-width;
     stroke: $threshold-color;
@@ -46,7 +46,7 @@ $meter-circle-dash: round($meter-size-default * 3.2);
     }
   }
 
-  .#{$grommet-namespace}meter__values .#{$grommet-namespace}meter__slice {
+  .meter__values .meter__slice {
     @include graph-stroke-color();
 
     &--clickable {
@@ -61,12 +61,12 @@ $meter-circle-dash: round($meter-size-default * 3.2);
     }
   }
 
-  .#{$grommet-namespace}meter__thresholds .#{$grommet-namespace}meter__slice,
-  .#{$grommet-namespace}meter__tracks .#{$grommet-namespace}meter__slice {
+  .meter__thresholds .meter__slice,
+  .meter__tracks .meter__slice {
     @include graph-stroke-color-translucent(0.5);
   }
 
-  .#{$grommet-namespace}meter__threshold {
+  .meter__threshold {
     stroke-linecap: butt;
   }
 }

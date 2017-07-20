@@ -1,4 +1,4 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -131,7 +131,7 @@ export default class Card extends Component {
       const size = small ? 'large' : 'xlarge';
       const videoIcon = (video) ?
         (
-          <Anchor icon={<CirclePlayIcon responsive={false} 
+          <Anchor icon={<CirclePlayIcon responsive={false}
             colorIndex='brand' size={size} />} />
         ):
         undefined;

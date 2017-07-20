@@ -1,3 +1,5 @@
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
+
 import React, { Component } from 'react'
 import { Navbar, Button } from 'react-bootstrap'
 
@@ -22,14 +24,14 @@ export default class SampleApp extends Component {
         <Navbar fluid>
           <Navbar.Header>
             <Navbar.Brand>
-              <a href='#'>Adddduth0 - Reacdddt</a>
+              <a href='#'>Auth0 - React</a>
             </Navbar.Brand>
             <Button
               bsStyle='primary'
               className='btn-margin'
               onClick={this.goTo.bind(this, 'home')}
             >
-              Home
+              Homesddd
             </Button>
             {
               !isAuthenticated() && (
@@ -38,7 +40,7 @@ export default class SampleApp extends Component {
                   className='btn-margin'
                   onClick={this.login.bind(this)}
                 >
-                  Log In
+                  Log ssddIn
                 </Button>
               )
             }

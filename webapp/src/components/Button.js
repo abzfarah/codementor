@@ -1,4 +1,4 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 
 import React, { Children, Component } from 'react';
 import PropTypes from 'prop-types';
@@ -14,7 +14,7 @@ function getHoverModifier(hoverIndicator) {
     if (typeof hoverIndicator === 'object') {
       if (hoverIndicator.background) {
         if (typeof hoverIndicator.background === 'string') {
-          const prefix = `${namespace}background-hover-color-index-`;
+          const prefix = `background-hover-color-index-`;
           return `${prefix}${hoverIndicator.background}`;
         }
         return `${CLASS_ROOT}--hover-background`;

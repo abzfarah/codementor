@@ -1,4 +1,4 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -30,7 +30,7 @@ export default class Tile extends Component {
         [`${CLASS_ROOT}--status-${statusClass}`]: status,
         [`${CLASS_ROOT}--wide`]: wide,
         [`${CLASS_ROOT}--selectable`]: onClick,
-        [`${NAMESPACE}${hoverStyle}${(hoverStyle == 'border') ?
+        [`${hoverStyle}${(hoverStyle == 'border') ?
           ((borderSize) ? `-${borderSize}` : '-medium') : ''
         }-hover-color-index-${hoverColorIndex}`]: hoverStyle,
         [`${CLASS_ROOT}--hover-border-${borderSize}`]: borderSize

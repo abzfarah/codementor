@@ -1,4 +1,4 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 
 $social-twitter-color: #1DA1F2;
 $social-facebook-color: #3B5998;
@@ -11,7 +11,7 @@ $icon-large-size: round($inuit-base-spacing-unit * 2) !default;
 $icon-xlarge-size: round($inuit-base-spacing-unit * 6) !default;
 $icon-huge-size: round($inuit-base-spacing-unit * 12) !default;
 
-.#{$grommet-namespace}control-icon {
+.control-icon {
   display: inline-block;
   width: $icon-small-size;
   height: $icon-small-size;
@@ -60,7 +60,7 @@ $icon-huge-size: round($inuit-base-spacing-unit * 12) !default;
   }
 }
 
-.#{$grommet-namespace}control-icon__badge {
+.control-icon__badge {
   circle {
     fill: $icon-badge-background-color;
   }
@@ -71,54 +71,54 @@ $icon-huge-size: round($inuit-base-spacing-unit * 12) !default;
   }
 }
 
-.#{$grommet-namespace}control-icon--active {
+.control-icon--active {
   fill: $active-icon-color;
   stroke: $active-icon-color;
 }
 
-.#{$grommet-namespace}control-icon--xsmall {
+.control-icon--xsmall {
   width: $icon-xsmall-size;
   height: $icon-xsmall-size;
 }
 
-.#{$grommet-namespace}control-icon--medium {
+.control-icon--medium {
   width: $icon-medium-size;
   height: $icon-medium-size;
 }
 
-.#{$grommet-namespace}control-icon--large {
+.control-icon--large {
   width: $icon-large-size;
   height: $icon-large-size;
 }
 
-.#{$grommet-namespace}control-icon--xlarge {
+.control-icon--xlarge {
   width: $icon-xlarge-size;
   height: $icon-xlarge-size;
 }
 
-.#{$grommet-namespace}control-icon--huge {
+.control-icon--huge {
   width: $icon-huge-size;
   height: $icon-huge-size;
 }
 
 @include media-query(palm) {
-  .#{$grommet-namespace}control-icon--responsive {
-    &.#{$grommet-namespace}control-icon--large,
-    &.#{$grommet-namespace}control-icon--xlarge,
-    &.#{$grommet-namespace}control-icon--huge {
+  .control-icon--responsive {
+    &.control-icon--large,
+    &.control-icon--xlarge,
+    &.control-icon--huge {
       width: $inuit-base-spacing-unit;
       height: $inuit-base-spacing-unit;
     }
   }
 }
 
-.#{$grommet-namespace}status-icon {
+.status-icon {
   width: $inuit-base-spacing-unit;
   height: $inuit-base-spacing-unit;
   vertical-align: middle;
   flex: 0 0 auto;
 
-  .#{$grommet-namespace}status-icon__base {
+  .status-icon__base {
     fill: map-get($brand-status-colors, unknown);
 
     #{$dark-background-context} {
@@ -126,12 +126,12 @@ $icon-huge-size: round($inuit-base-spacing-unit * 12) !default;
     }
   }
 
-  .#{$grommet-namespace}status-icon__detail {
+  .status-icon__detail {
     fill: $background-color;
     stroke: $background-color;
   }
 
-  .#{$grommet-namespace}status-icon__small {
+  .status-icon__small {
     display: none;
     stroke: map-get($brand-status-colors, unknown);
 
@@ -141,68 +141,68 @@ $icon-huge-size: round($inuit-base-spacing-unit * 12) !default;
   }
 }
 
-.#{$grommet-namespace}status-icon-label {
-  .#{$grommet-namespace}status-icon__base {
+.status-icon-label {
+  .status-icon__base {
     fill: map-get($brand-status-colors, unknown);
   }
 }
 
-.#{$grommet-namespace}status-icon-unknown {
-  .#{$grommet-namespace}status-icon__detail {
+.status-icon-unknown {
+  .status-icon__detail {
     fill: map-get($brand-status-colors, unknown);
     stroke: map-get($brand-status-colors, unknown);
   }
 }
 
-.#{$grommet-namespace}status-icon--xsmall {
+.status-icon--xsmall {
   width: $icon-xsmall-size;
   height: $icon-xsmall-size;
 }
 
-.#{$grommet-namespace}status-icon--medium {
+.status-icon--medium {
   width: $icon-medium-size;
   height: $icon-medium-size;
 }
 
-.#{$grommet-namespace}status-icon--large {
+.status-icon--large {
   width: $icon-large-size;
   height: $icon-large-size;
 }
 
-.#{$grommet-namespace}status-icon--xlarge {
+.status-icon--xlarge {
   width: $icon-xlarge-size;
   height: $icon-xlarge-size;
 }
 
-.#{$grommet-namespace}status-icon--huge {
+.status-icon--huge {
   width: $icon-huge-size;
   height: $icon-huge-size;
 }
 
-.#{$grommet-namespace}status-icon--small {
+.status-icon--small {
   width: halve($inuit-base-spacing-unit);
   height: halve($inuit-base-spacing-unit);
   // adjust margin so it aligns with text better
   margin-top: quarter($inuit-base-spacing-unit);
   margin-bottom: quarter($inuit-base-spacing-unit);
 
-  .#{$grommet-namespace}status-icon__base {
+  .status-icon__base {
     mask: none;
   }
 
-  .#{$grommet-namespace}status-icon__detail,
-  .#{$grommet-namespace}status-icon__normal {
+  .status-icon__detail,
+  .status-icon__normal {
     display: none;
   }
 
-  .#{$grommet-namespace}status-icon__small {
+  .status-icon__small {
     display: block;
   }
 }
 
 @each $status, $color in $brand-status-colors {
-  .#{$grommet-namespace}status-icon-#{$status} {
-    .#{$grommet-namespace}status-icon__base {
+  .status-icon-#{$status} {
+    .status-icon__base {
       fill: $color;
     }
   }
@@ -220,7 +220,7 @@ $spinning-dash: round($inuit-base-spacing-unit * 2 * 3.1416);
   }
 }
 
-.#{$grommet-namespace}icon-spinning {
+.icon-spinning {
   width: $inuit-base-spacing-unit;
   height: $inuit-base-spacing-unit;
   stroke-dasharray: $spinning-dash $spinning-dash;
@@ -229,33 +229,33 @@ $spinning-dash: round($inuit-base-spacing-unit * 2 * 3.1416);
   @include animation('drawAndReverse 4s alternate infinite ease-in-out');
 }
 
-.#{$grommet-namespace}icon-spinning--xsmall {
+.icon-spinning--xsmall {
   width: $icon-xsmall-size;
   height: $icon-xsmall-size;
 }
 
-.#{$grommet-namespace}icon-spinning--medium {
+.icon-spinning--medium {
   width: $icon-medium-size;
   height: $icon-medium-size;
 }
 
-.#{$grommet-namespace}icon-spinning--large {
+.icon-spinning--large {
   width: $icon-large-size;
   height: $icon-large-size;
 }
 
-.#{$grommet-namespace}icon-spinning--xlarge {
+.icon-spinning--xlarge {
   width: $icon-xlarge-size;
   height: $icon-xlarge-size;
 }
 
-.#{$grommet-namespace}icon-spinning--huge {
+.icon-spinning--huge {
   width: $icon-huge-size;
   height: $icon-huge-size;
 }
 
-.#{$grommet-namespace}icon-spinning--xlarge.#{$grommet-namespace}icon-spinning--responsive,
-.#{$grommet-namespace}icon-spinning--huge.#{$grommet-namespace}icon-spinning--responsive {
+.icon-spinning--xlarge.icon-spinning--responsive,
+.icon-spinning--huge.icon-spinning--responsive {
   @include media-query(palm) {
     width: round($inuit-base-spacing-unit * 2);
     height: round($inuit-base-spacing-unit * 2);
@@ -275,7 +275,7 @@ $logo-dash-size: round($logo-size * 16);
   }
 }
 
-.#{$grommet-namespace}logo-icon {
+.logo-icon {
   width: $logo-size;
   height: $logo-size;
 
@@ -290,22 +290,22 @@ $logo-dash-size: round($logo-size * 16);
   }
 }
 
-.#{$grommet-namespace}logo-icon--small {
+.logo-icon--small {
   width: halve($logo-size);
   height: halve($logo-size);
 }
 
-.#{$grommet-namespace}logo-icon--large {
+.logo-icon--large {
   width: double($logo-size);
   height: double($logo-size);
 }
 
-.#{$grommet-namespace}logo-icon--xlarge {
+.logo-icon--xlarge {
   width: quadruple($logo-size);
   height: quadruple($logo-size);
 }
 
-.#{$grommet-namespace}logo-icon--huge {
+.logo-icon--huge {
   width: round($logo-size * 8);
   height: round($logo-size * 8);
 }

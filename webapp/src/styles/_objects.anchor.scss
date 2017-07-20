@@ -1,4 +1,4 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 
 @mixin anchor-style() {
   color: $link-color;
@@ -6,7 +6,7 @@
   cursor: pointer;
 
   &.plain
-  &.#{$grommet-namespace}button {
+  &.button {
     text-decoration: none;
 
     &:hover {
@@ -32,29 +32,29 @@
   @include background-context-color($link-color, $link-hover-color);
 }
 
-.grommet a:not(.#{$grommet-namespace}anchor):not(.#{$grommet-namespace}button) {
+.grommet a:not(.anchor):not(.button) {
   @include anchor-style;
 }
 
-a:not(.#{$grommet-namespace}anchor):not(.#{$grommet-namespace}button) {
+a:not(.anchor):not(.button) {
   @include background-context-color($link-color, $link-hover-color);
 }
 
-.#{$grommet-namespace}anchor {
+.anchor {
   @include anchor-style;
 }
 
-.#{$grommet-namespace}anchor__icon {
+.anchor__icon {
   display: inline-block;
   height: double($inuit-base-spacing-unit);
   padding: halve($inuit-base-spacing-unit);
 
-  .#{$grommet-namespace}control-icon {
+  .control-icon {
     @include icon-color($icon-color);
   }
 
   &:hover {
-    .#{$grommet-namespace}control-icon {
+    .control-icon {
       @include icon-color($active-icon-color);
     }
   }
@@ -63,23 +63,23 @@ a:not(.#{$grommet-namespace}anchor):not(.#{$grommet-namespace}button) {
   @include background-context-icon($icon-color, $active-icon-color);
 }
 
-.#{$grommet-namespace}anchor--animate-icon:hover {
-  .#{$grommet-namespace}control-icon {
+.anchor--animate-icon:hover {
+  .control-icon {
     @include icon-hover-grow();
   }
 }
 
-.#{$grommet-namespace}anchor--icon {
+.anchor--icon {
   flex: 0 0 auto;
 }
 
-.#{$grommet-namespace}anchor--primary,
-.#{$grommet-namespace}anchor--icon-label {
+.anchor--primary,
+.anchor--icon-label {
   @include inuit-font-size($control-font-size, $inuit-base-spacing-unit);
   font-weight: $control-font-weight;
   text-decoration: none;
 
-  .#{$grommet-namespace}control-icon {
+  .control-icon {
     vertical-align: middle;
     margin-right: halve($inuit-base-spacing-unit);
 
@@ -94,25 +94,25 @@ a:not(.#{$grommet-namespace}anchor):not(.#{$grommet-namespace}button) {
   }
 }
 
-.#{$grommet-namespace}anchor--reverse {
-  .#{$grommet-namespace}control-icon {
+.anchor--reverse {
+  .control-icon {
     margin-right: 0;
     margin-left: halve($inuit-base-spacing-unit);
   }
 }
 
-.#{$grommet-namespace}anchor--icon-label:not(.#{$grommet-namespace}anchor--primary) {
+.anchor--icon-label:not(.anchor--primary) {
   color: $text-color;
 
   &:visited {
     color: $text-color;
   }
 
-  .#{$grommet-namespace}control-icon {
+  .control-icon {
     @include icon-color($icon-color);
   }
 
-  &:hover:not(.#{$grommet-namespace}anchor--disabled) {
+  &:hover:not(.anchor--disabled) {
     color: $hover-text-color;
     text-decoration: none;
   }
@@ -121,10 +121,10 @@ a:not(.#{$grommet-namespace}anchor):not(.#{$grommet-namespace}button) {
   @include background-context-icon($icon-color, $active-icon-color);
 }
 
-.#{$grommet-namespace}anchor--primary {
+.anchor--primary {
   color: $control-brand-color;
 
-  .#{$grommet-namespace}control-icon {
+  .control-icon {
     @include icon-color($control-brand-color);
   }
 
@@ -133,11 +133,11 @@ a:not(.#{$grommet-namespace}anchor):not(.#{$grommet-namespace}button) {
   }
 
   // Only animate icon when it's a primary anchor
-  &.#{$grommet-namespace}anchor--animate-icon:not(.#{$grommet-namespace}anchor--disabled) {
+  &.anchor--animate-icon:not(.anchor--disabled) {
     &:hover {
       text-decoration: none;
 
-      .#{$grommet-namespace}control-icon {
+      .control-icon {
         transform: translateX(round($inuit-base-spacing-unit * 0.125));
       }
     }
@@ -147,31 +147,31 @@ a:not(.#{$grommet-namespace}anchor):not(.#{$grommet-namespace}button) {
   @include background-context-icon($control-brand-color, $control-brand-color);
 }
 
-.#{$grommet-namespace}anchor--disabled {
+.anchor--disabled {
   opacity: 0.3;
   cursor: default;
 
-  .#{$grommet-namespace}control-icon {
+  .control-icon {
     cursor: default;
   }
 }
 
-.#{$grommet-namespace}anchor--disabled:hover {
+.anchor--disabled:hover {
   color: inherit;
   text-decoration: none;
 
-  &.#{$grommet-namespace}anchor--primary {
+  &.anchor--primary {
     color: $control-brand-color;
   }
 
-  &.#{$grommet-namespace}anchor:not(.#{$grommet-namespace}anchor--primary) {
+  &.anchor:not(.anchor--primary) {
     color: $link-color;
   }
 
   #{$dark-background-context} {
     @include icon-color($colored-icon-color);
 
-    &.#{$grommet-namespace}anchor--primary {
+    &.anchor--primary {
       color: $colored-icon-color;
     }
   }
@@ -179,20 +179,20 @@ a:not(.#{$grommet-namespace}anchor):not(.#{$grommet-namespace}button) {
   #{$light-background-context} {
     @include icon-color($link-color);
 
-    &.#{$grommet-namespace}anchor--primary {
+    &.anchor--primary {
       color: $control-brand-color;
     }
   }
 }
 
-.#{$grommet-namespace}anchor--align-start {
+.anchor--align-start {
   text-align: left;
 }
 
-.#{$grommet-namespace}anchor--align-center {
+.anchor--align-center {
   text-align: center;
 }
 
-.#{$grommet-namespace}anchor--align-end {
+.anchor--align-end {
   text-align: right;
 }

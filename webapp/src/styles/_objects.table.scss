@@ -1,4 +1,4 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 
 @mixin small-table {
 
@@ -29,7 +29,7 @@
   }
 }
 
-.#{$grommet-namespace}table {
+.table {
 
   width: 100%;
   max-width: 100%;
@@ -70,7 +70,7 @@
   }
 }
 
-.#{$grommet-namespace}table__mirror {
+.table__mirror {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -82,15 +82,15 @@
   }
 }
 
-.#{$grommet-namespace}table__more {
+.table__more {
   margin-top: $inuit-base-spacing-unit;
   text-align: center;
 }
 
-.#{$grommet-namespace}table--scrollable {
+.table--scrollable {
   position: relative;
 
-  .#{$grommet-namespace}table__table {
+  .table__table {
     thead {
       visibility: hidden;
     }
@@ -101,12 +101,12 @@
   }
 }
 
-.#{$grommet-namespace}table--selectable {
-  .#{$grommet-namespace}table__table {
+.table--selectable {
+  .table__table {
     outline: none;
   }
 
-  .#{$grommet-namespace}table__table--focus {
+  .table__table--focus {
     border-color: $focus-border-color;
     box-shadow: 0 0 1px 1px $focus-border-color;
   }
@@ -120,7 +120,7 @@
         transition: background-color 0.2s;
       }
 
-      &.#{$grommet-namespace}table-row--selected {
+      &.table-row--selected {
         td {
           background-color: $selected-background-color;
           color: $selected-text-color;
@@ -137,7 +137,7 @@
         }
       }
 
-      &.#{$grommet-namespace}table-row--active,
+      &.table-row--active,
       &:hover {
         td {
           background-color: $hover-background-color;
@@ -158,6 +158,6 @@
   }
 }
 
-.#{$grommet-namespace}table--small {
+.table--small {
   @include small-table();
 }

@@ -1,6 +1,6 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 
-.#{$grommet-namespace}sidebar {
+.sidebar {
   @include media-query(palm) {
     max-width: 100%;
     width: 100vw;
@@ -11,31 +11,31 @@
   }
 }
 
-.#{$grommet-namespace}sidebar--fixed {
+.sidebar--fixed {
   display: flex;
   flex-direction: column;
   max-height: 100vh;
 }
 
-.#{$grommet-namespace}sidebar--xsmall {
+.sidebar--xsmall {
   @include media-query(lap-and-up) {
     width: $sidebar-xsmall-width;
   }
 }
 
-.#{$grommet-namespace}sidebar--small {
+.sidebar--small {
   @include media-query(lap-and-up) {
     width: $sidebar-small-width;
   }
 }
 
-.#{$grommet-namespace}sidebar--large {
+.sidebar--large {
   @include media-query(lap-and-up) {
     width: $sidebar-large-width;
   }
 }
 
-.#{$grommet-namespace}sidebar--full {
+.sidebar--full {
   height: 100vh;
   overflow: auto;
 }

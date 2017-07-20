@@ -1,11 +1,11 @@
 // (C) Copyright 2016 Hewlett Packard Enterprise Development LP
 
-.#{$grommet-namespace}value {
+.value {
   display: inline-block;
   @include text-align();
 }
 
-.#{$grommet-namespace}value--active {
+.value--active {
   color: $hover-text-color;
 
   #{$dark-background-context} {
@@ -17,7 +17,7 @@
   }
 }
 
-.#{$grommet-namespace}value__annotated {
+.value__annotated {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -25,87 +25,87 @@
   align-items: center;
   @include inuit-font-size($value-font-size);
 
-  .#{$grommet-namespace}control-icon:first-child {
+  .control-icon:first-child {
     margin-right: quarter($inuit-base-spacing-unit);
   }
 
-  .#{$grommet-namespace}control-icon:last-child {
+  .control-icon:last-child {
     margin-left: quarter($inuit-base-spacing-unit);
   }
 }
 
-.#{$grommet-namespace}value__label {
+.value__label {
   display: inline-block;
   margin-top: quarter($inuit-base-spacing-unit);
   @include inuit-font-size($control-font-size);
 }
 
-.#{$grommet-namespace}value__value {
+.value__value {
   font-weight: $text-strong-font-weight;
 }
 
-.#{$grommet-namespace}value__units {
+.value__units {
   margin-left: 0.5rem;
   font-weight: $text-font-weight;
 }
 
-.#{$grommet-namespace}value--align-start {
-  .#{$grommet-namespace}value__annotated {
+.value--align-start {
+  .value__annotated {
     justify-content: flex-start;
   }
 }
 
-.#{$grommet-namespace}value--align-end {
-  .#{$grommet-namespace}value__annotated {
+.value--align-end {
+  .value__annotated {
     justify-content: flex-end;
   }
 }
 
-.#{$grommet-namespace}value--xsmall {
-  .#{$grommet-namespace}value__annotated {
+.value--xsmall {
+  .value__annotated {
     @include inuit-font-size($value-xsmall-font-size);
   }
 
-  .#{$grommet-namespace}value__label {
+  .value__label {
     margin-top: quarter($inuit-base-spacing-unit);
     @include inuit-font-size($content-small-font-size);
   }
 }
 
-.#{$grommet-namespace}value--small {
-  .#{$grommet-namespace}value__annotated {
+.value--small {
+  .value__annotated {
     @include inuit-font-size($value-small-font-size);
   }
 
-  .#{$grommet-namespace}value__label {
+  .value__label {
     margin-top: quarter($inuit-base-spacing-unit);
     @include inuit-font-size($content-small-font-size);
   }
 }
 
-.#{$grommet-namespace}value--large {
-  .#{$grommet-namespace}value__annotated {
+.value--large {
+  .value__annotated {
     @include inuit-font-size($value-large-font-size);
 
-    .#{$grommet-namespace}control-icon:first-child {
+    .control-icon:first-child {
       margin-right: halve($inuit-base-spacing-unit);
     }
 
-    .#{$grommet-namespace}control-icon:last-child {
+    .control-icon:last-child {
       margin-left: halve($inuit-base-spacing-unit);
     }
   }
 
-  .#{$grommet-namespace}value__label {
+  .value__label {
     margin-top: halve($inuit-base-spacing-unit);
     @include inuit-font-size($content-large-font-size);
   }
 }
 
-.#{$grommet-namespace}value--align-center {
+.value--align-center {
   justify-content: center;
 
-  .#{$grommet-namespace}value__annotated {
+  .value__annotated {
     justify-content: center;
   }
 }
@@ -113,41 +113,41 @@
 @include media-query(palm) {
 
   // same as large
-  .#{$grommet-namespace}value--xlarge {
-    .#{$grommet-namespace}value__annotated {
+  .value--xlarge {
+    .value__annotated {
       @include inuit-font-size($value-large-font-size);
 
-      .#{$grommet-namespace}control-icon:first-child {
+      .control-icon:first-child {
         margin-right: halve($inuit-base-spacing-unit);
       }
 
-      .#{$grommet-namespace}control-icon:last-child {
+      .control-icon:last-child {
         margin-left: halve($inuit-base-spacing-unit);
       }
     }
 
-    .#{$grommet-namespace}value__label {
+    .value__label {
       margin-top: halve($inuit-base-spacing-unit);
       @include inuit-font-size($content-large-font-size);
     }
   }
 
-  .#{$grommet-namespace}value--responsive {
-    &.#{$grommet-namespace}value--large,
-    &.#{$grommet-namespace}value--xlarge {
-      .#{$grommet-namespace}value__annotated {
+  .value--responsive {
+    &.value--large,
+    &.value--xlarge {
+      .value__annotated {
         @include inuit-font-size($value-font-size);
 
-        .#{$grommet-namespace}control-icon:first-child {
+        .control-icon:first-child {
           margin-right: quarter($inuit-base-spacing-unit);
         }
 
-        .#{$grommet-namespace}control-icon:last-child {
+        .control-icon:last-child {
           margin-left: quarter($inuit-base-spacing-unit);
         }
       }
 
-      .#{$grommet-namespace}value__label {
+      .value__label {
         margin-top: quarter($inuit-base-spacing-unit);
         @include inuit-font-size($control-font-size);
       }
@@ -156,20 +156,20 @@
 }
 
 @include media-query(lap-and-up) {
-  .#{$grommet-namespace}value--xlarge {
-    .#{$grommet-namespace}value__annotated {
+  .value--xlarge {
+    .value__annotated {
       @include inuit-font-size($value-xlarge-font-size);
 
-      .#{$grommet-namespace}control-icon:first-child {
+      .control-icon:first-child {
         margin-right: ($inuit-base-spacing-unit);
       }
 
-      .#{$grommet-namespace}control-icon:last-child {
+      .control-icon:last-child {
         margin-left: ($inuit-base-spacing-unit);
       }
     }
 
-    .#{$grommet-namespace}value__label {
+    .value__label {
       margin-top: $inuit-base-spacing-unit;
       @include inuit-font-size($value-font-size);
     }

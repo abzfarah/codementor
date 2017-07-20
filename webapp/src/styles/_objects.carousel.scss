@@ -1,4 +1,4 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 
 @include keyframes(carousel-reveal) {
   0% { opacity: 0; }
@@ -10,12 +10,12 @@
   100% { opacity: 0; }
 }
 
-.#{$grommet-namespace}carousel {
+.carousel {
   position: relative;
   max-width: 100%;
   overflow: hidden;
 
-  .#{$grommet-namespace}tiles.#{$grommet-namespace}box--direction-row > .#{$grommet-namespace}tile.#{$grommet-namespace}carousel__item {
+  .tiles.box--direction-row > .tile.carousel__item {
     flex: 1 1 100%;
     box-sizing: border-box;
 
@@ -24,11 +24,11 @@
     }
   }
 
-  .#{$grommet-namespace}control-icon-next {
+  .control-icon-next {
     right: 0;
   }
 
-  .#{$grommet-namespace}control-icon-previous {
+  .control-icon-previous {
     left: 0;
   }
 
@@ -42,7 +42,7 @@
   }
 }
 
-.#{$grommet-namespace}carousel-controls__control {
+.carousel-controls__control {
   width: round($inuit-base-spacing-unit * 1.5);
   height: round($inuit-base-spacing-unit * 1.5);
   stroke: #fff;
@@ -52,25 +52,25 @@
   -webkit-filter: drop-shadow(1px 1px 1px $button-drop-shadow-color);
 }
 
-.#{$grommet-namespace}carousel-controls__control:hover {
+.carousel-controls__control:hover {
   stroke-width: 2px;
 }
 
-.#{$grommet-namespace}carousel-controls__control--active {
+.carousel-controls__control--active {
   stroke: $brand-color;
   fill: $brand-color;
 }
 
-.#{$grommet-namespace}carousel__track {
+.carousel__track {
   display: flex;
   max-width: none;
 }
 
-.#{$grommet-namespace}carousel__track--animate {
+.carousel__track--animate {
   transition: all 0.8s;
 }
 
-.#{$grommet-namespace}carousel__arrow {
+.carousel__arrow {
   @include animation('carousel-reveal 1s');
   z-index: 1;
   position: absolute;
@@ -78,7 +78,7 @@
   transform: translateY(-50%);
   cursor: pointer;
 
-  .#{$grommet-namespace}control-icon {
+  .control-icon {
     filter: drop-shadow(1px 1px 1px $button-drop-shadow-color);
     -webkit-filter: drop-shadow(1px 1px 1px $button-drop-shadow-color);
 
@@ -89,21 +89,21 @@
   }
 }
 
-.#{$grommet-namespace}carousel__arrow:hover {
-  .#{$grommet-namespace}control-icon polyline {
+.carousel__arrow:hover {
+  .control-icon polyline {
     stroke: $active-colored-icon-color;
   }
 }
 
-.#{$grommet-namespace}carousel__arrow--next {
+.carousel__arrow--next {
   right: 0;
 }
 
-.#{$grommet-namespace}carousel__arrow--prev {
+.carousel__arrow--prev {
   left: 0;
 }
 
-.#{$grommet-namespace}carousel__controls {
+.carousel__controls {
   @include animation('carousel-reveal 1s');
   margin-left: 50%;
   transform: translateX(-50%);
@@ -113,7 +113,7 @@
   z-index: 1;
 }
 
-.#{$grommet-namespace}carousel__control {
+.carousel__control {
   display: inline-block;
   width: round($inuit-base-spacing-unit * 1.5);
   height: round($inuit-base-spacing-unit * 1.5);
@@ -124,15 +124,15 @@
   -webkit-filter: drop-shadow(1px 1px 1px $button-drop-shadow-color);
 }
 
-.#{$grommet-namespace}carousel__control--active {
+.carousel__control--active {
   stroke: $brand-color;
   fill: $brand-color;
 }
 
-.#{$grommet-namespace}carousel--hide-controls {
-  .#{$grommet-namespace}control-icon-previous,
-  .#{$grommet-namespace}control-icon-next,
-  .#{$grommet-namespace}carousel__controls {
+.carousel--hide-controls {
+  .control-icon-previous,
+  .control-icon-next,
+  .carousel__controls {
     opacity: 0;
     @include animation('carousel-hide 1s');
   }
@@ -140,13 +140,13 @@
 
 // workaround for missing controls in Safari
 _::-webkit-:not(:root:root),
-.#{$grommet-namespace}carousel__control,
-.#{$grommet-namespace}carousel__arrow .#{$grommet-namespace}control-icon {
+.carousel__control,
+.carousel__arrow .control-icon {
   -webkit-filter: none;
   -webkit-svg-shadow: 1px 1px 1px $button-drop-shadow-color;
 }
 
 // Set carousel width to render correctly in Layer
-.#{$grommet-namespace}layer .#{$grommet-namespace}carousel {
+.layer .carousel {
   width: 100vw;
 }

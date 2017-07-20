@@ -2,31 +2,31 @@
 
 @mixin column-flex-basis ($original-basis) {
   @include media-query(lap-and-up) {
-    > .#{$grommet-namespace}columns__column {
+    > .columns__column {
       flex-basis: calc(#{$original-basis});
     }
 
-    &.#{$grommet-namespace}columns--margin-small {
-      > .#{$grommet-namespace}columns__column {
+    &.columns--margin-small {
+      > .columns__column {
         flex-basis: calc(#{$original-basis} + #{halve($inuit-base-spacing-unit)});
       }
     }
 
-    &.#{$grommet-namespace}columns--margin-medium {
-      > .#{$grommet-namespace}columns__column {
+    &.columns--margin-medium {
+      > .columns__column {
         flex-basis: calc(#{$original-basis} + #{$inuit-base-spacing-unit});
       }
     }
 
-    &.#{$grommet-namespace}columns--margin-large {
-      > .#{$grommet-namespace}columns__column {
+    &.columns--margin-large {
+      > .columns__column {
         flex-basis: calc(#{$original-basis} + #{double($inuit-base-spacing-unit)});
       }
     }
   }
 }
 
-.#{$grommet-namespace}columns {
+.columns {
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -38,7 +38,7 @@
   }
 }
 
-.#{$grommet-namespace}columns__column {
+.columns__column {
   flex: 0 0 $size-medium; //$size-medium;
   display: flex;
   flex-direction: column;
@@ -48,17 +48,17 @@
   }
 }
 
-.#{$grommet-namespace}columns--responsive {
-  > .#{$grommet-namespace}columns__column {
+.columns--responsive {
+  > .columns__column {
     @include media-query(palm) {
       flex: 0 1 auto;
     }
   }
 
-  &.#{$grommet-namespace}columns--small,
-  &.#{$grommet-namespace}columns--medium,
-  &.#{$grommet-namespace}columns--large {
-    > .#{$grommet-namespace}columns__column {
+  &.columns--small,
+  &.columns--medium,
+  &.columns--large {
+    > .columns__column {
       @include media-query(palm) {
         flex: 0 1 auto;
       }
@@ -66,30 +66,30 @@
   }
 }
 
-.#{$grommet-namespace}columns--small {
+.columns--small {
   @include column-flex-basis($size-small);
 }
 
-.#{$grommet-namespace}columns--medium {
+.columns--medium {
   @include column-flex-basis($size-medium);
 }
 
-.#{$grommet-namespace}columns--large {
+.columns--large {
   @include column-flex-basis($size-large);
 }
 
-.#{$grommet-namespace}columns--justify-start {
+.columns--justify-start {
   justify-content: flex-start;
 }
 
-.#{$grommet-namespace}columns--justify-center {
+.columns--justify-center {
   justify-content: center;
 }
 
-.#{$grommet-namespace}columns--justify-between {
+.columns--justify-between {
   justify-content: space-between;
 }
 
-.#{$grommet-namespace}columns--justify-end {
+.columns--justify-end {
   justify-content: flex-end;
 }

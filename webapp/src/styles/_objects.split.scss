@@ -1,6 +1,6 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 
-.#{$grommet-namespace}split {
+.split {
   position: relative;
   overflow: visible;
 
@@ -10,15 +10,15 @@
   }
 }
 
-.#{$grommet-namespace}split__column {
+.split__column {
   flex: 0 0 auto;
 }
 
-.#{$grommet-namespace}split__column--hidden {
+.split__column--hidden {
   display: none;
 }
 
-.#{$grommet-namespace}split__column--fixed {
+.split__column--fixed {
   @include media-query(lap-and-up) {
     position: relative;
     height: 100vh;
@@ -27,13 +27,13 @@
   }
 }
 
-.#{$grommet-namespace}split__column--flex {
+.split__column--flex {
   @include media-query(lap-and-up) {
     flex: 1 1;
   }
 }
 
-.#{$grommet-namespace}split__column--separator {
+.split__column--separator {
   @include media-query(lap-and-up) {
     border-right: 1px solid $strong-border-color;
   }

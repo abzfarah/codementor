@@ -1,6 +1,6 @@
 // (C) Copyright 2016 Hewlett Packard Enterprise Development LP
 
-.#{$grommet-namespace}toast__container {
+.toast__container {
   position: fixed;
   top: 0;
   left: 0;
@@ -18,7 +18,7 @@
   100% { transform: translateY(-100%); }
 }
 
-.#{$grommet-namespace}toast {
+.toast {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -27,33 +27,33 @@
   @include animation('toast-lower #{$animation-duration}');
 }
 
-.#{$grommet-namespace}toast--closing {
+.toast--closing {
   @include animation('toast-raise #{$animation-duration}');
   animation-fill-mode: forwards;
 }
 
-.#{$grommet-namespace}toast__closer {
+.toast__closer {
   flex: 0 0 auto;
 }
 
-.#{$grommet-namespace}toast__status {
+.toast__status {
   flex: 0 0 auto;
   padding-left: $inuit-base-spacing-unit;
 }
 
-.#{$grommet-namespace}toast__contents {
+.toast__contents {
   flex: 1;
   padding: quarter($inuit-base-spacing-unit) $inuit-base-spacing-unit;
 }
 
-.#{$grommet-namespace}toast--small {
+.toast--small {
   min-height: $small-header-height;
 }
 
-.#{$grommet-namespace}toast--medium {
+.toast--medium {
   min-height: $header-height;
 }
 
-.#{$grommet-namespace}toast--large {
+.toast--large {
   min-height: $large-header-height;
 }

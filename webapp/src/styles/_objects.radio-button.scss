@@ -1,16 +1,16 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 
-.#{$grommet-namespace}radio-button {
+.radio-button {
   margin-right: $inuit-base-spacing-unit;
   white-space: nowrap;
 }
 
-.#{$grommet-namespace}radio-button:not(.#{$grommet-namespace}radio-button--disabled) {
+.radio-button:not(.radio-button--disabled) {
   cursor: pointer;
 }
 
-.#{$grommet-namespace}radio-button:hover:not(.#{$grommet-namespace}radio-button--disabled) {
-  .#{$grommet-namespace}radio-button__control {
+.radio-button:hover:not(.radio-button--disabled) {
+  .radio-button__control {
     border-color: $active-icon-color;
 
     #{$dark-background-context} {
@@ -22,7 +22,7 @@
     }
   }
 
-  .#{$grommet-namespace}radio-button__input:checked + .#{$grommet-namespace}radio-button__control {
+  .radio-button__input:checked + .radio-button__control {
     border-color: $active-icon-color;
 
     #{$dark-background-context} {
@@ -34,7 +34,7 @@
     }
   }
 
-  .#{$grommet-namespace}radio-button__label {
+  .radio-button__label {
     color: $hover-text-color;
 
     #{$dark-background-context} {
@@ -47,12 +47,12 @@
   }
 }
 
-.#{$grommet-namespace}radio-button__input {
+.radio-button__input {
   opacity: 0;
   position: absolute;
 }
 
-.#{$grommet-namespace}radio-button__input:checked + .#{$grommet-namespace}radio-button__control {
+.radio-button__input:checked + .radio-button__control {
   border-color: $brand-color;
 
   #{$dark-background-context} {
@@ -63,7 +63,7 @@
     border-color: $brand-color;
   }
 
-  + .#{$grommet-namespace}radio-button__label {
+  + .radio-button__label {
     color: $text-color;
 
     #{$dark-background-context} {
@@ -76,7 +76,7 @@
   }
 }
 
-.#{$grommet-namespace}radio-button__input:checked + .#{$grommet-namespace}radio-button__control:after {
+.radio-button__input:checked + .radio-button__control:after {
   content: "";
   display: block;
   position: absolute;
@@ -96,13 +96,13 @@
   }
 }
 
-.#{$grommet-namespace}radio-button__input:focus + .#{$grommet-namespace}radio-button__control {
+.radio-button__input:focus + .radio-button__control {
   content: "";
   border-color: $focus-border-color;
   box-shadow: 0 0 1px 1px $focus-border-color;
 }
 
-.#{$grommet-namespace}radio-button__control {
+.radio-button__control {
   position: relative;
   display: inline-block;
   width: $control-size;
@@ -128,7 +128,7 @@
   }
 }
 
-.#{$grommet-namespace}radio-button__label {
+.radio-button__label {
   // display and vertical-align are needed for rich custom labels
   display: inline-block;
   vertical-align: middle;
@@ -146,8 +146,8 @@
   }
 }
 
-.#{$grommet-namespace}radio-button--disabled {
-  .#{$grommet-namespace}radio-button__control {
+.radio-button--disabled {
+  .radio-button__control {
     opacity: 0.5;
   }
 }

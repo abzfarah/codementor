@@ -1,6 +1,6 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 
-.#{$grommet-namespace}legend {
+.legend {
   text-align: left;
   white-space: normal;
   display: inline-block;
@@ -11,8 +11,8 @@
   }
 }
 
-.#{$grommet-namespace}legend__item,
-.#{$grommet-namespace}legend__total {
+.legend__item,
+.legend__total {
   color: $secondary-text-color;
 
   #{$dark-background-context} {
@@ -24,12 +24,12 @@
   }
 }
 
-.#{$grommet-namespace}legend__item-label {
+.legend__item-label {
   margin-right: halve($inuit-base-spacing-unit);
 }
 
-.#{$grommet-namespace}legend__item-units,
-.#{$grommet-namespace}legend__total-units {
+.legend__item-units,
+.legend__total-units {
   display: inline-block;
   margin-left: quarter($inuit-base-spacing-unit);
 
@@ -39,7 +39,7 @@
   }
 }
 
-.#{$grommet-namespace}legend__item-swatch {
+.legend__item-swatch {
   width: halve($inuit-base-spacing-unit);
   height: halve($inuit-base-spacing-unit);
   // margin-top: quarter($inuit-base-spacing-unit);
@@ -61,14 +61,14 @@
   }
 }
 
-.#{$grommet-namespace}legend__item--clickable {
+.legend__item--clickable {
   cursor: pointer;
 }
 
-.#{$grommet-namespace}legend__item--active {
+.legend__item--active {
   color: $text-color;
 
-  svg.#{$grommet-namespace}legend__item-swatch {
+  svg.legend__item-swatch {
     path {
       stroke-width: halve($inuit-base-spacing-unit);
     }
@@ -84,7 +84,7 @@
 }
 
 // need li to override .grommet li
-.#{$grommet-namespace}legend__total {
+.legend__total {
   margin-left: $inuit-base-spacing-unit;
   margin-top: quarter($inuit-base-spacing-unit);
   padding-top: quarter($inuit-base-spacing-unit);
@@ -104,26 +104,26 @@
   }
 }
 
-.#{$grommet-namespace}legend--large {
+.legend--large {
   font-size: $paragraph-large-font-size;
   line-height: $paragraph-large-font-size + round($inuit-base-spacing-unit / 3);
 
-  .#{$grommet-namespace}legend__item {
+  .legend__item {
     margin-bottom: quarter($inuit-base-spacing-unit);
   }
 
-  .#{$grommet-namespace}legend__item-label {
+  .legend__item-label {
     margin-right: $inuit-base-spacing-unit;
   }
 
-  .#{$grommet-namespace}legend__item-swatch {
+  .legend__item-swatch {
     position: relative;
     top: 3px;
     width: $inuit-base-spacing-unit;
     height: $inuit-base-spacing-unit;
   }
 
-  .#{$grommet-namespace}legend__total {
+  .legend__total {
     margin-left: round($inuit-base-spacing-unit * 1.5);
   }
 }

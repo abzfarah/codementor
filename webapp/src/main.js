@@ -7,7 +7,7 @@ const routes = makeMainRoutes()
 
 // Render Setup
 // ------------------------------------
-const MOUNT_NODE = document.getElementById('root')
+var MOUNT_NODE = document.getElementById('root')
 
 let render = () => {
   ReactDOM.render(

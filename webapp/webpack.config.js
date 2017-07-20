@@ -12,20 +12,12 @@ const __TEST__ = project.env === 'test'
 const __PROD__ = project.env === 'production'
 
 const config = {
-  entry: {
-    normalize: [
-      inProjectSrc('normalize'),
-    ],
-    main: [
-      inProjectSrc(project.main),
-    ],
-
-    middle: [
-      'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
-      'webpack/hot/dev-server',
-      'webpack-dev-server/client?http://localhost:8080/'
-    ],
-  },
+  entry: [
+    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+    'webpack/hot/dev-server',
+    'webpack-dev-server/client?http://localhost:8080/',
+    path.join(__dirname, 'src/main.js')
+  ],
   watch: true,
   devtool: project.sourcemaps ? 'source-map' : false,
   output: {
@@ -45,15 +37,14 @@ const config = {
     rules: [],
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin(Object.assign({
       'process.env': { NODE_ENV: JSON.stringify(project.env) },
       __DEV__,
       __TEST__,
       __PROD__,
-    }, project.globals)),
-
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
+    }, project.globals))
   ],
 }
 
@@ -189,48 +180,5 @@ config.plugins.push(new HtmlWebpackPlugin({
     collapseWhitespace: true,
   },
 }))
-
-// Development Tools
-// ------------------------------------
-
-
-// Bundle Splitting
-// ------------------------------------
-if (!__TEST__) {
-  const bundles = ['normalize', 'manifest']
-
-  if (project.vendors && project.vendors.length) {
-    bundles.unshift('vendor')
-    config.entry.vendor = project.vendors
-  }
-  config.plugins.push(new webpack.optimize.CommonsChunkPlugin({ names: bundles }))
-}
-
-// Production Optimizations
-// ------------------------------------
-if (__PROD__) {
-  config.plugins.push(
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      debug: false,
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: !!config.devtool,
-      comments: false,
-      compress: {
-        warnings: false,
-        screw_ie8: true,
-        conditionals: true,
-        unused: true,
-        comparisons: true,
-        sequences: true,
-        dead_code: true,
-        evaluate: true,
-        if_return: true,
-        join_vars: true,
-      },
-    })
-  )
-}
 
 module.exports = config

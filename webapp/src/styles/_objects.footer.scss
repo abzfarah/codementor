@@ -1,19 +1,19 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 
-.#{$grommet-namespace}footer {
+.footer {
   min-height: $footer-height;
   width: 100%;
 }
 
-.#{$grommet-namespace}footer--small {
+.footer--small {
   min-height: $small-footer-height;
 }
 
-.#{$grommet-namespace}footer--large {
+.footer--large {
   min-height: $large-footer-height;
 }
 
-.#{$grommet-namespace}footer__content {
+.footer__content {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -30,19 +30,19 @@
   }
 }
 
-.#{$grommet-namespace}footer--primary {
+.footer--primary {
   height: auto;
   padding: $inuit-base-spacing-unit;
 
-  .#{$grommet-namespace}footer__content {
+  .footer__content {
     position: relative;
     color: $secondary-text-color;
     display: block;
   }
 }
 
-.#{$grommet-namespace}footer--centered {
-  .#{$grommet-namespace}footer__content {
+.footer--centered {
+  .footer__content {
     display: block;
     text-align: center;
 
@@ -54,16 +54,16 @@
   }
 }
 
-.#{$grommet-namespace}footer--flush {
-  .#{$grommet-namespace}footer__content,
-  .#{$grommet-namespace}footer__wrapper {
+.footer--flush {
+  .footer__content,
+  .footer__wrapper {
     padding-left: 0px;
     padding-right: 0px;
   }
 }
 
-.#{$grommet-namespace}footer--fixed {
-  .#{$grommet-namespace}footer__wrapper {
+.footer--fixed {
+  .footer__wrapper {
     position: absolute;
     bottom: 0px;
     left: 0px;
@@ -71,52 +71,52 @@
     z-index: 3;
   }
 
-  .#{$grommet-namespace}footer__wrapper--fill {
-    .#{$grommet-namespace}footer__wrapper {
+  .footer__wrapper--fill {
+    .footer__wrapper {
       background-color: $footer-background-color;
     }
   }
 }
 
-.#{$grommet-namespace}footer--fixed.#{$grommet-namespace}footer--primary {
-  .#{$grommet-namespace}footer__wrapper {
+.footer--fixed.footer--primary {
+  .footer__wrapper {
     position: fixed;
   }
 
-  .#{$grommet-namespace}footer__wrapper--fill {
-    .#{$grommet-namespace}footer__wrapper {
+  .footer__wrapper--fill {
+    .footer__wrapper {
       background-color: $footer-background-color;
     }
   }
 
-  .#{$grommet-namespace}footer__content {
+  .footer__content {
     position: static;
     background-color: transparent;
   }
 }
 
-.#{$grommet-namespace}footer__container {
+.footer__container {
   flex-shrink: 0;
 }
 
-.#{$grommet-namespace}footer__container--float {
+.footer__container--float {
   position: absolute;
   bottom: 0px;
   left: 0px;
   right: 0px;
 }
 
-.#{$grommet-namespace}footer__container--fill {
-  .#{$grommet-namespace}footer {
+.footer__container--fill {
+  .footer {
     background-color: $footer-background-color;
   }
 }
 
-.#{$grommet-namespace}footer__container--fixed {
+.footer__container--fixed {
   position: relative;
   width: 100%;
 
-  .#{$grommet-namespace}footer__wrapper {
+  .footer__wrapper {
     position: absolute;
     bottom: 0px;
     left: 0px;
@@ -125,19 +125,19 @@
   }
 }
 
-.#{$grommet-namespace}footer__wrapper {
+.footer__wrapper {
   height: $footer-height;
 }
 
-.#{$grommet-namespace}footer__wrapper--large {
+.footer__wrapper--large {
   height: $large-footer-height;
 }
 
-.#{$grommet-namespace}footer__wrapper--small {
+.footer__wrapper--small {
   height: $small-footer-height;
 }
 
-*:not(.#{$grommet-namespace}footer__container--float) > .#{$grommet-namespace}footer--float {
+*:not(.footer__container--float) > .footer--float {
   position: fixed;
   bottom: 0px;
   left: 0px;

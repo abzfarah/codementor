@@ -1,4 +1,4 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 $base-size: double($inuit-base-spacing-unit);
 
 @mixin scale-up-fade-out($duration, $delay) {
@@ -30,7 +30,7 @@ $base-size: double($inuit-base-spacing-unit);
   }
 }
 
-.#{$grommet-namespace}pulse {
+.pulse {
   display: inline-block;
   height: $base-size;
   width: $base-size;
@@ -40,18 +40,18 @@ $base-size: double($inuit-base-spacing-unit);
   transform-origin: center;
 }
 
-.#{$grommet-namespace}pulse:hover {
+.pulse:hover {
   // `rotate` is used to trick the browser into rendering the image better
   transform: scale(1.2) rotate(0.0001deg);
   cursor: pointer;
 
-  .#{$grommet-namespace}pulse__icon-anim {
+  .pulse__icon-anim {
     -webkit-animation: none;
     animation: none;
   }
 }
 
-.#{$grommet-namespace}pulse__icon {
+.pulse__icon {
   svg {
     width: $base-size;
     height: $base-size;
@@ -62,7 +62,7 @@ $base-size: double($inuit-base-spacing-unit);
   }
 }
 
-.#{$grommet-namespace}pulse__icon-anim {
+.pulse__icon-anim {
   display: block;
   width: $base-size;
   height: $base-size;

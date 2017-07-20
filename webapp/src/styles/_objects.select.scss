@@ -1,12 +1,12 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 
-.#{$grommet-namespace}select {
+.select {
   position: relative;
   cursor: pointer;
   overflow: hidden;
 }
 
-.#{$grommet-namespace}select__input {
+.select__input {
   @include input();
   width: 100%;
   padding-right: round($inuit-base-spacing-unit * 2.5);
@@ -27,44 +27,44 @@
   }
 }
 
-.#{$grommet-namespace}select__input:focus {
+.select__input:focus {
   padding-right: round($inuit-base-spacing-unit * 2.5 -
     ($input-border-width + 1));
 }
 
 // Disable IE's clear icon
-.#{$grommet-namespace}select__input::-ms-clear {
+.select__input::-ms-clear {
   display: none;
 }
 
-.#{$grommet-namespace}select__control {
+.select__control {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   right: quarter($inuit-base-spacing-unit);
 }
 
-.#{$grommet-namespace}select__search {
+.select__search {
   width: 100%;
 }
 
-.#{$grommet-namespace}select__options {
+.select__options {
   margin: 0px;
   list-style-type: none;
 }
 
-.#{$grommet-namespace}select__option {
+.select__option {
   // min-height handles blank options
   min-height: $inuit-base-spacing-unit + halve($inuit-base-spacing-unit);
   padding: quarter($inuit-base-spacing-unit) 0;
   cursor: pointer;
 }
 
-.#{$grommet-namespace}select__drop {
+.select__drop {
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
 
-  .#{$grommet-namespace}select__option {
+  .select__option {
     @include text();
     color: $text-color;
     padding: quarter($inuit-base-spacing-unit) $inuit-base-spacing-unit;

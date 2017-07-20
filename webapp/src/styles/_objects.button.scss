@@ -1,4 +1,4 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 
 $button-vertical-padding:
   round($inuit-base-spacing-unit / 3) - $button-border-width;
@@ -6,10 +6,10 @@ $button-horizontal-padding:
   round($inuit-base-spacing-unit) - $button-border-width;
 
 @mixin basic-button {
-  &:not(.#{$grommet-namespace}button--box) {
+  &:not(.button--box) {
     padding: $button-vertical-padding $button-horizontal-padding;
   }
-  
+
   background-color: transparent;
   border: $button-border-width solid $button-border-color;
   border-radius: $border-radius;
@@ -38,7 +38,7 @@ $button-horizontal-padding:
 .grommet {
   input[type="button"],
   input[type="submit"],
-  button:not(.#{$grommet-namespace}button) {
+  button:not(.button) {
     @include basic-button();
 
     &:focus {
@@ -47,7 +47,7 @@ $button-horizontal-padding:
     }
   }
 
-  a.#{$grommet-namespace}button {
+  a.button {
     text-decoration: none;
 
     &:hover {
@@ -56,7 +56,7 @@ $button-horizontal-padding:
   }
 }
 
-.#{$grommet-namespace}button {
+.button {
   @include basic-button();
 
   &--focus {
@@ -67,7 +67,7 @@ $button-horizontal-padding:
   @include background-context-color($button-text-color, $button-text-color);
 }
 
-.#{$grommet-namespace}button--hover-background:hover {
+.button--hover-background:hover {
   background-color: $hover-background-color;
   color: $hover-text-color;
 
@@ -82,46 +82,46 @@ $button-horizontal-padding:
   }
 }
 
-.#{$grommet-namespace}button:hover {
-  .#{$grommet-namespace}control-icon {
+.button:hover {
+  .control-icon {
     @include icon-color($active-icon-color);
     transition: none;
   }
 
   #{$dark-background-context} {
-    .#{$grommet-namespace}control-icon {
+    .control-icon {
       @include icon-color($active-colored-icon-color);
     }
   }
 
   #{$light-background-context} {
-    .#{$grommet-namespace}control-icon {
+    .control-icon {
       @include icon-color($active-icon-color);
     }
   }
 }
 
-.#{$grommet-namespace}button__icon {
+.button__icon {
   display: inline-block;
 
-  .#{$grommet-namespace}control-icon {
+  .control-icon {
     vertical-align: bottom;
   }
 }
 
-.#{$grommet-namespace}button--secondary:not(.#{$grommet-namespace}button--focus) {
+.button--secondary:not(.button--focus) {
   border-color: $button-secondary-color;
 }
 
-.#{$grommet-namespace}button--accent:not(.#{$grommet-namespace}button--focus) {
+.button--accent:not(.button--focus) {
   border-color: $button-accent-color;
 }
 
-.#{$grommet-namespace}button--critical:not(.#{$grommet-namespace}button--focus) {
+.button--critical:not(.button--focus) {
   border-color: $button-critical-color;
 }
 
-.#{$grommet-namespace}button--align-start {
+.button--align-start {
   text-align: left;
 
   html.rtl & {
@@ -129,11 +129,11 @@ $button-horizontal-padding:
   }
 }
 
-.#{$grommet-namespace}button--plain:not(.#{$grommet-namespace}button--box) {
+.button--plain:not(.button--box) {
   padding: 0;
 }
 
-.#{$grommet-namespace}button--plain {
+.button--plain {
   width: auto;
   height: auto;
   min-width: 0;
@@ -141,50 +141,50 @@ $button-horizontal-padding:
   text-align: inherit;
   font-weight: inherit;
 
-  .#{$grommet-namespace}button__label {
+  .button__label {
     margin: 0 halve($inuit-base-spacing-unit);
   }
 
-  .#{$grommet-namespace}button__icon {
+  .button__icon {
     padding: halve($inuit-base-spacing-unit);
 
-    + .#{$grommet-namespace}button__label {
+    + .button__label {
       margin-left: 0;
     }
   }
 }
 
-.#{$grommet-namespace}button--plain:not(.#{$grommet-namespace}button--focus) {
+.button--plain:not(.button--focus) {
   border: $button-border-width solid transparent;
 }
 
-.#{$grommet-namespace}button:not(.#{$grommet-namespace}button--plain) {
-  .#{$grommet-namespace}button__icon {
+.button:not(.button--plain) {
+  .button__icon {
 
     // @include background-context-icon($button-text-color, $button-text-color);
 
-    + .#{$grommet-namespace}button__label {
+    + .button__label {
       margin-left: halve($inuit-base-spacing-unit);
     }
   }
 }
 
-.#{$grommet-namespace}button--primary {
-  &:not(.#{$grommet-namespace}button--focus) {
+.button--primary {
+  &:not(.button--focus) {
     border-color: $brand-color;
   }
   background-color: $brand-color;
   color: $active-colored-text-color;
 
-  &:hover:not(.#{$grommet-namespace}button--disabled) {
+  &:hover:not(.button--disabled) {
     color: $active-colored-text-color;
 
-   .#{$grommet-namespace}button__icon .#{$grommet-namespace}control-icon {
+   .button__icon .control-icon {
       @include icon-color($active-colored-icon-color)
     }
   }
 
-  .#{$grommet-namespace}control-icon {
+  .control-icon {
     @include icon-color($active-colored-icon-color);
   }
 
@@ -194,16 +194,16 @@ $button-horizontal-padding:
   @include background-context-icon($active-colored-text-color, $active-colored-text-color);
 }
 
-.#{$grommet-namespace}button--disabled {
+.button--disabled {
   opacity: 0.3;
   cursor: default;
 }
 
-.#{$grommet-namespace}button:not(.#{$grommet-namespace}button--fill) {
+.button:not(.button--fill) {
   flex: 0 0 auto;
 }
 
-.#{$grommet-namespace}button--fill {
+.button--fill {
   width: 100%;
   max-width: none;
   // used to add full height for button inside a flex container

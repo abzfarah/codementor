@@ -1,4 +1,4 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 
 $meter-size-default: $size-small;
 
@@ -10,34 +10,34 @@ $meter-indicator-width: round($inuit-base-spacing-unit / 6);
 $meter-label-width: double($inuit-base-spacing-unit);
 $meter-active-offset: round($inuit-base-spacing-unit * 1.5);
 
-.#{$grommet-namespace}meter {
+.meter {
   display: inline-block;
   position: relative;
 }
 
-.#{$grommet-namespace}meter__slice {
+.meter__slice {
   stroke-width: $meter-slice-width;
   fill: none;
   stroke: $meter-background-color;
 }
 
-.#{$grommet-namespace}meter__hot {
+.meter__hot {
   cursor: pointer;
   stroke-width: double($meter-slice-active-width);
   stroke: rgba(0, 0, 0, 0.001);
 }
 
-.#{$grommet-namespace}meter__threshold {
+.meter__threshold {
   stroke: $threshold-color;
 }
 
-.#{$grommet-namespace}meter__value-container {
+.meter__value-container {
   position: relative;
   display: inline-block;
   white-space: nowrap;
 }
 
-.#{$grommet-namespace}meter__graphic-container {
+.meter__graphic-container {
   white-space: normal;
 
   > a {
@@ -45,7 +45,7 @@ $meter-active-offset: round($inuit-base-spacing-unit * 1.5);
   }
 }
 
-.#{$grommet-namespace}meter__graphic {
+.meter__graphic {
   max-width: 100%;
 
   &:focus {
@@ -57,40 +57,40 @@ $meter-active-offset: round($inuit-base-spacing-unit * 1.5);
   }
 }
 
-.#{$grommet-namespace}meter:not(.#{$grommet-namespace}meter--vertical) {
+.meter:not(.meter--vertical) {
 
-  .#{$grommet-namespace}meter__graphic-container {
+  .meter__graphic-container {
     display: inline-block;
   }
 }
 
-.#{$grommet-namespace}meter--vertical {
+.meter--vertical {
 
-  .#{$grommet-namespace}meter__graphic-container {
+  .meter__graphic-container {
     display: inline-block;
     white-space: nowrap;
   }
 }
 
-.#{$grommet-namespace}meter--small,
-.#{$grommet-namespace}meter--xsmall {
+.meter--small,
+.meter--xsmall {
 
-  .#{$grommet-namespace}meter__slice {
+  .meter__slice {
     stroke-width: double($meter-slice-width);
   }
 
-  .#{$grommet-namespace}meter__values .#{$grommet-namespace}meter__slice.#{$grommet-namespace}meter__slice--active {
+  .meter__values .meter__slice.meter__slice--active {
     stroke-width: double($meter-slice-active-width);
   }
 }
 
-.#{$grommet-namespace}meter--active {
-  .#{$grommet-namespace}meter__values .#{$grommet-namespace}meter__slice {
+.meter--active {
+  .meter__values .meter__slice {
     stroke-width: $meter-slice-active-width;
   }
 }
 
-.#{$grommet-namespace}meter__values .#{$grommet-namespace}meter__slice--active {
+.meter__values .meter__slice--active {
   stroke-width: $meter-slice-active-width;
 }
 

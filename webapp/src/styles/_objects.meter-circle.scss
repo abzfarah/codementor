@@ -1,41 +1,41 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 
 // CIRCLE
 
-.#{$grommet-namespace}meter--circle {
+.meter--circle {
 
-  .#{$grommet-namespace}meter__graphic {
+  .meter__graphic {
     width: $meter-size-default;
     min-width: $size-xsmall;
     height: auto;
   }
 
-  .#{$grommet-namespace}meter__label {
+  .meter__label {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
 
-  &.#{$grommet-namespace}meter--xsmall {
+  &.meter--xsmall {
 
-    .#{$grommet-namespace}meter__graphic {
+    .meter__graphic {
       width: $size-xsmall;
       height: $size-xsmall;
     }
   }
 
-  &.#{$grommet-namespace}meter--small {
+  &.meter--small {
 
-    .#{$grommet-namespace}meter__graphic {
+    .meter__graphic {
       width: $size-small;
       height: $size-small;
     }
   }
 
-  &.#{$grommet-namespace}meter--medium {
+  &.meter--medium {
 
-    .#{$grommet-namespace}meter__graphic {
+    .meter__graphic {
       @include media-query(palm) {
         width: $size-small;
         height: $size-small;
@@ -48,9 +48,9 @@
     }
   }
 
-  &.#{$grommet-namespace}meter--large {
+  &.meter--large {
 
-    .#{$grommet-namespace}meter__graphic {
+    .meter__graphic {
       @include media-query(palm) {
         width: $size-small;
         height: $size-small;
@@ -63,9 +63,9 @@
     }
   }
 
-  &.#{$grommet-namespace}meter--xlarge {
+  &.meter--xlarge {
 
-    .#{$grommet-namespace}meter__graphic {
+    .meter__graphic {
       @include media-query(palm) {
         width: $size-small;
         height: $size-small;

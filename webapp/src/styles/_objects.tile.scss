@@ -8,41 +8,41 @@
   }
 }
 
-.#{$grommet-namespace}tiles {
+.tiles {
   width: 100%;
 
   @include pad();
 }
 
-.#{$grommet-namespace}tiles--focus {
+.tiles--focus {
   border-color: $focus-border-color;
   box-shadow: 0 0 1px 1px $focus-border-color;
 }
 
-.#{$grommet-namespace}tiles__container {
+.tiles__container {
   display: flex;
   flex-direction: row;
   align-items: center;
   width: 100%;
 
-  .#{$grommet-namespace}tiles__left,
-  .#{$grommet-namespace}tiles__right {
+  .tiles__left,
+  .tiles__right {
     flex: 0 0 auto;
   }
 
-  .#{$grommet-namespace}tiles {
+  .tiles {
     flex: 1;
     margin: 0px;
   }
 
-  .#{$grommet-namespace}tiles.#{$grommet-namespace}box--direction-row {
+  .tiles.box--direction-row {
     width: 100%;
     overflow: hidden;
   }
 }
 
-.#{$grommet-namespace}tiles:not(.#{$grommet-namespace}tiles--flush) {
-  > .#{$grommet-namespace}tile {
+.tiles:not(.tiles--flush) {
+  > .tile {
     margin: halve($inuit-base-spacing-unit);
     @include ie-tile-margin($inuit-base-spacing-unit);
 
@@ -50,37 +50,37 @@
       flex-basis: calc(100% - #{$inuit-base-spacing-unit});
     }
 
-    &.#{$grommet-namespace}tile--hover-border-medium {
+    &.tile--hover-border-medium {
       margin: quarter($inuit-base-spacing-unit);
       @include ie-tile-margin(halve($inuit-base-spacing-unit));
     }
 
-    &.#{$grommet-namespace}tile--hover-border-large {
+    &.tile--hover-border-large {
       margin: halve($inuit-base-spacing-unit);
       @include ie-tile-margin($inuit-base-spacing-unit);
     }
   }
 }
 
-.#{$grommet-namespace}tiles--fill {
+.tiles--fill {
   // IE11 fix to remove extra gap in Tiles
   @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
     height: 100%;
   }
 
-  &.#{$grommet-namespace}box--wrap {
+  &.box--wrap {
     justify-content: space-around;
 
-    > .#{$grommet-namespace}tile {
+    > .tile {
       flex-grow: 1;
     }
   }
 }
 
-.#{$grommet-namespace}tiles--flush {
+.tiles--flush {
   padding: 0px;
 
-  > .#{$grommet-namespace}tile {
+  > .tile {
     margin: 0px;
 
     &--wide {
@@ -89,21 +89,21 @@
   }
 }
 
-.#{$grommet-namespace}tiles__more {
+.tiles__more {
   flex: 1 1 100%;
   text-align: center;
 }
 
-.#{$grommet-namespace}tiles--selectable {
+.tiles--selectable {
   outline: none;
 
-  .#{$grommet-namespace}tile {
+  .tile {
     cursor: pointer;
     outline: none;
     transition: all 0.2s;
   }
 
-  .#{$grommet-namespace}tile--selected {
+  .tile--selected {
     background-color: $selected-background-color;
     color: $selected-text-color;
 
@@ -118,8 +118,8 @@
     }
   }
 
-  .#{$grommet-namespace}tile--active,
-  .#{$grommet-namespace}tile:hover:not([class*="background-hover-color-index-"]) {
+  .tile--active,
+  .tile:hover:not([class*="background-hover-color-index-"]) {
     background-color: $hover-background-color;
     color: $hover-text-color;
 
@@ -135,27 +135,27 @@
   }
 }
 
-.#{$grommet-namespace}tiles--small {
-  > .#{$grommet-namespace}tile:not(.#{$grommet-namespace}box--size) {
+.tiles--small {
+  > .tile:not(.box--size) {
     @include media-query(lap-and-up) {
       flex-basis: $size-small;
     }
   }
 }
 
-.#{$grommet-namespace}tiles--large {
-  > .#{$grommet-namespace}tile:not(.#{$grommet-namespace}box--size) {
+.tiles--large {
+  > .tile:not(.box--size) {
     @include media-query(lap-and-up) {
       flex-basis: $size-large;
     }
   }
 }
 
-.#{$grommet-namespace}tile {
+.tile {
   overflow: hidden;
   transition: all 0.2s;
 
-  .#{$grommet-namespace}status-icon {
+  .status-icon {
     margin-right: quarter($inuit-base-spacing-unit);
 
     html.rtl & {
@@ -165,11 +165,11 @@
   }
 }
 
-.#{$grommet-namespace}tile--selectable {
+.tile--selectable {
   cursor: pointer;
   transition: background-color 0.2s;
 }
 
-.#{$grommet-namespace}tile--eclipsed {
+.tile--eclipsed {
   opacity: 0.2;
 }

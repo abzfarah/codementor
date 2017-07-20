@@ -1,22 +1,22 @@
 // (C) Copyright 2015-2016 Hewlett Packard Enterprise Development LP
 
-.#{$grommet-namespace}timestamp--center {
+.timestamp--center {
   text-align: center;
 }
 
-.#{$grommet-namespace}timestamp--end {
+.timestamp--end {
   text-align: right;
 }
 
-.#{$grommet-namespace}timestamp__date {
+.timestamp__date {
   white-space: nowrap;
 
-  + .#{$grommet-namespace}timestamp__time {
+  + .timestamp__time {
     margin-left: 0.2em;
   }
 }
 
-.#{$grommet-namespace}timestamp__time {
+.timestamp__time {
   text-transform: lowercase;
   white-space: nowrap;
 }

@@ -1,5 +1,5 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
-.#{$grommet-namespace}article {
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
+.article {
   position: relative;
 
   > * { // too generic, change
@@ -7,28 +7,28 @@
   }
 }
 
-.#{$grommet-namespace}article--scroll-step {
+.article--scroll-step {
   text-align: center;
   height: 100vh;
   width: 100vw;
   max-width: 100%;
 
-  &.#{$grommet-namespace}box--direction-column {
+  &.box--direction-column {
     overflow-x: hidden;
     overflow-y: auto;
 
-    .#{$grommet-namespace}article__control-carousel {
+    .article__control-carousel {
       top: 50%;
       left: $inuit-base-spacing-unit;
       transform: translateY(-50%);
     }
   }
 
-  &.#{$grommet-namespace}box--direction-row {
+  &.box--direction-row {
     overflow-x: auto;
     overflow-y: hidden;
 
-    > *:not(.#{$grommet-namespace}article__controls) { // too generic, change
+    > *:not(.article__controls) { // too generic, change
       overflow-y: auto;
 
       // https://css-tricks.com/snippets/css/momentum-scrolling-on-ios-overflow-elements/
@@ -38,7 +38,7 @@
       }
     }
 
-    .#{$grommet-namespace}article__control-carousel {
+    .article__control-carousel {
       top: $inuit-base-spacing-unit;
       left: 50%;
       transform: translateX(-50%);
@@ -46,15 +46,15 @@
   }
 
   @include media-query(palm) {
-    &.#{$grommet-namespace}box--responsive {
-      &.#{$grommet-namespace}box--direction-row {
+    &.box--responsive {
+      &.box--direction-row {
         flex-direction: row;
       }
     }
   }
 }
 
-.#{$grommet-namespace}article__control {
+.article__control {
   position: fixed;
   z-index: 10;
   // using margin instead of padding for article control
@@ -63,28 +63,28 @@
   margin: $inuit-base-spacing-unit;
 
   // removes scrollbars from article control arrows in mobile
-  &.#{$grommet-namespace}button--plain.#{$grommet-namespace}button--icon {
+  &.button--plain.button--icon {
     overflow: hidden;
   }
 
-  .#{$grommet-namespace}button__icon {
+  .button__icon {
     padding: 0;
   }
 }
 
-.#{$grommet-namespace}article__control-up {
+.article__control-up {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
 }
 
-.#{$grommet-namespace}article__control-down {
+.article__control-down {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
 }
 
-.#{$grommet-namespace}article__control-left {
+.article__control-left {
   @include media-query(lap-and-up) {
     left: 0;
     top: 50%;
@@ -97,7 +97,7 @@
   }
 }
 
-.#{$grommet-namespace}article__control-right {
+.article__control-right {
   @include media-query(lap-and-up) {
     top: 50%;
     transform: translateY(-50%);
@@ -110,6 +110,6 @@
   }
 }
 
-.grommet article:not(.#{$grommet-namespace}article) {
+.grommet article:not(.article) {
   width: 100%;
 }

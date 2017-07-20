@@ -1,6 +1,6 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 
-section:not(.#{$grommet-namespace}section) {
+section:not(.section) {
   padding-top: $inuit-base-spacing-unit;
   padding-bottom: $inuit-base-spacing-unit;
 
@@ -10,7 +10,7 @@ section:not(.#{$grommet-namespace}section) {
   }
 }
 
-.#{$grommet-namespace}section,
+.section,
 .grommet section {
 
   // IE11 fix to remove white gap when Section component is inside Layer
@@ -37,7 +37,7 @@ section:not(.#{$grommet-namespace}section) {
   }
 
   > ol,
-  > ul:not([class^="#{$grommet-namespace}"]) {
+  > ul:not([class^=""]) {
     @include media-query(palm) {
       margin-left: 2rem;
     }

@@ -7,7 +7,7 @@ const compiler = webpack(config)
 
 const server = new WebpackDevServer(compiler, {
   publicPath: config.output.publicPath,
-  contentBase : path.resolve(project.basePath, project.srcDir),
+  contentBase : path.resolve(project.basePath, project.outDir),
   hot: true,
   proxy: {
     '/': {
@@ -15,7 +15,7 @@ const server = new WebpackDevServer(compiler, {
       secure: false
     },
   },
-  historyApiFallback: false,
+  historyApiFallback:  true,
   // It suppress error shown in console, so it has to be set to false.
   quiet: false,
   // It suppress everything except error, so it has to be set to false as well

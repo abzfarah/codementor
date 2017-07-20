@@ -1,55 +1,55 @@
 // (C) Copyright 2016 Hewlett Packard Enterprise Development LP
 
-h1.#{$grommet-namespace}heading {
+h1.heading {
   @include h1();
 }
 
-h2.#{$grommet-namespace}heading {
+h2.heading {
   @include h2();
 }
 
-h3.#{$grommet-namespace}heading {
+h3.heading {
   @include h3();
 }
 
-h4.#{$grommet-namespace}heading {
+h4.heading {
   @include h4();
 }
 
-h5.#{$grommet-namespace}heading {
+h5.heading {
   @include h5();
 }
 
-h6.#{$grommet-namespace}heading {
+h6.heading {
   @include h6();
 }
 
-.#{$grommet-namespace}heading {
+.heading {
   @include heading();
   margin-bottom: halve($inuit-base-spacing-unit);
   @include text-align();
   @include vertical-margin();
 }
 
-.#{$grommet-namespace}heading--large {
+.heading--large {
   font-size: 125%;
 }
 
-.#{$grommet-namespace}heading--small {
+.heading--small {
   font-size: 75%;
 }
 
-.#{$grommet-namespace}heading--strong {
+.heading--strong {
   font-weight: $text-strong-font-weight;
 }
 
-.#{$grommet-namespace}heading--truncate {
+.heading--truncate {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.#{$grommet-namespace}heading--uppercase {
+.heading--uppercase {
   text-transform: uppercase;
   letter-spacing: 0.2em;
 }

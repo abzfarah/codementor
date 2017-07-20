@@ -11,14 +11,14 @@ class Home extends Component {
         {
           isAuthenticated() && (
             <h4>
-              You are logged in!
+              You are loggdded in!
             </h4>
             )
         }
         {
           !isAuthenticated() && (
             <h4>
-              You are not logged in! Please{' '}
+              You addre not loggdrddded in! Pleadsse{' '}
               <a
                 style={{ cursor: 'pointer' }}
                 onClick={this.login.bind(this)}

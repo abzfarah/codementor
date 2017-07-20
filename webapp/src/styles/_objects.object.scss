@@ -1,9 +1,9 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 
 $attribute-name-width: round($inuit-base-spacing-unit * 8);
 $attribute-value-width: round($inuit-base-spacing-unit * 16);
 
-.#{$grommet-namespace}object {
+.object {
   overflow: auto;
 
   ul,
@@ -17,21 +17,21 @@ $attribute-value-width: round($inuit-base-spacing-unit * 16);
   }
 }
 
-.#{$grommet-namespace}object__container {
+.object__container {
   padding: $inuit-base-spacing-unit;
 }
 
-.#{$grommet-namespace}object__attribute {
+.object__attribute {
   margin-bottom: halve($inuit-base-spacing-unit);
 }
 
-.#{$grommet-namespace}object__attribute-name {
+.object__attribute-name {
   display: block;
   color: $secondary-text-color;
   @include inuit-font-size($content-small-font-size);
 }
 
-.#{$grommet-namespace}object__attribute-value {
+.object__attribute-value {
   display: block;
   @include inuit-font-size($content-font-size);
 
@@ -43,21 +43,21 @@ $attribute-value-width: round($inuit-base-spacing-unit * 16);
   }
 }
 
-.#{$grommet-namespace}object__attribute--container {
-  > .#{$grommet-namespace}object__attribute-name {
+.object__attribute--container {
+  > .object__attribute-name {
     font-weight: $text-strong-font-weight;
   }
 }
 
-.#{$grommet-namespace}object__attribute--unset {
-  .#{$grommet-namespace}object__attribute-value {
+.object__attribute--unset {
+  .object__attribute-value {
     font-style: italic;
     color: $secondary-text-color;
   }
 }
 
-.#{$grommet-namespace}object__attribute--array {
-  > .#{$grommet-namespace}object__attribute-value > ol {
+.object__attribute--array {
+  > .object__attribute-value > ol {
 
     > li {
       border-top: 1px solid $border-color;

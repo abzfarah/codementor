@@ -19,7 +19,7 @@ $card-hover-color: #EBEBEB;
   }
 }
 
-.#{$grommet-namespace}card {
+.card {
   @include media-query(palm) {
     padding: 0;
 
@@ -28,7 +28,7 @@ $card-hover-color: #EBEBEB;
     }
   }
 
-  &.#{$grommet-namespace}box--responsive {
+  &.box--responsive {
     @include media-query(palm) {
       width: auto;
       margin: 0;
@@ -41,13 +41,13 @@ $card-hover-color: #EBEBEB;
   }
 }
 
-.#{$grommet-namespace}card__thumbnail {
+.card__thumbnail {
   min-height: $size-small;
 }
 
-.#{$grommet-namespace}card__content--truncate {
+.card__content--truncate {
   // truncate text paragraphs after 8 lines
-  .#{$grommet-namespace}paragraph {
+  .paragraph {
     max-width: none;
     overflow: hidden;
     display: -webkit-box;
@@ -81,36 +81,36 @@ $card-hover-color: #EBEBEB;
     }
   }
 
-  .#{$grommet-namespace}paragraph--small {
+  .paragraph--small {
     @include truncate-paragraph($paragraph-small-line-height, $paragraph-small-font-size);
   }
 
-  .#{$grommet-namespace}paragraph--large {
+  .paragraph--large {
     @include truncate-paragraph($paragraph-large-line-height, $paragraph-large-font-size);
   }
 
-  .#{$grommet-namespace}paragraph--xlarge {
+  .paragraph--xlarge {
     @include truncate-paragraph($paragraph-xlarge-line-height, $paragraph-xlarge-font-size);
   }
 }
 
-.#{$grommet-namespace}card--direction-row {
+.card--direction-row {
   @include media-query(palm) {
-    .#{$grommet-namespace}card__thumbnail {
+    .card__thumbnail {
       flex-basis: $size-small;  // match basis for thumbnail in Card.js
     }
   }
 }
 
-.#{$grommet-namespace}card--selectable {
+.card--selectable {
 
   &:hover > div {
     background-color: $card-hover-color;
     color: $hover-text-color;
     cursor: pointer;
 
-    .#{$grommet-namespace}card__content {
-      .#{$grommet-namespace}paragraph::after {
+    .card__content {
+      .paragraph::after {
         background: linear-gradient(to right, transparent, $card-hover-color 50%);
       }
     }

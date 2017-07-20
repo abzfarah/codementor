@@ -1,4 +1,4 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 
 @mixin range-track {
   width: 100%;
@@ -14,7 +14,7 @@
 }
 
 .grommet {
-  input:not(.#{$grommet-namespace}input:not(.#{$grommet-namespace}check-box__input)),
+  input:not(.input:not(.check-box__input)),
   select,
   textarea {
     @include inuit-font-size($inuit-base-font-size);

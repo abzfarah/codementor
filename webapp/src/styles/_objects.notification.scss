@@ -1,32 +1,32 @@
 // (C) Copyright 2014 Hewlett Packard Enterprise Development LP
 
-.#{$grommet-namespace}notification {
+.notification {
   @include inuit-font-size($control-font-size, $inuit-base-spacing-unit);
 
   @each $status, $color in $brand-status-colors {
     &--status-#{$status} {
       // background-color comes from background-color-index
 
-      .#{$grommet-namespace}notification__status {
-        .#{$grommet-namespace}status-icon__base,
-        .#{$grommet-namespace}status-icon__base .#{$grommet-namespace}status-icon__small {
+      .notification__status {
+        .status-icon__base,
+        .status-icon__base .status-icon__small {
           fill: $active-colored-text-color;
         }
 
-        .#{$grommet-namespace}status-icon__detail {
+        .status-icon__detail {
           stroke: $color;
           fill: $color;
         }
 
-        &.#{$grommet-namespace}status-icon-unknown {
-          .#{$grommet-namespace}status-icon__detail {
+        &.status-icon-unknown {
+          .status-icon__detail {
             stroke: $active-colored-text-color;
             fill: $active-colored-text-color;
           }
         }
       }
 
-      .#{$grommet-namespace}notification__close {
+      .notification__close {
         stroke: $active-colored-text-color;
         fill: $active-colored-text-color;
       }
@@ -35,7 +35,7 @@
   }
 }
 
-.#{$grommet-namespace}notification__message {
+.notification__message {
   @include inuit-font-size($content-large-font-size, $inuit-base-spacing-unit);
 
   + * {
@@ -43,7 +43,7 @@
   }
 }
 
-.#{$grommet-namespace}notification__status {
+.notification__status {
   flex: 0 0 auto;
   margin-right: $inuit-base-spacing-unit;
 
@@ -53,8 +53,8 @@
   }
 }
 
-.#{$grommet-namespace}notification--small {
-  .#{$grommet-namespace}notification {
+.notification--small {
+  .notification {
     &__message {
       @include inuit-font-size($control-font-size, $inuit-base-spacing-unit);
     }

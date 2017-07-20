@@ -1,20 +1,20 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 
-.#{$grommet-namespace}form {
+.form {
   position: relative;
   max-width: 100%;
 
   @include media-query(lap-and-up) {
     // For some reason, Tiles inside FormField doesn't determine its
     // width correctly. Enforce it here.
-    .#{$grommet-namespace}form-field .#{$grommet-namespace}tiles__container {
+    .form-field .tiles__container {
       max-width: $form-width;
     }
   }
 
   @include pad();
 
-  > .#{$grommet-namespace}header .#{$grommet-namespace}header__wrapper { // TODO: clean up
+  > .header .header__wrapper { // TODO: clean up
     background-color: inherit;
   }
 
@@ -40,37 +40,37 @@
       margin-bottom: halve($inuit-base-spacing-unit);
     }
 
-    > *:not(.#{$grommet-namespace}form-field) + .#{$grommet-namespace}form-field {
+    > *:not(.form-field) + .form-field {
       margin-top: halve($inuit-base-spacing-unit);
     }
 
-    > .#{$grommet-namespace}form-field + *:not(.#{$grommet-namespace}form-field):not(.#{$grommet-namespace}form-fields) {
+    > .form-field + *:not(.form-field):not(.form-fields) {
       margin-top: $inuit-base-spacing-unit;
     }
 
-    > .#{$grommet-namespace}form-fields {
+    > .form-fields {
       display: flex;
       flex-direction: row;
 
-      .#{$grommet-namespace}form-field {
+      .form-field {
         margin-bottom: -1px;
       }
 
-      > .#{$grommet-namespace}button {
+      > .button {
         flex: 0 0 auto;
       }
     }
   }
 }
 
-.#{$grommet-namespace}form:not(.#{$grommet-namespace}form--plain) {
+.form:not(.form--plain) {
   width: $form-width;
 }
 
-.#{$grommet-namespace}form--fill {
+.form--fill {
   min-width: 0px;
 }
 
-.#{$grommet-namespace}form--compact {
+.form--compact {
   max-width: $compact-form-width;
 }

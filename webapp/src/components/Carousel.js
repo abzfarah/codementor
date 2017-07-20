@@ -1,4 +1,4 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -224,7 +224,7 @@ export default class Carousel extends Component {
     const { children } = this.props;
     const { activeIndex } = this.state;
     const numSlides = children.length;
-    const index = !this.props.infinite && activeIndex === 0 ? 
+    const index = !this.props.infinite && activeIndex === 0 ?
       activeIndex : (activeIndex + numSlides - 1) % numSlides;
 
     if(! this.props.hasOwnProperty('activeIndex')) {

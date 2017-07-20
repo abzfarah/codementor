@@ -1,4 +1,4 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 
 // ARC
 
@@ -9,32 +9,32 @@ $meter-arc-size-large: ($size-large * 0.75);
 $meter-arc-size-xlarge: ($size-xlarge * 0.75);
 $meter-arc-size-default: $meter-arc-size-small;
 
-.#{$grommet-namespace}meter--arc:not(.#{$grommet-namespace}meter--vertical) {
+.meter--arc:not(.meter--vertical) {
 
-  .#{$grommet-namespace}meter__graphic {
+  .meter__graphic {
     width: $meter-size-default;
     min-width: $size-xsmall;
     height: auto;
   }
 
-  &.#{$grommet-namespace}meter--xsmall {
-    .#{$grommet-namespace}meter__graphic {
+  &.meter--xsmall {
+    .meter__graphic {
       width: $size-xsmall;
       height: $meter-arc-size-xsmall;
     }
   }
 
-  &.#{$grommet-namespace}meter--small {
+  &.meter--small {
 
-    .#{$grommet-namespace}meter__graphic {
+    .meter__graphic {
       width: $size-small;
       height: $meter-arc-size-small;
     }
   }
 
-  &.#{$grommet-namespace}meter--medium {
+  &.meter--medium {
 
-    .#{$grommet-namespace}meter__graphic {
+    .meter__graphic {
       @include media-query(palm) {
         width: $size-small;
         height: $meter-arc-size-small;
@@ -47,9 +47,9 @@ $meter-arc-size-default: $meter-arc-size-small;
     }
   }
 
-  &.#{$grommet-namespace}meter--large {
+  &.meter--large {
 
-    .#{$grommet-namespace}meter__graphic {
+    .meter__graphic {
       @include media-query(palm) {
         width: $size-small;
         height: $meter-arc-size-small;
@@ -62,9 +62,9 @@ $meter-arc-size-default: $meter-arc-size-small;
     }
   }
 
-  &.#{$grommet-namespace}meter--xlarge {
+  &.meter--xlarge {
 
-    .#{$grommet-namespace}meter__graphic {
+    .meter__graphic {
       @include media-query(palm) {
         width: $size-small;
         height: $meter-arc-size-small;
@@ -78,33 +78,33 @@ $meter-arc-size-default: $meter-arc-size-small;
   }
 }
 
-.#{$grommet-namespace}meter--arc.#{$grommet-namespace}meter--vertical {
+.meter--arc.meter--vertical {
 
-  .#{$grommet-namespace}meter__graphic {
+  .meter__graphic {
     display: inline;
     width: $meter-arc-size-default;
     height: $meter-size-default;
   }
 
-  &.#{$grommet-namespace}meter--xsmall {
+  &.meter--xsmall {
 
-    .#{$grommet-namespace}meter__graphic {
+    .meter__graphic {
       width: $meter-arc-size-xsmall;
       height: $size-xsmall;
     }
   }
 
-  &.#{$grommet-namespace}meter--small {
+  &.meter--small {
 
-    .#{$grommet-namespace}meter__graphic {
+    .meter__graphic {
       width: $meter-arc-size-small;
       height: $size-small;
     }
   }
 
-  &.#{$grommet-namespace}meter--medium {
+  &.meter--medium {
 
-    .#{$grommet-namespace}meter__graphic {
+    .meter__graphic {
       @include media-query(palm) {
         width: $meter-arc-size-small;
         height: $size-small;
@@ -117,9 +117,9 @@ $meter-arc-size-default: $meter-arc-size-small;
     }
   }
 
-  &.#{$grommet-namespace}meter--large {
+  &.meter--large {
 
-    .#{$grommet-namespace}meter__graphic {
+    .meter__graphic {
       @include media-query(palm) {
         width: $meter-arc-size-small;
         height: $size-small;
@@ -132,9 +132,9 @@ $meter-arc-size-default: $meter-arc-size-small;
     }
   }
 
-  &.#{$grommet-namespace}meter--xlarge {
+  &.meter--xlarge {
 
-    .#{$grommet-namespace}meter__graphic {
+    .meter__graphic {
       @include media-query(palm) {
         width: $meter-arc-size-small;
         height: $size-small;

@@ -1,4 +1,4 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -391,7 +391,7 @@ export default class Table extends Component {
                 headerCells[headerIndex].textContent
               ));
             }
-            
+
             incrementCount++;
             if (incrementCount === increments[headerIndex]) {
               incrementCount = 0;
@@ -449,7 +449,7 @@ export default class Table extends Component {
       const cells = immediateTableChildOnly(
         tableElement.querySelectorAll('thead tr th'), tableElement
       );
-      
+
       let rect = tableElement.getBoundingClientRect();
       mirrorElement.style.width =
         '' + Math.floor(rect.right - rect.left) + 'px';

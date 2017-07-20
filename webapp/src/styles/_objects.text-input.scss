@@ -1,22 +1,22 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 
-.#{$grommet-namespace}text-input {
+.text-input {
   @include input();
 }
 
-.#{$grommet-namespace}text-input--active {
+.text-input--active {
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
 }
 
-.#{$grommet-namespace}text-input__suggestions {
+.text-input__suggestions {
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
   margin: 0px;
   list-style-type: none;
 }
 
-.#{$grommet-namespace}text-input__suggestion {
+.text-input__suggestion {
   padding: quarter($inuit-base-spacing-unit) $inuit-base-spacing-unit;
   cursor: pointer;
 

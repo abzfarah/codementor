@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 
 // NOTE: This component is a temporary wrapper of react-intl FormattedMessage
 // to avoid errors being thrown if the context hasn't been wrapped by

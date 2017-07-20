@@ -1,6 +1,6 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// Copyright (c) 2018 Nomad Media, Inc. All Rights Reserved.
 
-.#{$grommet-namespace}check-box {
+.check-box {
   margin-right: halve($inuit-base-spacing-unit);
   white-space: nowrap;
 
@@ -10,12 +10,12 @@
   }
 }
 
-.#{$grommet-namespace}check-box:not(.#{$grommet-namespace}check-box--disabled) {
+.check-box:not(.check-box--disabled) {
   cursor: pointer;
 }
 
-.#{$grommet-namespace}check-box:hover:not(.#{$grommet-namespace}check-box--disabled) {
-  .#{$grommet-namespace}check-box__control {
+.check-box:hover:not(.check-box--disabled) {
+  .check-box__control {
     border-color: $active-icon-color;
 
     #{$dark-background-context} {
@@ -27,8 +27,8 @@
     }
   }
 
-  .#{$grommet-namespace}check-box__input:checked +
-  .#{$grommet-namespace}check-box__control {
+  .check-box__input:checked +
+  .check-box__control {
     border-color: $active-icon-color;
 
     #{$dark-background-context} {
@@ -40,7 +40,7 @@
     }
   }
 
-  .#{$grommet-namespace}check-box__label {
+  .check-box__label {
     color: $hover-text-color;
 
     #{$dark-background-context} {
@@ -62,12 +62,12 @@
   //   }
   // }
 
-.#{$grommet-namespace}check-box__input {
+.check-box__input {
   opacity: 0;
   width: 0;
   height: 0;
 
-  &:checked + .#{$grommet-namespace}check-box__control {
+  &:checked + .check-box__control {
     border-color: $brand-color;
 
     #{$dark-background-context} {
@@ -78,11 +78,11 @@
       border-color: $brand-color;
     }
 
-    .#{$grommet-namespace}check-box__control-check {
+    .check-box__control-check {
       display: block;
     }
 
-    + .#{$grommet-namespace}check-box__label {
+    + .check-box__label {
       color: $text-color;
 
       #{$dark-background-context} {
@@ -95,13 +95,13 @@
     }
   }
 
-  &:focus + .#{$grommet-namespace}check-box__control {
+  &:focus + .check-box__control {
     border-color: $focus-border-color;
     box-shadow: 0 0 1px 1px $focus-border-color;
   }
 }
 
-.#{$grommet-namespace}check-box__control {
+.check-box__control {
   position: relative;
   top: -1px;
 	display: inline-block;
@@ -127,7 +127,7 @@
   }
 }
 
-.#{$grommet-namespace}check-box__control-check {
+.check-box__control-check {
   position: absolute;
   top: -2px;
   left: -2px;
@@ -146,7 +146,7 @@
   }
 }
 
-.#{$grommet-namespace}check-box__label {
+.check-box__label {
   // display and vertical-align are needed for rich custom labels
   display: inline-block;
   vertical-align: middle;
@@ -164,14 +164,14 @@
   }
 }
 
-.#{$grommet-namespace}check-box--disabled {
-  .#{$grommet-namespace}check-box__control {
+.check-box--disabled {
+  .check-box__control {
     opacity: 0.5;
   }
 }
 
-.#{$grommet-namespace}check-box--reverse {
-  .#{$grommet-namespace}check-box__control {
+.check-box--reverse {
+  .check-box__control {
     margin-right: 0;
     margin-left: halve($inuit-base-spacing-unit);
 
@@ -182,10 +182,10 @@
   }
 }
 
-.#{$grommet-namespace}check-box--toggle {
+.check-box--toggle {
 
-  &:hover:not(.#{$grommet-namespace}check-box--disabled) {
-    .#{$grommet-namespace}check-box__control:after {
+  &:hover:not(.check-box--disabled) {
+    .check-box__control:after {
       content: "";
       border-color: $active-icon-color;
 
@@ -200,7 +200,7 @@
       }
     }
 
-    .#{$grommet-namespace}check-box__input:checked + .#{$grommet-namespace}check-box__control:after {
+    .check-box__input:checked + .check-box__control:after {
       content: "";
       border-color: $active-icon-color;
 
@@ -217,7 +217,7 @@
   }
 
   // track
-  .#{$grommet-namespace}check-box__control {
+  .check-box__control {
     width: double($control-size);
     height: $control-size;
     border-radius: $control-size;
@@ -260,15 +260,15 @@
     }
   }
 
-  .#{$grommet-namespace}check-box__input {
+  .check-box__input {
 
-    &:checked + .#{$grommet-namespace}check-box__control {
+    &:checked + .check-box__control {
       background-color: $brand-color;
 
       #{$dark-background-context} {
         background-color: $colored-meter-background-color;
 
-        .#{$grommet-namespace}check-box__control-check {
+        .check-box__control-check {
           stroke: transparent;
         }
       }
@@ -293,7 +293,7 @@
         }
       }
 
-      .#{$grommet-namespace}check-box__control-check {
+      .check-box__control-check {
         display: none;
       }
     }
