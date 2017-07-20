@@ -19,6 +19,12 @@ const config = {
     main: [
       inProjectSrc(project.main),
     ],
+
+    middle: [
+      'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+      'webpack/hot/dev-server',
+      'webpack-dev-server/client?http://localhost:8080/'
+    ],
   },
   watch: true,
   devtool: project.sourcemaps ? 'source-map' : false,
@@ -44,7 +50,10 @@ const config = {
       __DEV__,
       __TEST__,
       __PROD__,
-    }, project.globals))
+    }, project.globals)),
+
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
   ],
 }
 

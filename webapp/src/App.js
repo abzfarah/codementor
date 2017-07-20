@@ -22,7 +22,7 @@ export default class SampleApp extends Component {
         <Navbar fluid>
           <Navbar.Header>
             <Navbar.Brand>
-              <a href='#'>Auth0 - React</a>
+              <a href='#'>Adddduth0 - Reacdddt</a>
             </Navbar.Brand>
             <Button
               bsStyle='primary'
