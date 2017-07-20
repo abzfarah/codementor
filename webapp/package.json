@@ -7,7 +7,7 @@
     "clean": "rimraf dist",
     "compile": "node build/scripts/compile",
     "build": "npm run clean && cross-env NODE_ENV=development npm run compile",
-    "start": "cross-env NODE_ENV=development node build/scripts/start",
+    "start": "cross-env NODE_ENV=development node server/server",
     "test": "cross-env NODE_ENV=test karma start build/karma.config",
     "test:watch": "npm test -- --watch",
     "lint": "eslint .",
@@ -47,6 +47,7 @@
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
     "superagent": "^3.3.1",
+    "webpack-dev-server": "^2.5.1",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
