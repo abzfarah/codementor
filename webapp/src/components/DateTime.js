@@ -32,7 +32,7 @@ const TIME_REGEXP = new RegExp('[Hhmsa]');
 
 export default class DateTime extends Component {
 
-  constructor(props, context) {
+  constructor (props, context) {
     super(props, context);
 
     this._onInputChange = this._onInputChange.bind(this);

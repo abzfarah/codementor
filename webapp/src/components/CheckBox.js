@@ -56,7 +56,6 @@ export default class CheckBox extends Component {
       </label>
     );
   }
-
 }
 
 CheckBox.propTypes = {

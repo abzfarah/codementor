@@ -16,7 +16,7 @@ export default class Section extends Component {
     );
 
     return (
-      <Box {...props} tag="section" className={classes} />
+      <Box {...props} tag='section' className={classes} />
     );
   }
 };
@@ -26,5 +26,5 @@ Section.propTypes = {
 };
 
 Section.defaultProps = {
-  pad: {vertical: 'medium'}
+  pad: { vertical: 'medium' }
 };

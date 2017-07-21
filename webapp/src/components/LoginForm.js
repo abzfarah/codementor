@@ -22,7 +22,7 @@ export default class LoginForm extends Component {
 
   constructor(props, context) {
     super(props, context);
-
+    var x =33
     this._onSubmit = this._onSubmit.bind(this);
     this._onUsernameChange = this._onUsernameChange.bind(this);
     this._onPasswordChange = this._onPasswordChange.bind(this);
@@ -76,7 +76,7 @@ export default class LoginForm extends Component {
     username = username.trim();
 
     if (onSubmit) {
-      onSubmit({username, password, rememberMe});
+      onSubmit({ username, password, rememberMe });
     }
   }
 
@@ -87,7 +87,7 @@ export default class LoginForm extends Component {
     } = this.props;
 
     const classes = classnames(CLASS_ROOT, this.props.className);
-    const center = ! align || 'stretch' === align || 'center' === align;
+    const center = ! align || align === 'stretch' || align === 'center';
 
     const errorsNode = errors.map((error, index) => {
       if (error) {

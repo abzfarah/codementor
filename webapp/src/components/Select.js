@@ -23,7 +23,7 @@ const FORM_FIELD = CSSClassnames.FORM_FIELD;
 
 export default class Select extends Component {
 
-  constructor(props, context) {
+  constructor (props, context) {
     super(props, context);
 
     this._onAddDrop = this._onAddDrop.bind(this);
@@ -202,19 +202,19 @@ export default class Select extends Component {
   _onRemoveDrop (event) {
     if (!this._searchRef ||
       !findDOMNode(this._searchRef).contains(event.target)) {
-      this.setState({dropActive: false});
+      this.setState({ dropActive: false });
     }
   }
 
   _onForceClose () {
-    this.setState({dropActive: false});
+    this.setState({ dropActive: false });
   }
 
   _onNextOption (event) {
     event.preventDefault();
     let index = this.state.activeOptionIndex;
     index = Math.min(index + 1, this.props.options.length - 1);
-    this.setState({activeOptionIndex: index},
+    this.setState({ activeOptionIndex: index },
       this._announceOptions.bind(this, index));
   }
 
@@ -222,7 +222,7 @@ export default class Select extends Component {
     event.preventDefault();
     let index = this.state.activeOptionIndex;
     index = Math.max(index - 1, 0);
-    this.setState({activeOptionIndex: index},
+    this.setState({ activeOptionIndex: index },
       this._announceOptions.bind(this, index));
   }
 
@@ -292,7 +292,7 @@ export default class Select extends Component {
       // revert for announce as label is often a complex object
       return option.label || option.value || '';
     } else {
-      return (undefined === option || null === option) ? '' : option;
+      return (option === undefined || option === null) ? '' : option;
     }
   }
 
@@ -300,7 +300,7 @@ export default class Select extends Component {
     const { intl } = this.context;
     if (Array.isArray(option)) {
       // Could be an Array when !inline+multiple
-      if (1 === option.length) {
+      if (option.length === 1) {
         return this._renderValue(option[0]);
       } else if (option.length > 1) {
         const selectedMultiple = Intl.getMessage(
@@ -313,7 +313,7 @@ export default class Select extends Component {
     } else if (option && typeof option === 'object') {
       return option.label || option.value || '';
     } else {
-      return (undefined === option || null === option) ? '' : option;
+      return (option ===undefined || option === null) ? '' : option;
     }
   }
 
@@ -439,16 +439,16 @@ export default class Select extends Component {
       return this._renderOptions(classes, restProps);
     } else {
       const renderedValue = this._renderValue(value);
-      const shouldRenderElement  = React.isValidElement(renderedValue);
+      const shouldRenderElement = React.isValidElement(renderedValue);
 
       return (
-        <div ref={ref => this.componentRef = ref} className={classes}
+        <div ref={ref => (this.componentRef = ref)} className={classes}
           onClick={this._onAddDrop}>
           {shouldRenderElement && renderedValue}
-          <input {...restProps} ref={ref => this.inputRef = ref}
+          <input {...restProps} ref={ref => (this.inputRef = ref)}
             type={shouldRenderElement ? 'hidden' : 'text'}
             className={`${INPUT} ${CLASS_ROOT}__input`}
-            placeholder={placeHolder} readOnly={true}
+            placeholder={placeHolder} readOnly
             value={renderedValue || ''} />
           <Button className={`${CLASS_ROOT}__control`}
             a11yTitle={Intl.getMessage(intl, 'Select Icon')}

@@ -9,8 +9,7 @@ import { smallSize } from '../utils/Responsive';
 const CLASS_ROOT = CSSClassnames.SPLIT;
 
 export default class Split extends Component {
-
-  constructor(props, context) {
+  constructor (props, context) {
     super(props, context);
 
     this._onResize = this._onResize.bind(this);
@@ -59,7 +58,7 @@ export default class Split extends Component {
     let result = 0;
     React.Children.forEach(props.children, function (child) {
       if (child) result += 1;
-    });
+    })
     return result;
   }
 
@@ -71,7 +70,7 @@ export default class Split extends Component {
 
   _setResponsive (responsive) {
     if (this.state.responsive !== responsive) {
-      this.setState({responsive: responsive});
+      this.setState({ responsive: responsive });
       if (this.props.onResponsive) {
         this.props.onResponsive(responsive);
       }
@@ -97,10 +96,10 @@ export default class Split extends Component {
     delete props.onResponsive;
     delete props.showOnResponsive;
     const { responsive } = this.state;
-    const classes = classnames( CLASS_ROOT, className );
+    const classes = classnames(CLASS_ROOT, className);
 
-    const boxedChildren = !Array.isArray(children) ? children :
-      children.map((child, index) => {
+    const boxedChildren = !Array.isArray(children) ? children
+      : children.map((child, index) => {
         if (!child) {
           // skip the empty children but keep original index
           // this avoid the right element to remount
@@ -110,9 +109,9 @@ export default class Split extends Component {
         let hidden;
         let childFlex = true;
         // When we only have room to show one child, hide the appropriate one
-        if ('single' === responsive &&
-          (('left' === priority && index > 0) ||
-          ('right' === priority && index === 0 &&
+        if (responsive === 'single' &&
+          ((priority === 'left' && index > 0) ||
+          (priority === 'right' && index === 0 &&
             children.length > 1))) {
           hidden = true;
         } else if (children.length > 1 &&
@@ -128,7 +127,7 @@ export default class Split extends Component {
             [`${CLASS_ROOT}__column--fixed`]: fixed,
             [`${CLASS_ROOT}__column--hidden`]: hidden,
             [`${CLASS_ROOT}__column--flex`]: childFlex,
-            [`${CLASS_ROOT}__column--separator`]: (separator && ! lastChild)
+            [`${CLASS_ROOT}__column--separator`]: (separator && !lastChild)
           }
         );
         // Don't use a Box here because we don't want to constrain the child
@@ -156,11 +155,11 @@ Split.propTypes = {
   priority: PropTypes.oneOf(['left', 'right']),
   separator: PropTypes.bool,
   showOnResponsive: PropTypes.oneOf(['priority', 'both'])
-};
+}
 
 Split.defaultProps = {
   fixed: true,
   flex: 'both',
   priority: 'right',
   showOnResponsive: 'priority'
-};
+}
