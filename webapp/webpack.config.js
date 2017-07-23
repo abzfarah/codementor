@@ -21,7 +21,6 @@ const config = {
     path.join(__dirname, 'src/main.js')
   ],
   watch: true,
-  devtool: 'inline-source-map',
   output: {
     path: inProject(project.outDir),
     filename: __DEV__ ? '[name].js' : '[name].[chunkhash].js',
