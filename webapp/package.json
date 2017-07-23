@@ -39,6 +39,7 @@
     "react-bootstrap": "^0.31.1",
     "react-desc": "^1.0.0",
     "react-dom": "^15.5.4",
+    "react-hot-loader": "next",
     "react-intl": "^2.2.3",
     "react-redux": "^5.0.4",
     "react-router": "^4.1.1",

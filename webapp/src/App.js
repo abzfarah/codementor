@@ -19,7 +19,7 @@ export default class SampleApp extends Component {
             align="center"
             pad={{ horizontal: 'medium' }}
             flex="grow"
-          >
+          >fghfghdddss
             <GrommetIcon colorIndex="brand" size="small" />
             <Button
               label="Sign in"

@@ -13,13 +13,15 @@ const __PROD__ = project.env === 'production'
 
 const config = {
   entry: [
+    'react-hot-loader/patch',
+    'webpack-dev-server/client?http://localhost:8080',
     'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
     'webpack/hot/only-dev-server',
-    'webpack-dev-server/client?http://localhost:8080',
+
     path.join(__dirname, 'src/main.js')
   ],
   watch: true,
-  devtool: project.sourcemaps ? 'source-map' : false,
+  devtool: 'inline-source-map',
   output: {
     path: inProject(project.outDir),
     filename: __DEV__ ? '[name].js' : '[name].[chunkhash].js',
@@ -60,6 +62,7 @@ config.module.rules.push({
       plugins: [
         'babel-plugin-transform-class-properties',
         'babel-plugin-syntax-dynamic-import',
+        'react-hot-loader/babel',
         [
           'babel-plugin-transform-runtime',
           {
