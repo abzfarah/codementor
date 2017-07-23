@@ -20,7 +20,7 @@ const BACKGROUND_COLOR_INDEX = CSSClassnames.BACKGROUND_COLOR_INDEX;
 
 export default class Search extends Component {
 
-  constructor(props, context) {
+  constructor (props, context) {
     super(props, context);
 
     this._onAddDrop = this._onAddDrop.bind(this);
@@ -41,7 +41,7 @@ export default class Search extends Component {
 
     this.state = {
       announceChange: false,
-      activeSuggestionIndex: -1,
+      activeSuggestionIndex: - 1,
       align: 'left',
       dropActive: false,
       inline: props.inline,
@@ -176,12 +176,12 @@ export default class Search extends Component {
         // stop the input to move the cursor when suggestions are present
         event.preventDefault();
 
-        if (event.keyCode === down && !dropActive && inline) {
+        if (event.keyCode === down && ! dropActive && inline) {
           this._onAddDrop();
         }
       }
     }
-    if (!dropActive && onSelect && event.keyCode === enter) {
+    if (! dropActive && onSelect && event.keyCode === enter) {
       const suggestion = suggestions[activeSuggestionIndex];
 
       onSelect({
@@ -385,15 +385,20 @@ export default class Search extends Component {
         );
 
         return (
-          <div key={index} className={classes} tabIndex='-1' role='button'
+          <div
+            key={index}
+            className={classes}
+            tabIndex="-1"
+            role="button"
             onClick={this._onClickSuggestion.bind(this, suggestion)}
-            onFocus={() => this.setState({ activeSuggestionIndex: index })}>
+            onFocus={() => this.setState({ activeSuggestionIndex: index })}
+          >
             {this._renderLabel(suggestion)}
           </div>
         );
       }, this);
       suggestionsNode = (
-        <div key='suggestions' className={`${CLASS_ROOT}__suggestions`}>
+        <div key="suggestions" className={`${CLASS_ROOT}__suggestions`}>
           {suggestionsNode}
         </div>
       );
@@ -401,18 +406,24 @@ export default class Search extends Component {
 
     let contents = [input, suggestionsNode];
 
-    if (!inline) {
+    if (! inline) {
       contents = [
-        <div key='contents' className={`${CLASS_ROOT}__drop-contents`}
-          onClick={this._onSink}>
+        <div
+          key="contents"
+          className={`${CLASS_ROOT}__drop-contents`}
+          onClick={this._onSink}
+        >
           {contents}
         </div>
       ];
       if (! dropAlign || (! dropAlign.top && ! dropAlign.bottom)) {
         const control = (
-          <Button key='icon' icon={<SearchIcon />}
+          <Button
+            key='icon'
+            icon={<SearchIcon />}
             className={`${CLASS_ROOT}__drop-control`}
-            onClick={this._onRemoveDrop} />
+            onClick={this._onRemoveDrop}
+          />
         );
         if (! dropAlign || dropAlign.left === 'left') {
           contents.unshift(control);
@@ -439,7 +450,7 @@ export default class Search extends Component {
     const classes = classnames(
       CLASS_ROOT,
       {
-        [`${CLASS_ROOT}--controlled`]: !(inline),
+        [`${CLASS_ROOT}--controlled`]: ! (inline),
         [`${CLASS_ROOT}--fill`]: fill,
         [`${CLASS_ROOT}--icon-align-${iconAlign}`]: iconAlign,
         [`${CLASS_ROOT}--pad-${pad}`]: pad,
@@ -461,18 +472,21 @@ export default class Search extends Component {
             onFocus={this._onFocusInput}
             onChange={this._onChangeInput}
             onMouseUp={this._onMouseUp}
-            onKeyDown={this._onInputKeyDown} />
+            onKeyDown={this._onInputKeyDown}
+          />
           <SearchIcon />
         </div>
       );
-
-    } else {
-      return (
-        <Button ref={(ref) => this._controlRef = ref}
-          id={id} className={className} icon={<SearchIcon />}
-          onClick={this._onAddDrop} />
-      );
     }
+    return (
+      <Button
+        ref={ref => (this._controlRef = ref)}
+        id={id}
+        className={className}
+        icon={<SearchIcon />}
+        onClick={this._onAddDrop}
+      />
+    );
   }
 }
 

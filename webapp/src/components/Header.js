@@ -12,7 +12,7 @@ const CLASS_ROOT = CSSClassnames.HEADER;
 
 export default class Header extends Component {
 
-  constructor(props, context) {
+  constructor (props, context) {
     super(props, context);
 
     this._onResize = this._onResize.bind(this);
@@ -74,7 +74,7 @@ export default class Header extends Component {
       `${CLASS_ROOT}__container`, {
         [`${CLASS_ROOT}__container--fixed`]: fixed,
         // add default color index if none is provided
-        [`${CLASS_ROOT}__container--fill`]: (fixed && !colorIndex),
+        [`${CLASS_ROOT}__container--fill`]: (fixed && ! colorIndex),
         [`${CLASS_ROOT}__container--float`]: float
       }
     );
@@ -93,39 +93,51 @@ export default class Header extends Component {
     if (fixed) {
       return (
         <div className={containerClasses}>
-          <div ref={ref => this.mirrorRef = ref}
-            className={`${CLASS_ROOT}__mirror`} />
+          <div
+            ref={ref => (this.mirrorRef = ref)}
+            className={`${CLASS_ROOT}__mirror`}
+          />
           <div className={wrapperClasses}>
             {/* ie11 does not work with align center and min-height
               adding a wrapper flex div with column direction fixes the issue
               https://github.com/philipwalton/flexbugs
             */}
-            <Box pad='none' flex={false}>
-              <Box ref={ref => this.contentRef = ref}
-                {...other} {...restProps} tag="header"
-                className={classes}>
+            <Box
+              pad="none"
+              flex={false}
+            >
+              <Box
+                ref={ref => (this.contentRef = ref)}
+                {...other}
+                {...restProps}
+                tag="header"
+                className={classes}
+              >
                 {children}
               </Box>
             </Box>
           </div>
         </div>
       );
-    } else {
-      return (
-        // ie11 does not work with align center and min-height
-        // adding a wrapper flex div with column direction fixes the issue
-        // https://github.com/philipwalton/flexbugs
-        <Box pad='none' flex={false}>
-          <Box {...other} {...restProps} tag="header" role={role}
-            className={classes}
-            containerClassName={containerClasses}>
-            {children}
-          </Box>
-        </Box>
-      );
     }
+    return (
+      // ie11 does not work with align center and min-height
+      // adding a wrapper flex div with column direction fixes the issue
+      // https://github.com/philipwalton/flexbugs
+      <Box pad="none" flex={false}>
+        <Box
+          {...other}
+          {...restProps}
+          tag="header"
+          role={role}
+          className={classes}
+          containerClassName={containerClasses}
+        >
+          {children}
+        </Box>
+      </Box>
+    );
   }
-
 }
 
 Header.propTypes = {

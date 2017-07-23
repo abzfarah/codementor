@@ -218,7 +218,6 @@ export default class DateTime extends Component {
     };
 
     if (dropActive) {
-
       document.addEventListener('click', this._onClose);
       KeyboardAccelerators.startListeningToKeyboard(this, listeners);
 
@@ -234,7 +233,6 @@ export default class DateTime extends Component {
         });
 
     } else {
-
       document.removeEventListener('click', this._onClose);
       KeyboardAccelerators.stopListeningToKeyboard(this, listeners);
 

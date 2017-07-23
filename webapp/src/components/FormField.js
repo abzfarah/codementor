@@ -9,7 +9,7 @@ const CLASS_ROOT = CSSClassnames.FORM_FIELD;
 
 export default class FormField extends Component {
 
-  constructor(props, context) {
+  constructor (props, context) {
     super(props, context);
 
     this._onFocus = this._onFocus.bind(this);
@@ -42,11 +42,11 @@ export default class FormField extends Component {
   }
 
   _onFocus () {
-    this.setState({focus: true});
+    this.setState({ focus: true });
   }
 
   _onBlur () {
-    this.setState({focus: false});
+    this.setState({ focus: false });
   }
 
   _onClick () {
@@ -75,15 +75,15 @@ export default class FormField extends Component {
     );
 
     const fieldError = (error)
-      ? <span className={CLASS_ROOT + "__error"}>{error}</span>
+      ? <span className={`${CLASS_ROOT}__error`}>{error}</span>
       : undefined;
 
     const fieldHelp = (help !== null && help !== undefined)
-      ? <span className={CLASS_ROOT + "__help"}>{this.props.help}</span>
+      ? <span className={`${CLASS_ROOT}__help`}>{this.props.help}</span>
       : undefined;
 
     const labelNode = (label) ? (
-      <label className={CLASS_ROOT + "__label"} htmlFor={htmlFor}>
+      <label className={`${CLASS_ROOT}__label`} htmlFor={htmlFor}>
         {label}
       </label>
     ) : undefined;
@@ -93,8 +93,10 @@ export default class FormField extends Component {
         {fieldError}
         {labelNode}
         {fieldHelp}
-        <span ref={ref => this.contentsRef = ref}
-          className={CLASS_ROOT + "__contents"}>
+        <span
+          ref={ref => (this.contentsRef = ref)}
+          className={`${CLASS_ROOT}__contents`}
+        >
           {children}
         </span>
       </div>

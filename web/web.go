@@ -7,13 +7,13 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/NYTimes/gziphandler"
 
 	l4g "github.com/alecthomas/log4go"
 	"github.com/nomadsingles/platform/api"
 	"github.com/nomadsingles/platform/app"
 	"github.com/nomadsingles/platform/model"
 	"github.com/nomadsingles/platform/utils"
+
 	"github.com/mssola/user_agent"
 )
 
@@ -26,7 +26,7 @@ func InitWeb() {
 		staticDir := utils.FindDir(model.CLIENT_DIR)
 		l4g.Debug("Using client directory at %v", staticDir)
 		if *utils.Cfg.ServiceSettings.WebserverMode == "gzip" {
-			mainrouter.PathPrefix("/static/").Handler(gziphandler.GzipHandler(staticHandler(http.StripPrefix("/static/", http.FileServer(http.Dir(staticDir))))))
+			mainrouter.PathPrefix("/static/").Handler(staticHandler(http.StripPrefix("/static/", http.FileServer(http.Dir(staticDir)))))
 		} else {
 			mainrouter.PathPrefix("/static/").Handler(staticHandler(http.StripPrefix("/static/", http.FileServer(http.Dir(staticDir)))))
 		}
@@ -76,5 +76,8 @@ func root(c *api.Context, w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Cache-Control", "no-store")
+	w.Header().Set("Connection", "keep-alive")
+
+
 	http.ServeFile(w, r, utils.FindDir(model.CLIENT_DIR)+"index.html")
 }

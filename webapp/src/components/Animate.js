@@ -16,7 +16,8 @@ class AnimateChild extends Component {
     const { enter, leave } = props;
     // leave will reuse enter if leave is not defined
     this.state = {
-      enter: enter,
+      // eslint-disable object-shorthand
+      enter: enter, // eslint-disable-file no-use-before-define
       leave: leave || enter,
       state: 'inactive'
     };
@@ -26,8 +27,8 @@ class AnimateChild extends Component {
     const { enter, leave } = nextProps;
     this.setState({ enter: enter, leave: leave || enter });
     if (nextProps.visible !== this.props.visible) {
-      const [ nextState, lastState ] = nextProps.visible ?
-        [ 'enter', 'active' ] : [ 'leave', 'inactive' ];
+      const [nextState, lastState] = nextProps.visible ?
+        ['enter', 'active'] : ['leave', 'inactive'];
       this._delay(nextState, this._done.bind(this, lastState));
     }
   }
@@ -71,7 +72,7 @@ class AnimateChild extends Component {
     const { delay } = this.state[state];
     // ensure we start out inactive in case we aren't being kept in the DOM
     if ('enter' === state) {
-      this.setState({ state: 'inactive '});
+      this.setState({ state: 'inactive ' });
     }
     clearTimeout(this._timer);
     this._timer = setTimeout(this._start.bind(this, state, callback),

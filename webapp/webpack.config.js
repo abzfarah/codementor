@@ -14,8 +14,8 @@ const __PROD__ = project.env === 'production'
 const config = {
   entry: [
     'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
-    'webpack/hot/dev-server',
-    'webpack-dev-server/client?http://localhost:8080/',
+    'webpack/hot/only-dev-server',
+    'webpack-dev-server/client?http://localhost:8080',
     path.join(__dirname, 'src/main.js')
   ],
   watch: true,
